@@ -17,6 +17,14 @@ declare global {
       requestNotificationPermission?: () => void;
       showNotification?: (title: string, body: string) => void;
       openExternalUrl?: (url: string) => void;
+      printPage?: (documentTitle: string) => void;
+      insertCalendarEvent?: (
+        title: string,
+        description: string,
+        startMillis: number,
+        endMillis: number,
+        fallbackUrl: string
+      ) => void;
     };
   }
 }

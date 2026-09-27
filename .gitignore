@@ -12,4 +12,7 @@ android/app/src/main/assets/public/
 apk-output/
 *.jks
 *.keystore
+firebase-applet-config.json
+firebase_applet_config.xml
+google-services.json
 

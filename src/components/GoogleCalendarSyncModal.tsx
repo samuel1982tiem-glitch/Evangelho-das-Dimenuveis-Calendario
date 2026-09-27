@@ -1,33 +1,24 @@
 /**
  * @file src/components/GoogleCalendarSyncModal.tsx
- * Google Calendar integration modal with official "Sign in with Google" button,
- * mandatory user confirmation dialog before inserting events into Google Calendar,
- * and mobile Google Calendar app / .ICS quick actions.
+ * Secret-free Google Calendar modal allowing users to add individual Biblical Feasts
+ * directly into their Google Calendar mobile app (via Android CalendarContract Intent or
+ * Google Calendar TEMPLATE deep link) or export/import all 8 Feasts via .ICS.
  */
 
-import React, { useEffect, useState } from 'react';
-import { User } from 'firebase/auth';
+import React, { useState } from 'react';
 import {
   Calendar,
   CheckCircle2,
-  AlertCircle,
-  Loader2,
   ExternalLink,
   Download,
-  LogOut,
   X,
 } from 'lucide-react';
 import { CalculatedFeastOccurrence } from '../types/feasts';
 import { Language } from '../i18n/translations';
 import {
-  initAuth,
-  googleSignIn,
-  logout,
-  getAccessToken,
-  getCurrentGoogleUser,
-  insertFeastsToGoogleCalendar,
   openInGoogleCalendarApp,
   exportFeastsToIcs,
+  openGoogleCalendarImportPage,
 } from '../services/googleCalendarService';
 
 interface GoogleCalendarSyncModalProps {
@@ -46,106 +37,19 @@ export const GoogleCalendarSyncModal: React.FC<GoogleCalendarSyncModalProps> = (
   language,
 }) => {
   const isPt = language === 'pt';
-  const [needsAuth, setNeedsAuth] = useState<boolean>(true);
-  const [user, setUser] = useState<User | null>(null);
-  const [isLoggingIn, setIsLoggingIn] = useState<boolean>(false);
-  const [syncStatus, setSyncStatus] = useState<'IDLE' | 'SYNCING' | 'SUCCESS' | 'ERROR'>('IDLE');
-  const [statusMessage, setStatusMessage] = useState<string>('');
-  const [createdCount, setCreatedCount] = useState<number>(0);
-
-  useEffect(() => {
-    const unsubscribe = initAuth(
-      (authedUser) => {
-        setUser(authedUser);
-        setNeedsAuth(false);
-      },
-      () => {
-        setUser(null);
-        setNeedsAuth(true);
-      }
-    );
-    return () => unsubscribe();
-  }, []);
-
-  useEffect(() => {
-    if (isOpen) {
-      setSyncStatus('IDLE');
-      setStatusMessage('');
-      setCreatedCount(0);
-      getAccessToken().then((token) => {
-        if (token && getCurrentGoogleUser()) {
-          setUser(getCurrentGoogleUser());
-          setNeedsAuth(false);
-        } else {
-          setNeedsAuth(true);
-        }
-      });
-    }
-  }, [isOpen]);
+  const [addedIds, setAddedIds] = useState<Record<string, boolean>>({});
+  const [icsDownloaded, setIcsDownloaded] = useState(false);
 
   if (!isOpen) return null;
 
-  const handleGoogleLogin = async () => {
-    setIsLoggingIn(true);
-    setSyncStatus('IDLE');
-    setStatusMessage('');
-    try {
-      const result = await googleSignIn();
-      if (result) {
-        setUser(result.user);
-        setNeedsAuth(false);
-      }
-    } catch (err: any) {
-      setSyncStatus('ERROR');
-      setStatusMessage(
-        isPt
-          ? 'Não foi possível concluir o login com o Google nesta janela. Você também pode usar os botões abaixo para abrir diretamente no app Google Agenda do celular ou baixar o arquivo .ICS.'
-          : 'Could not complete Google sign-in in this window. You can also use the buttons below to open directly in your mobile Google Calendar app or download the .ICS file.'
-      );
-    } finally {
-      setIsLoggingIn(false);
-    }
+  const handleAddSingleFeast = (occ: CalculatedFeastOccurrence) => {
+    openInGoogleCalendarApp(occ, language);
+    setAddedIds((prev) => ({ ...prev, [occ.feast.id]: true }));
   };
 
-  const handleSignOut = async () => {
-    await logout();
-    setUser(null);
-    setNeedsAuth(true);
-    setSyncStatus('IDLE');
-    setStatusMessage('');
-  };
-
-  const handleConfirmInsertEvents = async () => {
-    const token = await getAccessToken();
-    if (!token) {
-      setNeedsAuth(true);
-      return;
-    }
-
-    setSyncStatus('SYNCING');
-    setStatusMessage('');
-    try {
-      const res = await insertFeastsToGoogleCalendar(occurrences, language);
-      setCreatedCount(res.createdCount);
-      setSyncStatus('SUCCESS');
-      setStatusMessage(
-        isPt
-          ? `${res.createdCount} festa(s) bíblica(s) incluída(s) com sucesso no seu Google Agenda com lembretes automáticos!`
-          : `Successfully added ${res.createdCount} Biblical feast(s) to your Google Calendar with automatic reminders!`
-      );
-    } catch (err: any) {
-      if (err?.message === 'NO_ACCESS_TOKEN' || err?.message === 'AUTH_EXPIRED') {
-        setNeedsAuth(true);
-        setSyncStatus('IDLE');
-      } else {
-        setSyncStatus('ERROR');
-        setStatusMessage(
-          isPt
-            ? 'Erro ao sincronizar com a API do Google Agenda. Verifique sua permissão ou use o botão de abrir no app abaixo.'
-            : 'Error syncing with Google Calendar API. Please check your permissions or use the open in app button below.'
-        );
-      }
-    }
+  const handleDownloadAllIcs = () => {
+    exportFeastsToIcs(occurrences, sacredYear, language);
+    setIcsDownloaded(true);
   };
 
   return (
@@ -164,7 +68,7 @@ export const GoogleCalendarSyncModal: React.FC<GoogleCalendarSyncModalProps> = (
               id="google-calendar-modal-title"
               className="text-xs uppercase tracking-wider text-amber-400 font-semibold whitespace-nowrap truncate"
             >
-              {isPt ? 'Incluir no Google Agenda' : 'Add to Google Calendar'}
+              {isPt ? 'Incluir no Google Agenda Móvel' : 'Add to Google Mobile Calendar'}
             </span>
           </div>
           <button
@@ -185,218 +89,127 @@ export const GoogleCalendarSyncModal: React.FC<GoogleCalendarSyncModalProps> = (
               {occurrences.length === 1
                 ? occurrences[0].feast.name
                 : isPt
-                  ? `8 Festas Bíblicas · Ano Sagrado ${sacredYear}`
-                  : `8 Biblical Feasts · Sacred Year ${sacredYear}`}
+                  ? `Festas Bíblicas · Ano Sagrado ${sacredYear}`
+                  : `Biblical Feasts · Sacred Year ${sacredYear}`}
             </h3>
             <p className="text-xs text-slate-300 leading-relaxed">
               {isPt
-                ? 'Conecte sua conta Google para incluir os eventos diretamente no seu Google Agenda móvel com alertas de véspera (Pôr do Sol), ou abra diretamente no aplicativo do celular.'
-                : 'Connect your Google account to insert events directly into your mobile Google Calendar with evening Sunset reminders, or open directly in your phone calendar app.'}
+                ? 'Toque em "Incluir no Google Agenda" ao lado de qualquer festa para abrir diretamente no aplicativo Google Agenda da sua conta no celular, ou baixe o arquivo .ICS com todas as festas e alertas de Pôr do Sol.'
+                : 'Tap "Add to Google Calendar" next to any feast to open it directly in your mobile Google Calendar app for your Google account, or download the .ICS file with all feasts and Sunset alerts.'}
             </p>
           </div>
 
-          {/* List of Feasts to be Added (Confirmation Preview) */}
-          <div className="border border-slate-800 bg-slate-900/40 divide-y divide-slate-800 max-h-52 overflow-y-auto">
+          {/* List of Feasts with 1-Tap Add to Google Calendar */}
+          <div className="border border-slate-800 bg-slate-900/40 divide-y divide-slate-800 max-h-64 overflow-y-auto">
             <div className="px-3.5 py-2 bg-slate-900/80 text-xs font-semibold text-amber-400 uppercase tracking-wider flex items-center justify-between whitespace-nowrap">
               <span>
-                {isPt ? 'Eventos Selecionados para Inclusão' : 'Events Selected to Add'} ({occurrences.length})
+                {isPt ? 'Festas Bíblicas Descritas' : 'Described Biblical Feasts'} ({occurrences.length})
               </span>
               <span className="text-slate-400 italic font-normal">
-                {isPt ? 'Datas Gregorianas' : 'Gregorian Dates'}
+                {isPt ? 'Toque para incluir' : 'Tap to add'}
               </span>
             </div>
             {occurrences.map((occ) => {
               const startISO = occ.gregorianStartDate.toISOString().split('T')[0];
               const endISO = occ.gregorianEndDate.toISOString().split('T')[0];
+              const wasAdded = Boolean(addedIds[occ.feast.id]);
               return (
                 <div
                   key={occ.feast.id}
-                  className="px-3.5 py-2.5 flex items-center justify-between gap-2 text-xs"
+                  className="px-3.5 py-2.5 flex items-center justify-between gap-2 text-xs hover:bg-slate-900/60 transition-colors"
                 >
                   <div className="min-w-0">
                     <div className="font-bold text-slate-100 whitespace-nowrap truncate">
-                      {occ.feast.name} <span className="font-normal italic text-amber-300">({occ.feast.hebrewName})</span>
+                      {occ.feast.name}{' '}
+                      <span className="font-normal italic text-amber-300">({occ.feast.hebrewName})</span>
                     </div>
                     <div className="text-slate-400 tabular-nums whitespace-nowrap">
-                      {isPt ? 'Mês' : 'Month'} {occ.feast.sacredMonth}, {isPt ? 'Dia' : 'Day'} {occ.feast.sacredDay} ·{' '}
-                      {startISO === endISO ? startISO : `${startISO} → ${endISO}`}
+                      {isPt ? 'Mês' : 'Month'} {occ.feast.sacredMonth}, {isPt ? 'Dia' : 'Day'}{' '}
+                      {occ.feast.sacredDay} · {startISO === endISO ? startISO : `${startISO} → ${endISO}`}
                     </div>
                   </div>
 
                   <button
                     type="button"
-                    onClick={() => openInGoogleCalendarApp(occ, language)}
-                    className="inline-flex items-center gap-1 px-2.5 py-1 bg-slate-900 hover:bg-slate-800 border border-slate-700 hover:border-amber-500/60 text-amber-300 text-xs transition-colors shrink-0 whitespace-nowrap cursor-pointer"
-                    title={isPt ? 'Abrir este evento no app Google Agenda' : 'Open this event in Google Calendar app'}
+                    onClick={() => handleAddSingleFeast(occ)}
+                    className={`inline-flex items-center gap-1.5 px-3 py-1.5 border text-xs font-semibold transition-colors shrink-0 whitespace-nowrap cursor-pointer ${
+                      wasAdded
+                        ? 'bg-emerald-950/40 border-emerald-500/50 text-emerald-300'
+                        : 'bg-amber-500 hover:bg-amber-400 border-amber-500 text-slate-950'
+                    }`}
                   >
-                    <ExternalLink className="w-3 h-3 shrink-0" />
-                    <span>{isPt ? 'Abrir no App' : 'Open in App'}</span>
+                    {wasAdded ? (
+                      <>
+                        <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />
+                        <span>{isPt ? 'Aberto no Agenda' : 'Opened in Calendar'}</span>
+                      </>
+                    ) : (
+                      <>
+                        <ExternalLink className="w-3.5 h-3.5 shrink-0" />
+                        <span>{isPt ? 'Incluir no Google Agenda' : 'Add to Google Calendar'}</span>
+                      </>
+                    )}
                   </button>
                 </div>
               );
             })}
           </div>
 
-          {/* Google Account OAuth Section & Mandatory Confirmation */}
-          <div className="border border-slate-800 bg-slate-900/30 p-4 space-y-3">
-            <div className="flex items-center justify-between gap-2">
-              <span className="text-xs uppercase tracking-wider font-semibold text-amber-400 whitespace-nowrap">
-                {isPt ? 'Sincronização Direta (Conta Google)' : 'Direct Sync (Google Account)'}
-              </span>
-              {user && !needsAuth && (
-                <button
-                  type="button"
-                  onClick={handleSignOut}
-                  className="inline-flex items-center gap-1 text-xs text-slate-400 hover:text-slate-200 cursor-pointer whitespace-nowrap"
-                >
-                  <LogOut className="w-3 h-3" />
-                  <span>{isPt ? 'Trocar Conta' : 'Switch Account'}</span>
-                </button>
-              )}
+          {/* Bulk .ICS Export for All 8 Feasts */}
+          <div className="border border-slate-800 bg-slate-900/30 p-4 space-y-2.5">
+            <div className="text-xs uppercase tracking-wider font-semibold text-amber-400 whitespace-nowrap">
+              {isPt
+                ? 'Importar Todas as Festas de Uma Vez (.ICS)'
+                : 'Import All Feasts at Once (.ICS)'}
+            </div>
+            <p className="text-xs text-slate-300 leading-relaxed">
+              {isPt
+                ? 'Baixe o pacote .ICS contendo todas as festas selecionadas com lembretes de 24h e Pôr do Sol. Ao abrir o arquivo .ICS no celular, o aplicativo Google Agenda importa todas as festas para sua conta Google.'
+                : 'Download the .ICS bundle containing all selected feasts with 24h and Sunset reminders. Opening the .ICS file on your phone imports all feasts into your Google Calendar account.'}
+            </p>
+            <div className="flex flex-wrap items-center gap-2 pt-1 text-xs">
+              <button
+                type="button"
+                onClick={handleDownloadAllIcs}
+                className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold transition-colors cursor-pointer whitespace-nowrap"
+              >
+                <Download className="w-3.5 h-3.5 shrink-0" />
+                <span>
+                  {isPt
+                    ? `Baixar Arquivo .ICS (${occurrences.length} Festas)`
+                    : `Download .ICS File (${occurrences.length} Feasts)`}
+                </span>
+              </button>
+
+              <button
+                type="button"
+                onClick={openGoogleCalendarImportPage}
+                className="inline-flex items-center gap-1.5 px-3 py-2 border border-slate-700 bg-slate-950 hover:border-amber-500/60 text-amber-300 transition-colors cursor-pointer whitespace-nowrap"
+              >
+                <ExternalLink className="w-3.5 h-3.5 shrink-0" />
+                <span>{isPt ? 'Página de Importação Google' : 'Google Import Page'}</span>
+              </button>
             </div>
 
-            {needsAuth ? (
-              <div className="space-y-2.5">
-                <p className="text-xs text-slate-300 leading-relaxed">
+            {icsDownloaded && (
+              <div className="p-2.5 bg-emerald-950/40 border border-emerald-500/40 text-xs text-emerald-200 flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 shrink-0 text-emerald-400" />
+                <span>
                   {isPt
-                    ? 'Faça login com sua conta do Google para autorizar a inclusão automática das Festas Bíblicas no seu Google Agenda:'
-                    : 'Sign in with your Google account to authorize adding the Biblical Feasts directly to your Google Calendar:'}
-                </p>
-
-                <button
-                  type="button"
-                  onClick={handleGoogleLogin}
-                  disabled={isLoggingIn}
-                  className="gsi-material-button inline-flex items-center justify-center gap-2.5 px-4 py-2.5 bg-white hover:bg-slate-100 text-slate-900 font-sans text-xs sm:text-sm font-medium border border-slate-300 shadow-xs transition-colors cursor-pointer whitespace-nowrap"
-                >
-                  <div className="w-4 h-4 shrink-0">
-                    <svg
-                      version="1.1"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 48 48"
-                      className="w-full h-full block"
-                    >
-                      <path
-                        fill="#EA4335"
-                        d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"
-                      />
-                      <path
-                        fill="#4285F4"
-                        d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"
-                      />
-                      <path
-                        fill="#FBBC05"
-                        d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"
-                      />
-                      <path
-                        fill="#34A853"
-                        d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"
-                      />
-                      <path fill="none" d="M0 0h48v48H0z" />
-                    </svg>
-                  </div>
-                  <span>
-                    {isLoggingIn
-                      ? isPt
-                        ? 'Conectando ao Google...'
-                        : 'Connecting to Google...'
-                      : isPt
-                        ? 'Entrar com o Google'
-                        : 'Sign in with Google'}
-                  </span>
-                </button>
-              </div>
-            ) : (
-              <div className="space-y-3">
-                <div className="text-xs text-emerald-300 flex items-center gap-2 whitespace-nowrap truncate">
-                  <CheckCircle2 className="w-4 h-4 shrink-0 text-emerald-400" />
-                  <span>
-                    {isPt ? 'Conta conectada:' : 'Connected account:'}{' '}
-                    <strong>{user?.email || user?.displayName}</strong>
-                  </span>
-                </div>
-
-                {/* Mandatory Confirmation Box before creating events */}
-                <div className="p-3 border border-amber-500/40 bg-amber-950/20 space-y-2.5 text-xs">
-                  <div className="font-bold text-amber-300 whitespace-nowrap">
-                    {isPt ? 'Confirmação de Inclusão no Calendário' : 'Calendar Addition Confirmation'}
-                  </div>
-                  <p className="text-slate-200 leading-relaxed">
-                    {isPt
-                      ? `Confirma a criação de ${occurrences.length} evento(s) de Festa Bíblica no calendário principal da sua conta Google (${user?.email || ''})?`
-                      : `Do you confirm creating ${occurrences.length} Biblical Feast event(s) in the primary calendar of your Google account (${user?.email || ''})?`}
-                  </p>
-                  <div className="flex flex-wrap items-center gap-2 pt-1">
-                    <button
-                      type="button"
-                      onClick={handleConfirmInsertEvents}
-                      disabled={syncStatus === 'SYNCING'}
-                      className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-amber-500 hover:bg-amber-400 disabled:opacity-60 text-slate-950 font-bold transition-colors cursor-pointer whitespace-nowrap"
-                    >
-                      {syncStatus === 'SYNCING' ? (
-                        <>
-                          <Loader2 className="w-3.5 h-3.5 animate-spin shrink-0" />
-                          <span>{isPt ? 'Sincronizando...' : 'Syncing...'}</span>
-                        </>
-                      ) : (
-                        <>
-                          <Calendar className="w-3.5 h-3.5 shrink-0" />
-                          <span>
-                            {isPt
-                              ? `Confirmar e Incluir (${occurrences.length})`
-                              : `Confirm & Add (${occurrences.length})`}
-                          </span>
-                        </>
-                      )}
-                    </button>
-
-                    <button
-                      type="button"
-                      onClick={onClose}
-                      disabled={syncStatus === 'SYNCING'}
-                      className="px-3 py-2 border border-slate-700 bg-slate-950 hover:bg-slate-800 text-slate-300 transition-colors cursor-pointer whitespace-nowrap"
-                    >
-                      {isPt ? 'Cancelar' : 'Cancel'}
-                    </button>
-                  </div>
-                </div>
+                    ? 'Arquivo .ICS gerado! Abra o arquivo baixado para importar no seu Google Agenda.'
+                    : '.ICS file generated! Open the downloaded file to import into your Google Calendar.'}
+                </span>
               </div>
             )}
           </div>
-
-          {/* Status Feedback */}
-          {syncStatus === 'SUCCESS' && statusMessage && (
-            <div className="p-3 bg-emerald-950/40 border border-emerald-500/50 text-xs text-emerald-200 flex items-start gap-2.5">
-              <CheckCircle2 className="w-4 h-4 shrink-0 text-emerald-400 mt-0.5" />
-              <span className="leading-relaxed">{statusMessage}</span>
-            </div>
-          )}
-
-          {syncStatus === 'ERROR' && statusMessage && (
-            <div className="p-3 bg-rose-950/40 border border-rose-500/50 text-xs text-rose-200 flex items-start gap-2.5">
-              <AlertCircle className="w-4 h-4 shrink-0 text-rose-400 mt-0.5" />
-              <span className="leading-relaxed">{statusMessage}</span>
-            </div>
-          )}
         </div>
 
-        {/* Footer with Universal Mobile .ICS Export & Close */}
-        <div className="flex flex-wrap items-center justify-between gap-2 px-4 sm:px-5 py-3.5 bg-slate-900/80 text-xs">
-          <button
-            type="button"
-            onClick={() => exportFeastsToIcs(occurrences, sacredYear, language)}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-slate-700 bg-slate-950 hover:border-amber-500/60 text-amber-300 transition-colors cursor-pointer whitespace-nowrap"
-          >
-            <Download className="w-3.5 h-3.5 shrink-0" />
-            <span>
-              {isPt ? 'Baixar Arquivo .ICS (Calendário Móvel)' : 'Download .ICS (Mobile Calendar)'}
-            </span>
-          </button>
-
+        {/* Footer */}
+        <div className="flex items-center justify-end px-4 sm:px-5 py-3 bg-slate-900/80 text-xs">
           <button
             type="button"
             onClick={onClose}
-            className="px-3.5 py-1.5 border border-slate-700 bg-slate-900 hover:bg-slate-800 text-slate-200 transition-colors cursor-pointer whitespace-nowrap"
+            className="px-4 py-1.5 border border-slate-700 bg-slate-950 hover:bg-slate-800 text-slate-200 transition-colors cursor-pointer whitespace-nowrap"
           >
             {isPt ? 'Fechar' : 'Close'}
           </button>

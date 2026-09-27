@@ -1,84 +1,12 @@
 /**
  * @file src/services/googleCalendarService.ts
- * Google Calendar integration via Firebase Auth OAuth 2.0 (in-memory token caching)
- * + direct Google Calendar REST API (calendar.events) + mobile Google Calendar deep links & ICS export.
+ * Secret-free Google Calendar integration for mobile (Android APK CalendarContract Intent
+ * + Google Calendar universal TEMPLATE deep links + .ICS calendar export with alarms).
+ * Requires zero API keys in the repository so GitHub Secret Scanning stays 100% clean.
  */
 
-import { initializeApp, getApps, getApp } from 'firebase/app';
-import {
-  getAuth,
-  signInWithPopup,
-  GoogleAuthProvider,
-  onAuthStateChanged,
-  User,
-} from 'firebase/auth';
-import firebaseConfig from '../../firebase-applet-config.json';
 import { CalculatedFeastOccurrence } from '../types/feasts';
 import { Language } from '../i18n/translations';
-
-export const SCOPES = ['https://www.googleapis.com/auth/calendar.events'];
-
-const app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
-const auth = getAuth(app);
-
-const provider = new GoogleAuthProvider();
-SCOPES.forEach((scope) => provider.addScope(scope));
-
-// Flag to indicate if we are in the middle of a sign-in flow.
-let isSigningIn = false;
-// Cache the access token in memory only (never in localStorage or sessionStorage).
-let cachedAccessToken: string | null = null;
-
-export const initAuth = (
-  onAuthSuccess?: (user: User, token: string) => void,
-  onAuthFailure?: () => void
-) => {
-  return onAuthStateChanged(auth, async (user: User | null) => {
-    if (user) {
-      if (cachedAccessToken) {
-        if (onAuthSuccess) onAuthSuccess(user, cachedAccessToken);
-      } else if (!isSigningIn) {
-        cachedAccessToken = null;
-        if (onAuthFailure) onAuthFailure();
-      }
-    } else {
-      cachedAccessToken = null;
-      if (onAuthFailure) onAuthFailure();
-    }
-  });
-};
-
-export const googleSignIn = async (): Promise<{ user: User; accessToken: string } | null> => {
-  try {
-    isSigningIn = true;
-    const result = await signInWithPopup(auth, provider);
-    const credential = GoogleAuthProvider.credentialFromResult(result);
-    if (!credential?.accessToken) {
-      throw new Error('Failed to get access token from Firebase Auth');
-    }
-
-    cachedAccessToken = credential.accessToken;
-    return { user: result.user, accessToken: cachedAccessToken };
-  } catch (error: any) {
-    console.error('Sign in error:', error);
-    throw error;
-  } finally {
-    isSigningIn = false;
-  }
-};
-
-export const getAccessToken = async (): Promise<string | null> => {
-  return cachedAccessToken;
-};
-
-export const getCurrentGoogleUser = (): User | null => {
-  return auth.currentUser;
-};
-
-export const logout = async () => {
-  await auth.signOut();
-  cachedAccessToken = null;
-};
 
 function formatDateYMD(date: Date): string {
   return date.toISOString().split('T')[0];
@@ -133,75 +61,11 @@ export function buildFeastCalendarEventPayload(
   return {
     summary,
     description: descriptionLines.join('\n'),
-    start: {
-      date: startYMD,
-    },
-    end: {
-      date: exclusiveEndYMD,
-    },
-    reminders: {
-      useDefault: false,
-      overrides: [
-        { method: 'popup', minutes: 24 * 60 }, // 24 hours prior
-        { method: 'popup', minutes: 6 * 60 },  // Evening sunset reminder (6pm prior day)
-      ],
-    },
+    startDateYMD: startYMD,
+    endDateYMD: exclusiveEndYMD,
+    startMillis: occ.gregorianStartDate.getTime(),
+    endMillis: occ.gregorianStartDate.getTime() + Math.max(1, f.durationDays) * 86400000,
   };
-}
-
-export interface CalendarSyncResult {
-  createdCount: number;
-  eventLinks: string[];
-}
-
-/**
- * Inserts one or more Biblical Feast occurrences into the authenticated user's primary Google Calendar.
- * Caller MUST show an explicit confirmation dialog to the user before invoking this function.
- */
-export async function insertFeastsToGoogleCalendar(
-  occurrences: CalculatedFeastOccurrence[],
-  language: Language
-): Promise<CalendarSyncResult> {
-  const token = await getAccessToken();
-  if (!token) {
-    throw new Error('NO_ACCESS_TOKEN');
-  }
-
-  let createdCount = 0;
-  const eventLinks: string[] = [];
-
-  for (const occ of occurrences) {
-    const payload = buildFeastCalendarEventPayload(occ, language);
-    const res = await fetch(
-      'https://www.googleapis.com/calendar/v3/calendars/primary/events',
-      {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-      }
-    );
-
-    if (res.status === 401 || res.status === 403) {
-      cachedAccessToken = null;
-      throw new Error('AUTH_EXPIRED');
-    }
-
-    if (!res.ok) {
-      const errText = await res.text();
-      throw new Error(`GOOGLE_API_ERROR: ${errText}`);
-    }
-
-    const data = await res.json();
-    createdCount += 1;
-    if (data?.htmlLink) {
-      eventLinks.push(data.htmlLink);
-    }
-  }
-
-  return { createdCount, eventLinks };
 }
 
 /**
@@ -212,8 +76,8 @@ export function buildGoogleCalendarTemplateUrl(
   language: Language
 ): string {
   const payload = buildFeastCalendarEventPayload(occ, language);
-  const startCompact = formatDateCompact(payload.start.date);
-  const endCompact = formatDateCompact(payload.end.date);
+  const startCompact = formatDateCompact(payload.startDateYMD);
+  const endCompact = formatDateCompact(payload.endDateYMD);
   const params = new URLSearchParams({
     action: 'TEMPLATE',
     text: payload.summary,
@@ -224,13 +88,48 @@ export function buildGoogleCalendarTemplateUrl(
 }
 
 /**
- * Opens the Google Calendar template link in the Android native Google Calendar app or a browser tab.
+ * Opens the feast directly in the Android native Google Calendar app (via CalendarContract Intent)
+ * or opens the Google Calendar web/mobile template URL.
  */
 export function openInGoogleCalendarApp(
   occ: CalculatedFeastOccurrence,
   language: Language
 ): void {
+  const payload = buildFeastCalendarEventPayload(occ, language);
   const url = buildGoogleCalendarTemplateUrl(occ, language);
+
+  if (typeof window !== 'undefined' && window.AndroidBridge?.insertCalendarEvent) {
+    window.AndroidBridge.insertCalendarEvent(
+      payload.summary,
+      payload.description,
+      payload.startMillis,
+      payload.endMillis,
+      url
+    );
+    return;
+  }
+
+  if (typeof window !== 'undefined' && window.AndroidBridge?.openExternalUrl) {
+    window.AndroidBridge.openExternalUrl(url);
+    return;
+  }
+
+  if (typeof window !== 'undefined') {
+    const a = document.createElement('a');
+    a.href = url;
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+}
+
+/**
+ * Opens Google Calendar online settings/import page.
+ */
+export function openGoogleCalendarImportPage(): void {
+  const url = 'https://calendar.google.com/calendar/r/settings/export';
   if (typeof window !== 'undefined' && window.AndroidBridge?.openExternalUrl) {
     window.AndroidBridge.openExternalUrl(url);
     return;
@@ -248,7 +147,7 @@ export function openInGoogleCalendarApp(
 
 /**
  * Exports a standard .ics calendar file containing all selected Biblical Feasts
- * for import into Google Calendar mobile or any system calendar app.
+ * for one-tap import into Google Calendar mobile or any system calendar app.
  */
 export function exportFeastsToIcs(
   occurrences: CalculatedFeastOccurrence[],
@@ -266,8 +165,8 @@ export function exportFeastsToIcs(
 
   for (const occ of occurrences) {
     const payload = buildFeastCalendarEventPayload(occ, language);
-    const dtStart = formatDateCompact(payload.start.date);
-    const dtEnd = formatDateCompact(payload.end.date);
+    const dtStart = formatDateCompact(payload.startDateYMD);
+    const dtEnd = formatDateCompact(payload.endDateYMD);
     const uid = `feast-${occ.feast.id}-${sacredYear}@dimenueveis.calendar`;
     const escapedDesc = payload.description.replace(/\n/g, '\\n').replace(/,/g, '\\,');
     const escapedSummary = payload.summary.replace(/,/g, '\\,');
@@ -282,6 +181,11 @@ export function exportFeastsToIcs(
       `DESCRIPTION:${escapedDesc}`,
       'BEGIN:VALARM',
       'TRIGGER:-PT24H',
+      'ACTION:DISPLAY',
+      `DESCRIPTION:${escapedSummary}`,
+      'END:VALARM',
+      'BEGIN:VALARM',
+      'TRIGGER:-PT6H',
       'ACTION:DISPLAY',
       `DESCRIPTION:${escapedSummary}`,
       'END:VALARM',

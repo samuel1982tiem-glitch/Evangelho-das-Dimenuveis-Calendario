@@ -13,6 +13,10 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.print.PrintAttributes;
+import android.print.PrintDocumentAdapter;
+import android.print.PrintManager;
+import android.provider.CalendarContract;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.webkit.GeolocationPermissions;
@@ -262,6 +266,49 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                     startActivity(intent);
                 } catch (Exception ignored) {
+                }
+            });
+        }
+
+        @JavascriptInterface
+        public void printPage(String documentTitle) {
+            runOnUiThread(() -> {
+                try {
+                    if (webView == null) return;
+                    PrintManager printManager = (PrintManager) getSystemService(Context.PRINT_SERVICE);
+                    if (printManager != null) {
+                        String jobName = (documentTitle != null && !documentTitle.isEmpty())
+                                ? documentTitle
+                                : "Almanaque-Dimenuveis";
+                        PrintDocumentAdapter printAdapter = webView.createPrintDocumentAdapter(jobName);
+                        PrintAttributes.Builder builder = new PrintAttributes.Builder()
+                                .setMediaSize(PrintAttributes.MediaSize.ISO_A4)
+                                .setColorMode(PrintAttributes.COLOR_MODE_COLOR);
+                        printManager.print(jobName, printAdapter, builder.build());
+                    }
+                } catch (Exception ignored) {
+                }
+            });
+        }
+
+        @JavascriptInterface
+        public void insertCalendarEvent(String title, String description, long startMillis, long endMillis, String fallbackUrl) {
+            runOnUiThread(() -> {
+                try {
+                    Intent intent = new Intent(Intent.ACTION_INSERT)
+                            .setData(CalendarContract.Events.CONTENT_URI)
+                            .putExtra(CalendarContract.Events.TITLE, title)
+                            .putExtra(CalendarContract.Events.DESCRIPTION, description)
+                            .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, startMillis)
+                            .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endMillis)
+                            .putExtra(CalendarContract.EXTRA_EVENT_ALL_DAY, true);
+                    startActivity(intent);
+                } catch (Exception e) {
+                    try {
+                        Intent fallbackIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(fallbackUrl));
+                        startActivity(fallbackIntent);
+                    } catch (Exception ignored) {
+                    }
                 }
             });
         }
