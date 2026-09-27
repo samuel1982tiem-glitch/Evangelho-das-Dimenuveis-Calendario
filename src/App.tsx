@@ -265,8 +265,8 @@ export default function App() {
         onOpenGpsModal={() => setIsGpsModalOpen(true)}
       />
 
-      {/* Editorial Colophon Footer */}
-      <footer className="mt-auto border-t border-slate-800 bg-[#0b0e14] py-6 text-sm font-serif text-slate-300">
+      {/* Editorial Colophon Footer (padded for fixed bottom icon navbar) */}
+      <footer className="mt-auto border-t border-slate-800 bg-[#0b0e14] pt-6 pb-24 text-sm font-serif text-slate-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="space-y-1 text-center sm:text-left">
             <div className="text-slate-100 font-semibold text-base font-serif">

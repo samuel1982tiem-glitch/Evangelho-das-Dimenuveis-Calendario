@@ -171,6 +171,7 @@
 /* ========================================================================== */
 
 [data-theme="day"] body,
+[data-theme="day"] .bottom-icon-navbar,
 [data-theme="day"] .bg-\[\#090b10\],
 [data-theme="day"] .bg-\[\#0b0e14\],
 [data-theme="day"] .bg-\[\#0c0e14\],
