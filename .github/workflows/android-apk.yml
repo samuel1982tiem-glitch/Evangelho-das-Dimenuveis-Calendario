@@ -25,14 +25,14 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js 20
+      - name: Setup Node.js 22
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
 
       - name: Install Web Dependencies & Build Vite Bundle
         run: |
-          npm install
+          npm install --legacy-peer-deps
           npm run build
 
       - name: Sync Web Bundle into Android Assets
@@ -63,6 +63,7 @@ jobs:
       - name: Prepare Release Signing Keystore
         working-directory: android
         run: |
+          rm -f release-keystore.jks
           keytool -genkeypair -v \
             -keystore release-keystore.jks \
             -alias dimenueveis \
