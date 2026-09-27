@@ -297,7 +297,7 @@ export const TourGuideModal: React.FC<TourGuideModalProps> = ({
               <p className="text-xs text-slate-300 leading-relaxed">
                 {isPt
                   ? 'Compare Ussher (4004 a.C.), Rabínico Tradicional (3761 a.C.), Septuaginta LXX (5508 a.C.) e Época Sagrada Dimenúveis (4026 a.C.) com transição exata de 1 a.C. para 1 d.C. sem Ano Zero.'
-                  : 'Compare Ussher (4004 BCE), Traditional Rabbinic (3761 BCE), Septuagint LXX (5508 BCE), and Dimenúveis Sacred Epoch (4026 BCE) with strict 1 BCE to 1 CE transition (no Year Zero).'}
+                  : 'Compare Ussher (4004 BCE), Traditional Rabbinic (3761 BCE), Septuagint LXX (5508 BCE), and Dimenuous Sacred Epoch (4026 BCE) with strict 1 BCE to 1 CE transition (no Year Zero).'}
               </p>
             </div>
 
@@ -381,7 +381,7 @@ export const TourGuideModal: React.FC<TourGuideModalProps> = ({
                 id: 'DIMENUEVEIS' as NavTab,
                 roman: 'IX',
                 title: t.tabs.DIMENUEVEIS,
-                desc: isPt ? 'Textos canônicos, árvore de 6 camadas e léxico' : 'Canonical texts, 6-layer tree & lexicon',
+                desc: isPt ? 'Fundamentos bíblicos, árvore de 6 camadas e léxico' : 'Biblical foundations, 6-layer tree & lexicon',
               },
             ].map((item) => (
               <button

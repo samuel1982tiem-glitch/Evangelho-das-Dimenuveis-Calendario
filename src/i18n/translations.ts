@@ -41,7 +41,7 @@ export const TRANSLATIONS = {
       GREAT_WEEK: 'Great Week',
       CHRONOLOGY_LAB: 'Chronology Lab',
       SCRIPTURE_HISTORY: 'Scripture & History',
-      DIMENUEVEIS: 'Dimenúveis',
+      DIMENUEVEIS: 'Dimenuous',
       SETTINGS: 'Settings',
       TESTS: 'Engine Tests',
     },
@@ -186,17 +186,17 @@ export const TRANSLATIONS = {
     // Dimenúveis Screen
     dimenueveis: {
       heroTitle: 'Dimenuous Architecture',
-      subtitle: 'Immutable Canonical Text & 6-Layer Time System',
-      integrityProtocol: 'CANONICAL INTEGRITY PROTOCOL: All Gospel of Dimenuous source texts are preserved verbatim in their immutable form without alteration or summary.',
+      subtitle: 'Biblical Foundations & 6-Layer Time System',
+      integrityProtocol: 'SCRIPTURAL FOUNDATION: All calendar, lunar, Sabbath, and millennial concepts are grounded directly in Biblical texts (Genesis 1:14, Exodus 12:2, Leviticus 23, Psalm 104:19, 2 Peter 3:8, and Revelation 20).',
       treeTab: '6-Layer Tree',
-      viewerTab: 'Canonical Text',
+      viewerTab: 'Biblical Texts',
       lexiconTab: 'Lexicon',
       timeTreeTitle: '6-Layer Time Architecture',
-      indexTitle: 'Canonical Gospel Index',
-      annotationsTitle: 'Canonical Annotations',
+      indexTitle: 'Biblical Foundations Index',
+      annotationsTitle: 'Scriptural Citations',
       timeLayer: 'TIME LAYER',
-      lexiconTitle: 'Canonical Terminology Lexicon',
-      sourceLabel: 'Source:',
+      lexiconTitle: 'Terminology & Biblical References',
+      sourceLabel: 'Biblical Reference:',
     },
 
     // Settings
@@ -247,7 +247,7 @@ export const TRANSLATIONS = {
       sunset: 'Sunset',
       dusk: 'Twilight',
       biblicalEvents: 'Biblical Events on This Date',
-      canonicalMaterial: 'Canonical Gospel Material',
+      canonicalMaterial: 'Biblical Foundation',
     },
 
     // Common Badges
@@ -445,17 +445,17 @@ export const TRANSLATIONS = {
     // Dimenúveis Screen
     dimenueveis: {
       heroTitle: 'Arquitetura Dimenúveis',
-      subtitle: 'Texto Canônico Imutável & Tempo em 6 Camadas',
-      integrityProtocol: 'PROTOCOLO DE INTEGRIDADE CANÔNICA: Todos os textos-fonte do Evangelho das Dimenúveis são preservados verbatim em sua forma imutável sem alteração ou resumo.',
+      subtitle: 'Fundamentos Bíblicos & Tempo em 6 Camadas',
+      integrityProtocol: 'FUNDAMENTO BÍBLICO: Todos os conceitos do calendário, fases lunares, Sábado e milênio baseiam-se diretamente nos textos bíblicos (Gênesis 1:14, Êxodo 12:2, Levítico 23, Salmos 104:19, 2 Pedro 3:8 e Apocalipse 20).',
       treeTab: 'Árvore (6 Níveis)',
-      viewerTab: 'Texto Canônico',
+      viewerTab: 'Textos Bíblicos',
       lexiconTab: 'Léxico',
       timeTreeTitle: 'Arquitetura do Tempo em 6 Camadas',
-      indexTitle: 'Índice do Evangelho Canônico',
-      annotationsTitle: 'Anotações Canônicas',
+      indexTitle: 'Índice de Fundamentos Bíblicos',
+      annotationsTitle: 'Referências Bíblicas',
       timeLayer: 'CAMADA DE TEMPO',
-      lexiconTitle: 'Léxico de Terminologia Canônica',
-      sourceLabel: 'Fonte:',
+      lexiconTitle: 'Léxico de Terminologia e Referências Bíblicas',
+      sourceLabel: 'Referência Bíblica:',
     },
 
     // Settings
@@ -506,7 +506,7 @@ export const TRANSLATIONS = {
       sunset: 'Pôr do Sol',
       dusk: 'Crepúsculo',
       biblicalEvents: 'Eventos Bíblicos na Data',
-      canonicalMaterial: 'Material Canônico Dimenúveis',
+      canonicalMaterial: 'Fundamento Bíblico',
     },
 
     // Common Badges

@@ -78,11 +78,11 @@ export const DIMENUEVEIS_TIME_TREE: TimeArchitectureLayer[] = [
   },
   {
     id: 'dimenueveis-time',
-    name: 'DIMENÚVEIS TIME',
+    name: 'DIMENUOUS TIME',
     color: '#f59e0b',
-    description: 'Canonical Gospel of Dimenuous architecture unifying all time domains.',
+    description: 'Biblical calendar architecture unifying sacred, celestial, and millennial time domains.',
     children: [
-      { name: 'Canonical Gospel Architecture', description: 'Immutable source texts, Day Zero doctrine, celestial witness.', status: 'Active' },
+      { name: 'Scriptural Foundations', description: 'Genesis 1:14, Exodus 12:2, Leviticus 23, Psalm 104:19, and 2 Peter 3:8.', status: 'Active' },
     ],
   },
 ];
@@ -150,9 +150,9 @@ export const DIMENUEVEIS_TIME_TREE_PT: TimeArchitectureLayer[] = [
     id: 'dimenueveis-time',
     name: 'TEMPO DIMENÚVEIS',
     color: '#f59e0b',
-    description: 'Arquitetura canônica do Evangelho das Dimenúveis unificando todos os domínios do tempo.',
+    description: 'Arquitetura bíblica do calendário unificando os domínios do tempo sagrado, celestial e milenar.',
     children: [
-      { name: 'Arquitetura Canônica do Evangelho', description: 'Textos-fonte imutáveis, doutrina do Dia Zero, testemunha celestial.', status: 'Ativo' },
+      { name: 'Fundamentos Bíblicos', description: 'Gênesis 1:14, Êxodo 12:2, Levítico 23, Salmos 104:19 e 2 Pedro 3:8.', status: 'Ativo' },
     ],
   },
 ];

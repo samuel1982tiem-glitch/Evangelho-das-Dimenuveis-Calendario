@@ -33,8 +33,8 @@ export function buildFeastCalendarEventPayload(
   const exclusiveEndYMD = addDaysYMD(occ.gregorianStartDate, Math.max(1, f.durationDays));
 
   const summary = isPt
-    ? `🕯️ ${f.name} (${f.hebrewName}) — Calendário Dimenúvel`
-    : `🕯️ ${f.name} (${f.hebrewName}) — Dimenúveis Calendar`;
+    ? `🕯️ ${f.name} (${f.hebrewName}) — Calendário Dimenúveis`
+    : `🕯️ ${f.name} (${f.hebrewName}) — Dimenuous Calendar`;
 
   const descriptionLines = isPt
     ? [

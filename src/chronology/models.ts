@@ -39,7 +39,7 @@ export const CHRONOLOGY_MODELS: ChronologyModel[] = [
   },
   {
     id: 'astronomical-sacred',
-    name: 'Astronomical Sacred Epoch (Dimenúveis Model)',
+    name: 'Astronomical Sacred Epoch (Dimenuous Model)',
     description: 'Calibrated astronomical-sacred chronology aligning Creation epoch with 4026 BCE spring equinox.',
     creationEpochBCE: 4026,
     methodology: 'Calibrates 6,000 elapsed solar/lunar years with sacred 364-day cycle alignments and spring New Moon conjunctions.',

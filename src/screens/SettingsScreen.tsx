@@ -93,7 +93,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
         );
       }
       sendFeastNotification(
-        isPt ? 'Calendário Dimenúvel — Alertas Ativos' : 'Dimenúveis Calendar — Alerts Active',
+        isPt ? 'Calendário Dimenúveis — Alertas Ativos' : 'Dimenuous Calendar — Alerts Active',
         isPt
           ? 'As notificações de Festas Bíblicas, Sábados e Fases da Lua foram ativadas.'
           : 'Biblical Feast, Sabbath, and Lunar Phase notifications are now active.',
