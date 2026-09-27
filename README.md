@@ -173,14 +173,14 @@ npm run preview
 ```
 
 ### 📱 Geração Automática do Android APK (GitHub Actions)
-O projeto inclui uma estrutura nativa Android em `/android` (Gradle 8.7, AGP 8.5.2, Java 17, Android SDK 34, `WebViewAssetLoader`) e um workflow automatizado em `.github/workflows/android-apk.yml`.
+O projeto inclui uma estrutura nativa Android para o aplicativo **Calendário Dimenuvel** em `/android` (Gradle 8.7, AGP 8.5.2, Java 17, Android SDK 34, `WebViewAssetLoader`, ícone do número 13 sobre espiral arco-íris) e um workflow automatizado em `.github/workflows/android-apk.yml`.
 
 Ao enviar código para a branch `main`/`master` (ou acionar manualmente em **Actions → Build Android APK → Run workflow** no GitHub):
-1. O GitHub Actions instala o Node.js 20, compila o aplicativo Vite (`npm run build`) e sincroniza o bundle em `android/app/src/main/assets/public/`.
+1. O GitHub Actions instala o Node.js 22, compila o aplicativo Vite (`npm run build`) e sincroniza o bundle em `android/app/src/main/assets/public/`.
 2. Configura automaticamente o **Java JDK 17 (Temurin)**, **Android SDK 34** e **Gradle 8.7**, baixando todas as dependências Maven/Gradle na nuvem.
 3. Gera e assina os arquivos:
-   - `Evangelho-das-Dimenuveis-v1.0.0-release.apk` (APK Release assinado pronto para instalação)
-   - `Evangelho-das-Dimenuveis-v1.0.0-debug.apk` (APK Debug)
+   - `Calendario-Dimenuvel-v1.0.0-release.apk` (APK Release assinado pronto para instalação)
+   - `Calendario-Dimenuvel-v1.0.0-debug.apk` (APK Debug)
 4. Disponibiliza ambos os APKs para download direto na seção **Artifacts** da execução do workflow no GitHub.
 
 ---

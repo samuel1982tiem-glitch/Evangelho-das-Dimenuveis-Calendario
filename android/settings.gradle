@@ -14,5 +14,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "DimenueveisCalendar"
+rootProject.name = "CalendarioDimenuvel"
 include(":app")

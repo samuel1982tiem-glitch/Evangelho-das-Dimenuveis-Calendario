@@ -4,14 +4,121 @@
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
-    <!-- Outer Sacred Solar Ring -->
+
+    <!-- Multi-Turn Rainbow Spiral (14 continuous spectral arc segments) -->
+    <!-- Turn 1: Inner Spiral -->
     <path
         android:fillColor="#00000000"
-        android:strokeColor="#D97706"
-        android:strokeWidth="2.5"
-        android:pathData="M54,26A28,28 0 1,1 54,82A28,28 0 1,1 54,26Z" />
-    <!-- Golden Lunar Crescent -->
+        android:strokeColor="#FF2E4C"
+        android:strokeWidth="5.5"
+        android:strokeLineCap="round"
+        android:pathData="M60,54 A7,7 0 0,1 54,62" />
     <path
-        android:fillColor="#FBBF24"
-        android:pathData="M58,32A22,22 0 1,0 58,76A17,17 0 1,1 58,32Z" />
+        android:fillColor="#00000000"
+        android:strokeColor="#FF7A00"
+        android:strokeWidth="5.5"
+        android:strokeLineCap="round"
+        android:pathData="M54,62 A9,9 0 0,1 44,54" />
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#FFD600"
+        android:strokeWidth="5.5"
+        android:strokeLineCap="round"
+        android:pathData="M44,54 A11,11 0 0,1 54,42" />
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#00E676"
+        android:strokeWidth="5.5"
+        android:strokeLineCap="round"
+        android:pathData="M54,42 A13,13 0 0,1 68,54" />
+    <!-- Turn 2: Middle Spiral -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#00E5FF"
+        android:strokeWidth="5.5"
+        android:strokeLineCap="round"
+        android:pathData="M68,54 A15,15 0 0,1 54,70" />
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#2979FF"
+        android:strokeWidth="5.5"
+        android:strokeLineCap="round"
+        android:pathData="M54,70 A17,17 0 0,1 36,54" />
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#D500F9"
+        android:strokeWidth="5.5"
+        android:strokeLineCap="round"
+        android:pathData="M36,54 A19,19 0 0,1 54,34" />
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#FF2E4C"
+        android:strokeWidth="5.5"
+        android:strokeLineCap="round"
+        android:pathData="M54,34 A21,21 0 0,1 76,54" />
+    <!-- Turn 3: Outer Spiral -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#FF7A00"
+        android:strokeWidth="5.5"
+        android:strokeLineCap="round"
+        android:pathData="M76,54 A23,23 0 0,1 54,78" />
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#FFD600"
+        android:strokeWidth="5.5"
+        android:strokeLineCap="round"
+        android:pathData="M54,78 A25,25 0 0,1 28,54" />
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#00E676"
+        android:strokeWidth="5.5"
+        android:strokeLineCap="round"
+        android:pathData="M28,54 A27,27 0 0,1 54,26" />
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#00E5FF"
+        android:strokeWidth="5.5"
+        android:strokeLineCap="round"
+        android:pathData="M54,26 A29,29 0 0,1 84,54" />
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#2979FF"
+        android:strokeWidth="5.5"
+        android:strokeLineCap="round"
+        android:pathData="M84,54 A31,31 0 0,1 54,86" />
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#D500F9"
+        android:strokeWidth="5.5"
+        android:strokeLineCap="round"
+        android:pathData="M54,86 A33,33 0 0,1 20,54" />
+
+    <!-- Number "13" Centered Over Rainbow Spiral -->
+    <!-- Layer 1: Dark Contrast Backdrop Outline -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#0C0E14"
+        android:strokeWidth="11.5"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M35.5,43.5 L43.5,37 L43.5,71 M53.5,42.5 C55.5,38.2 59.2,36.8 63.5,36.8 C68.8,36.8 72,40.2 72,44.8 C72,49.2 68.5,52.2 63.2,53 L59.5,53 M63.2,53 C69.2,53.8 73,57.2 73,62.5 C73,67.8 68.8,71.5 63,71.5 C58,71.5 54.2,69.5 52.5,65.2" />
+
+    <!-- Layer 2: Warm Golden Aura Rim -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#F59E0B"
+        android:strokeWidth="8.2"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M35.5,43.5 L43.5,37 L43.5,71 M53.5,42.5 C55.5,38.2 59.2,36.8 63.5,36.8 C68.8,36.8 72,40.2 72,44.8 C72,49.2 68.5,52.2 63.2,53 L59.5,53 M63.2,53 C69.2,53.8 73,57.2 73,62.5 C73,67.8 68.8,71.5 63,71.5 C58,71.5 54.2,69.5 52.5,65.2" />
+
+    <!-- Layer 3: Crisp Luminous White Number 13 -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="5.4"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M35.5,43.5 L43.5,37 L43.5,71 M53.5,42.5 C55.5,38.2 59.2,36.8 63.5,36.8 C68.8,36.8 72,40.2 72,44.8 C72,49.2 68.5,52.2 63.2,53 L59.5,53 M63.2,53 C69.2,53.8 73,57.2 73,62.5 C73,67.8 68.8,71.5 63,71.5 C58,71.5 54.2,69.5 52.5,65.2" />
 </vector>
