@@ -1,6 +1,6 @@
 {
-  "name": "DIMENÚVEIS — Biblical Lunar & Millennial Calendar",
-  "description": "A 13-month / 28-day sacred calendar application with astronomical lunar overlay, Biblical chronology, 7,000-year Millennial Sabbath clock, and Gospel of Dimenúveis architecture.",
+  "name": "Evangelho das Dimenúveis - Calendário",
+  "description": "Um aplicativo de calendário sagrado de 13 meses e 28 dias com cálculo astronômico das fases da lua, cronologia bíblica, relógio do Sábado Milenar de 7.000 anos e arquitetura do Evangelho das Dimenúveis.",
   "requestFramePermissions": ["geolocation"],
   "majorCapabilities": []
 }
