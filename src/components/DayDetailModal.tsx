@@ -4,7 +4,7 @@
  */
 
 import React from 'react';
-import { X } from 'lucide-react';
+import { X, MapPin } from 'lucide-react';
 import { CalendarConfiguration, CalendarDay } from '../types/calendar';
 import { Language, TRANSLATIONS } from '../i18n/translations';
 import { getLunarPhaseInfo, getLocalizedPhaseName } from '../astronomy/moon';
@@ -22,9 +22,16 @@ interface DayDetailModalProps {
   onClose: () => void;
   config: CalendarConfiguration;
   language: Language;
+  onOpenGpsModal?: () => void;
 }
 
-export const DayDetailModal: React.FC<DayDetailModalProps> = ({ day, onClose, config, language }) => {
+export const DayDetailModal: React.FC<DayDetailModalProps> = ({
+  day,
+  onClose,
+  config,
+  language,
+  onOpenGpsModal,
+}) => {
   if (!day) return null;
 
   const t = TRANSLATIONS[language];
@@ -67,9 +74,9 @@ export const DayDetailModal: React.FC<DayDetailModalProps> = ({ day, onClose, co
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-xs">
       <div className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-slate-950 border border-slate-700 text-slate-100 divide-y divide-slate-800 shadow-2xl">
         {/* Top Header */}
-        <div className="flex items-start justify-between p-5 bg-slate-900/70">
-          <div className="space-y-1.5 pr-8">
-            <div className="flex flex-wrap items-center gap-2 text-xs font-serif uppercase tracking-wider tabular-nums">
+        <div className="flex items-start justify-between p-4 sm:p-5 bg-slate-900/70">
+          <div className="space-y-1.5 pr-4 min-w-0">
+            <div className="flex flex-wrap items-center gap-2 text-xs font-serif uppercase tracking-wider tabular-nums whitespace-nowrap">
               <span className="text-amber-400 font-semibold">
                 {t.modal.sacredYear} {day.calendarYear}
               </span>
@@ -77,30 +84,22 @@ export const DayDetailModal: React.FC<DayDetailModalProps> = ({ day, onClose, co
               <span className={sabbathBadge.textClass}>
                 {sabbathBadge.text}
               </span>
-              {observancesInfo.isDoubleObservance && (
-                <>
-                  <span className="text-slate-500">·</span>
-                  <span className="text-amber-300 font-semibold">
-                    {isPt ? 'Dupla Observância' : 'Double Observance'}
-                  </span>
-                </>
-              )}
             </div>
 
-            <h2 className="text-2xl font-serif font-bold text-slate-100 tabular-nums">
+            <h2 className="text-lg sm:text-2xl font-serif font-bold text-slate-100 tabular-nums whitespace-nowrap">
               {isZero
-                ? `${t.today.dayZeroTitle} — ${t.today.dayZeroSubtitle}`
+                ? t.today.dayZeroTitle
                 : `${getMonthDisplayTitle((day as any).month, config.customMonthNames, language)}, ${isPt ? 'Dia' : 'Day'} ${(day as any).dayOfMonth}`}
             </h2>
 
-            <p className="text-xs text-slate-300 italic font-serif tabular-nums">
-              {t.modal.gregorianEquiv} {day.gregorianDate.toISOString().split('T')[0]} ({day.gregorianDate.toLocaleDateString(isPt ? 'pt-BR' : 'en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })})
+            <p className="text-xs text-slate-300 italic font-serif tabular-nums whitespace-nowrap">
+              {t.modal.gregorianEquiv} {day.gregorianDate.toISOString().split('T')[0]}
             </p>
           </div>
 
           <button
             onClick={onClose}
-            className="p-1.5 bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-300 hover:text-white transition-colors cursor-pointer"
+            className="p-1.5 bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-300 hover:text-white transition-colors cursor-pointer shrink-0"
           >
             <X className="w-4 h-4" />
           </button>
@@ -179,26 +178,38 @@ export const DayDetailModal: React.FC<DayDetailModalProps> = ({ day, onClose, co
         </div>
 
         {/* Solar Ephemeris Table */}
-        <div className="p-5 space-y-2.5">
-          <div className="text-xs font-serif text-amber-400 uppercase tracking-wider font-semibold">
-            {t.modal.solarData} ({displayCity})
+        <div className="p-4 sm:p-5 space-y-2.5">
+          <div className="flex items-center justify-between gap-2">
+            <div className="text-xs font-serif text-amber-400 uppercase tracking-wider font-semibold whitespace-nowrap truncate">
+              {t.modal.solarData} ({displayCity})
+            </div>
+            {onOpenGpsModal && (
+              <button
+                type="button"
+                onClick={onOpenGpsModal}
+                className="inline-flex items-center gap-1 px-2 py-0.5 bg-slate-900 hover:bg-slate-800 border border-slate-700 hover:border-amber-500/60 text-xs font-serif text-amber-300 transition-colors shrink-0 whitespace-nowrap cursor-pointer"
+              >
+                <MapPin className="w-3 h-3 shrink-0" />
+                <span>{isPt ? 'GPS Local' : 'Local GPS'}</span>
+              </button>
+            )}
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-4 border border-slate-800 divide-y sm:divide-y-0 sm:divide-x divide-slate-800 bg-slate-900/40 text-xs tabular-nums">
-            <div className="p-3">
-              <span className="text-slate-400 block text-[11px] italic font-serif">{t.modal.sunrise}</span>
-              <span className="text-amber-300 font-semibold text-sm">{sunTimes.sunrise.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+            <div className="p-3.5 space-y-0.5">
+              <span className="text-slate-300 block text-xs italic font-serif">{t.modal.sunrise}</span>
+              <span className="text-amber-300 font-bold text-base">{sunTimes.sunrise.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
             </div>
-            <div className="p-3">
-              <span className="text-slate-400 block text-[11px] italic font-serif">{t.modal.solarNoon}</span>
-              <span className="text-amber-300 font-semibold text-sm">{sunTimes.solarNoon.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+            <div className="p-3.5 space-y-0.5">
+              <span className="text-slate-300 block text-xs italic font-serif">{t.modal.solarNoon}</span>
+              <span className="text-amber-300 font-bold text-base">{sunTimes.solarNoon.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
             </div>
-            <div className="p-3">
-              <span className="text-slate-400 block text-[11px] italic font-serif">{t.modal.sunset}</span>
-              <span className="text-amber-300 font-semibold text-sm">{sunTimes.sunset.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+            <div className="p-3.5 space-y-0.5">
+              <span className="text-slate-300 block text-xs italic font-serif">{t.modal.sunset}</span>
+              <span className="text-amber-300 font-bold text-base">{sunTimes.sunset.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
             </div>
-            <div className="p-3">
-              <span className="text-slate-400 block text-[11px] italic font-serif">{t.modal.dusk}</span>
-              <span className="text-amber-300 font-semibold text-sm">{sunTimes.dusk.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+            <div className="p-3.5 space-y-0.5">
+              <span className="text-slate-300 block text-xs italic font-serif">{t.modal.dusk}</span>
+              <span className="text-amber-300 font-bold text-base">{sunTimes.dusk.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
             </div>
           </div>
         </div>

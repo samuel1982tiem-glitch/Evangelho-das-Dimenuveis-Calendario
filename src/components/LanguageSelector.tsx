@@ -23,7 +23,7 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({
     <button
       type="button"
       onClick={toggleLanguage}
-      className="inline-flex items-center justify-center w-9 h-9 border border-slate-700 bg-slate-900 hover:border-amber-500/60 transition-colors cursor-pointer shrink-0"
+      className="inline-flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 border border-slate-700 bg-slate-900 hover:border-amber-500/60 transition-colors cursor-pointer shrink-0"
       title={language === 'en' ? 'Mudar para Português (BR)' : 'Switch to English (US)'}
       aria-label={language === 'en' ? 'Mudar para Português' : 'Switch to English'}
     >

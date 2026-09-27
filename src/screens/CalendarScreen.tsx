@@ -95,23 +95,66 @@ export const CalendarScreen: React.FC<CalendarScreenProps> = ({
     language,
   ]);
 
+  const getShortFeastLabel = (feastId?: string, fullName?: string) => {
+    if (!feastId) return fullName || '';
+    if (isPt) {
+      const ptMap: Record<string, string> = {
+        PASSOVER: 'Páscoa',
+        UNLEAVENED_BREAD: 'Asmos',
+        FIRSTFRUITS: 'Primíc.',
+        WEEKS_PENTECOST: 'Pentec.',
+        TRUMPETS: 'Tromb.',
+        DAY_OF_ATONEMENT: 'Expiaç.',
+        TABERNACLES: 'Tabern.',
+        EIGHTH_DAY: '8º Dia',
+      };
+      return ptMap[feastId] || fullName || '';
+    }
+    const enMap: Record<string, string> = {
+      PASSOVER: 'Passover',
+      UNLEAVENED_BREAD: 'Matzot',
+      FIRSTFRUITS: '1stFruit',
+      WEEKS_PENTECOST: 'Shavuot',
+      TRUMPETS: 'Trumpet',
+      DAY_OF_ATONEMENT: 'Kippur',
+      TABERNACLES: 'Sukkot',
+      EIGHTH_DAY: '8th Day',
+    };
+    return enMap[feastId] || fullName || '';
+  };
+
+  const getShortPhaseLabel = (phaseName: string) => {
+    if (isPt) {
+      if (phaseName === 'New Moon') return 'Nova';
+      if (phaseName === 'First Quarter') return 'Cres.';
+      if (phaseName === 'Full Moon') return 'Cheia';
+      if (phaseName === 'Last Quarter') return 'Ming.';
+      return getLocalizedPhaseName(phaseName, language);
+    }
+    if (phaseName === 'New Moon') return 'New';
+    if (phaseName === 'First Quarter') return '1st Q';
+    if (phaseName === 'Full Moon') return 'Full';
+    if (phaseName === 'Last Quarter') return 'Last Q';
+    return getLocalizedPhaseName(phaseName, language);
+  };
+
   return (
     <div className="space-y-6">
       {/* Book Almanac Header & Control Strip */}
       <div className="border border-slate-800 bg-slate-950 divide-y divide-slate-800">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3.5 p-4 sm:p-5">
           <div>
-            <h2 className="text-2xl font-serif font-bold text-slate-100 tabular-nums">
+            <h2 className="text-lg sm:text-2xl font-serif font-bold text-slate-100 tabular-nums whitespace-nowrap">
               {t.calendar.yearTitle} {selectedSacredYear}
             </h2>
-            <p className="text-xs text-slate-300 font-serif italic mt-0.5">
+            <p className="text-xs text-slate-300 font-serif italic mt-0.5 whitespace-nowrap">
               {t.calendar.subtitle}
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="flex items-center gap-2.5">
             {/* Year Stepper */}
-            <div className="inline-flex items-center border border-slate-700 bg-slate-900 divide-x divide-slate-700 font-serif text-xs">
+            <div className="inline-flex items-center border border-slate-700 bg-slate-900 divide-x divide-slate-700 font-serif text-xs shrink-0">
               <button
                 onClick={() => setSelectedSacredYear((prev) => prev - 1)}
                 className="p-2 hover:bg-slate-800 text-slate-200 transition-colors cursor-pointer"
@@ -119,7 +162,7 @@ export const CalendarScreen: React.FC<CalendarScreenProps> = ({
               >
                 <ChevronLeft className="w-3.5 h-3.5" />
               </button>
-              <span className="px-3.5 py-1.5 font-semibold text-amber-400 tabular-nums">
+              <span className="px-3 py-1.5 font-semibold text-amber-400 tabular-nums whitespace-nowrap">
                 {isPt ? 'Ano' : 'Year'} {selectedSacredYear}
               </span>
               <button
@@ -137,7 +180,7 @@ export const CalendarScreen: React.FC<CalendarScreenProps> = ({
               onChange={(e) =>
                 setActiveMonthFilter(e.target.value === 'ALL' ? 'ALL' : parseInt(e.target.value, 10))
               }
-              className="px-3 py-1.5 bg-slate-900 border border-slate-700 text-xs font-serif text-slate-100 focus:outline-none focus:border-amber-500"
+              className="px-2.5 py-1.5 bg-slate-900 border border-slate-700 text-xs font-serif text-slate-100 focus:outline-none focus:border-amber-500 min-w-0"
             >
               <option value="ALL">{t.calendar.allMonths}</option>
               {monthsData.map((m) => (
@@ -150,25 +193,23 @@ export const CalendarScreen: React.FC<CalendarScreenProps> = ({
         </div>
 
         {/* Lunar Phase Filter Strip */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 px-5 py-3 bg-slate-900/40 text-xs font-serif">
-          <span className="text-slate-300 italic shrink-0">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 px-4 sm:px-5 py-3 bg-slate-900/40 text-xs font-serif">
+          <span className="text-slate-300 italic shrink-0 whitespace-nowrap">
             {t.calendar.lunarFilter}
           </span>
 
-          <div className="grid grid-cols-2 sm:grid-cols-5 gap-px bg-slate-700 border border-slate-700 w-full sm:w-auto">
+          <div className="grid grid-cols-5 gap-px bg-slate-700 border border-slate-700 w-full sm:w-auto">
             {[
               { id: 'ALL', label: t.calendar.allPhases },
-              { id: 'New', label: isPt ? 'Lua Nova' : 'New' },
-              { id: 'Waxing', label: isPt ? 'Crescente' : 'Waxing' },
-              { id: 'Full', label: isPt ? 'Lua Cheia' : 'Full' },
-              { id: 'Waning', label: isPt ? 'Minguante' : 'Waning' },
-            ].map((p, idx) => (
+              { id: 'New', label: isPt ? 'Nova' : 'New' },
+              { id: 'Waxing', label: isPt ? 'Cresc.' : 'Waxing' },
+              { id: 'Full', label: isPt ? 'Cheia' : 'Full' },
+              { id: 'Waning', label: isPt ? 'Ming.' : 'Waning' },
+            ].map((p) => (
               <button
                 key={p.id}
                 onClick={() => setActiveLunarPhaseFilter(p.id as any)}
-                className={`px-3 py-1.5 text-xs font-serif text-center transition-colors cursor-pointer truncate ${
-                  idx === 0 ? 'col-span-2 sm:col-span-1' : 'col-span-1'
-                } ${
+                className={`px-1.5 sm:px-3 py-1.5 text-[11px] sm:text-xs font-serif text-center transition-colors cursor-pointer whitespace-nowrap ${
                   activeLunarPhaseFilter === p.id
                     ? 'bg-amber-500 text-slate-950 font-bold'
                     : 'bg-slate-950 text-slate-300 hover:text-slate-100 hover:bg-slate-900'
@@ -186,8 +227,8 @@ export const CalendarScreen: React.FC<CalendarScreenProps> = ({
         onClick={() => onOpenDayDetail(dayZero)}
         className="border border-purple-500/50 bg-slate-950 hover:bg-slate-900/80 transition-colors cursor-pointer grid grid-cols-1 md:grid-cols-12 divide-y md:divide-y-0 md:divide-x divide-slate-800"
       >
-        <div className="md:col-span-9 p-5 space-y-1.5">
-          <div className="flex items-center gap-2 text-xs font-serif uppercase tracking-wider">
+        <div className="md:col-span-9 p-4 sm:p-5 space-y-1.5">
+          <div className="flex items-center gap-2 text-xs font-serif uppercase tracking-wider whitespace-nowrap">
             <span className="text-purple-300 font-semibold">
               {isPt ? 'Dia Zero' : 'Day Zero'}
             </span>
@@ -198,7 +239,7 @@ export const CalendarScreen: React.FC<CalendarScreenProps> = ({
               {dayZero.gregorianDate.toISOString().split('T')[0]}
             </span>
           </div>
-          <h3 className="text-lg font-serif font-bold text-slate-100">
+          <h3 className="text-base sm:text-lg font-serif font-bold text-slate-100 whitespace-nowrap">
             {t.calendar.dayZeroBannerTitle}
           </h3>
           <p className="text-xs text-slate-300 leading-relaxed">
@@ -206,18 +247,18 @@ export const CalendarScreen: React.FC<CalendarScreenProps> = ({
           </p>
         </div>
 
-        <div className="md:col-span-3 p-5 flex items-center gap-3.5 bg-slate-900/30">
+        <div className="md:col-span-3 p-4 sm:p-5 flex items-center gap-3.5 bg-slate-900/30">
           <LunarPhaseIcon
             fraction={dayZero.lunarAnchor.illumination}
             phaseName={dayZero.lunarAnchor.phaseName}
-            size={36}
+            size={38}
           />
-          <div className="text-xs font-serif">
-            <span className="text-slate-400 block text-[11px] italic">{t.calendar.springAnchorPhase}</span>
-            <strong className="text-purple-300 block text-sm">
+          <div className="text-xs font-serif whitespace-nowrap">
+            <span className="text-slate-300 block text-xs italic">{t.calendar.springAnchorPhase}</span>
+            <strong className="text-purple-300 block text-sm sm:text-base">
               {getLocalizedPhaseName(dayZero.lunarAnchor.phaseName, language)}
             </strong>
-            <span className="text-xs text-slate-300 tabular-nums">
+            <span className="text-xs text-slate-200 tabular-nums font-medium">
               {(dayZero.lunarAnchor.illumination * 100).toFixed(1)}% {isPt ? 'Ilum.' : 'Illum.'}
             </span>
           </div>
@@ -235,27 +276,30 @@ export const CalendarScreen: React.FC<CalendarScreenProps> = ({
             >
               {/* Month Header Bar */}
               <div className="flex items-center justify-between px-4 py-3 bg-slate-900/70 border-b border-slate-800">
-                <div className="flex items-baseline gap-2">
-                  <span className="font-serif italic text-sm font-semibold text-amber-400">
+                <div className="flex items-baseline gap-2 whitespace-nowrap">
+                  <span className="font-serif italic text-base font-bold text-amber-400">
                     {m.roman}.
                   </span>
-                  <h3 className="text-base font-serif font-bold text-slate-100">
+                  <h3 className="text-base sm:text-lg font-serif font-bold text-slate-100">
                     {m.title}
                   </h3>
                 </div>
-                <span className="text-xs font-serif italic text-slate-300 tabular-nums">
+                <span className="text-xs font-serif italic text-slate-200 tabular-nums whitespace-nowrap">
                   {t.calendar.days28Weeks4}
                 </span>
               </div>
 
               {/* 7-Column Day Header */}
-              <div className="grid grid-cols-7 divide-x divide-slate-800 border-b border-slate-800 bg-slate-900/30 text-center text-xs font-serif text-slate-300">
+              <div className="grid grid-cols-7 divide-x divide-slate-800 border-b border-slate-800 bg-slate-900/40 text-center text-[10.5px] sm:text-xs font-serif text-slate-200">
                 {t.calendar.daysOfWeek.map((colName, idx) => (
                   <div
                     key={idx}
-                    className={`py-2 font-semibold ${idx === 6 ? 'text-amber-400 bg-amber-950/10' : ''}`}
+                    className={`py-2 px-0.5 font-bold whitespace-nowrap ${idx === 6 ? 'text-amber-400 bg-amber-950/15' : ''}`}
                   >
-                    {colName}
+                    <span className="sm:hidden">
+                      {idx === 6 ? (isPt ? 'Sáb' : 'Sab') : `${isPt ? 'D' : 'D'}${idx + 1}`}
+                    </span>
+                    <span className="hidden sm:inline">{colName}</span>
                   </div>
                 ))}
               </div>
@@ -283,26 +327,26 @@ export const CalendarScreen: React.FC<CalendarScreenProps> = ({
                     <div
                       key={numDay.dayOfYear}
                       onClick={() => onOpenDayDetail(numDay)}
-                      className={`p-2 h-16 flex flex-col justify-between cursor-pointer transition-colors ${
+                      className={`p-1.5 sm:p-2.5 min-h-[4.25rem] sm:min-h-[5rem] h-auto flex flex-col justify-between gap-1 cursor-pointer transition-colors ${
                         colIdx < 6 ? 'border-r border-slate-800' : ''
                       } ${rowIdx < 3 ? 'border-b border-slate-800' : ''} ${
-                        !matchesPhaseFilter ? 'opacity-25' : 'opacity-100'
+                        !matchesPhaseFilter ? 'opacity-35' : 'opacity-100'
                       } ${
                         observancesInfo.isDoubleObservance
                           ? 'bg-amber-950/40 hover:bg-amber-950/60 text-amber-200'
                           : feastObs
                           ? 'bg-amber-950/25 hover:bg-amber-950/40 text-amber-200'
                           : isSabbath
-                          ? 'bg-amber-950/10 hover:bg-amber-950/25 text-amber-200'
+                          ? 'bg-amber-950/15 hover:bg-amber-950/30 text-amber-200'
                           : isMajorPhaseDay
-                          ? 'bg-blue-950/15 hover:bg-blue-950/30 text-slate-200'
-                          : 'bg-slate-950 hover:bg-slate-900 text-slate-200'
+                          ? 'bg-blue-950/20 hover:bg-blue-950/35 text-slate-100'
+                          : 'bg-slate-950 hover:bg-slate-900 text-slate-100'
                       }`}
                     >
                       {/* Cell Top Row: Day Number + Moon Phase Icon */}
-                      <div className="flex items-start justify-between">
+                      <div className="flex items-start justify-between gap-0.5">
                         <span
-                          className={`font-serif font-bold text-sm tabular-nums ${
+                          className={`font-serif font-bold text-sm sm:text-base tabular-nums leading-none ${
                             isSabbath ? 'text-amber-400' : 'text-slate-100'
                           }`}
                         >
@@ -312,32 +356,33 @@ export const CalendarScreen: React.FC<CalendarScreenProps> = ({
                         <LunarPhaseIcon
                           fraction={lunarInfo.fraction}
                           phaseName={lunarInfo.phaseName}
-                          size={15}
+                          size={14}
                         />
                       </div>
 
-                      {/* Cell Bottom Row: Observance / Lunar Readout */}
-                      <div className="truncate">
+                      {/* Cell Bottom Row: Single-Line Observance / Lunar Readout */}
+                      <div className="min-w-0 overflow-hidden">
                         {feastObs ? (
                           <div
-                            className="text-[10px] font-serif font-semibold text-amber-300 truncate"
+                            className="text-[9.5px] sm:text-xs font-serif font-semibold text-amber-300 leading-tight whitespace-nowrap"
                             title={feastObs.label}
                           >
-                            {feastObs.feastName}
+                            {getShortFeastLabel(feastObs.feastId, feastObs.feastName)}
                           </div>
                         ) : isSabbath ? (
-                          <div className="text-[10px] font-serif italic text-amber-400 font-medium">
-                            {t.badges.sabbath}
+                          <div className="text-[9.5px] sm:text-xs font-serif italic text-amber-400 font-semibold leading-tight whitespace-nowrap">
+                            <span className="sm:hidden">{isPt ? 'Sáb' : 'Sab'}</span>
+                            <span className="hidden sm:inline">{t.badges.sabbath}</span>
                           </div>
                         ) : isMajorPhaseDay ? (
                           <div
-                            className="text-[10px] font-serif italic text-blue-300 truncate"
+                            className="text-[9.5px] sm:text-xs font-serif italic text-blue-300 font-medium leading-tight whitespace-nowrap"
                             title={getLocalizedPhaseName(lunarInfo.phaseName, language)}
                           >
-                            {getLocalizedPhaseName(lunarInfo.phaseName, language)}
+                            {getShortPhaseLabel(lunarInfo.phaseName)}
                           </div>
                         ) : (
-                          <div className="text-[10px] font-serif text-slate-400 tabular-nums">
+                          <div className="text-[10px] sm:text-xs font-serif text-slate-300 tabular-nums font-medium leading-tight whitespace-nowrap">
                             {Math.round(lunarInfo.fraction * 100)}%
                           </div>
                         )}

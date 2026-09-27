@@ -7,9 +7,15 @@ import React, { useState, useEffect } from 'react';
 import { Navbar, NavTab } from './components/Navbar';
 import { DayDetailModal } from './components/DayDetailModal';
 import { TourGuideModal } from './components/TourGuideModal';
+import { GpsPermissionModal } from './components/GpsPermissionModal';
 import { Language, TRANSLATIONS } from './i18n/translations';
 import { CalendarConfiguration, CalendarDay } from './types/calendar';
 import { loadStoredConfiguration, saveConfiguration } from './settings/config';
+import {
+  hasUserDecidedGpsPrompt,
+  isUsingDefaultJerusalem,
+  ResolvedUserLocation,
+} from './services/geolocationService';
 
 import { TodayScreen } from './screens/TodayScreen';
 import { CalendarScreen } from './screens/CalendarScreen';
@@ -33,10 +39,33 @@ export default function App() {
   const [isTourOpen, setIsTourOpen] = useState<boolean>(() => {
     return localStorage.getItem(TOUR_STORAGE_KEY) !== 'true';
   });
+  const [isGpsModalOpen, setIsGpsModalOpen] = useState<boolean>(() => {
+    const tourCompleted = localStorage.getItem(TOUR_STORAGE_KEY) === 'true';
+    const initialCfg = loadStoredConfiguration();
+    return (
+      tourCompleted &&
+      !hasUserDecidedGpsPrompt() &&
+      isUsingDefaultJerusalem(
+        initialCfg.userLocation?.cityName,
+        initialCfg.userLocation?.latitude,
+        initialCfg.userLocation?.longitude
+      )
+    );
+  });
 
   const handleCloseTour = () => {
     setIsTourOpen(false);
     localStorage.setItem(TOUR_STORAGE_KEY, 'true');
+    if (
+      !hasUserDecidedGpsPrompt() &&
+      isUsingDefaultJerusalem(
+        config.userLocation?.cityName,
+        config.userLocation?.latitude,
+        config.userLocation?.longitude
+      )
+    ) {
+      setIsGpsModalOpen(true);
+    }
   };
 
   // Language state ('en' | 'pt')
@@ -60,6 +89,13 @@ export default function App() {
     document.title = `${t.appTitle} — ${t.appSubtitle}`;
   }, [language, t]);
 
+  // Scroll to top on tab change
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  }, [activeTab]);
+
   // Theme state ('night' vs 'day')
   const [theme, setTheme] = useState<'night' | 'day'>(() => {
     const saved = localStorage.getItem('dimenueveis_theme');
@@ -80,6 +116,16 @@ export default function App() {
     const updated = { ...config, ...newConfig };
     setConfig(updated as CalendarConfiguration);
     saveConfiguration(updated as CalendarConfiguration);
+  };
+
+  const handleGpsLocationResolved = (loc: ResolvedUserLocation) => {
+    handleUpdateConfig({
+      userLocation: {
+        latitude: loc.latitude,
+        longitude: loc.longitude,
+        cityName: loc.cityName,
+      },
+    });
   };
 
   return (
@@ -107,6 +153,15 @@ export default function App() {
         onNavigateTab={setActiveTab}
       />
 
+      {/* Android & Web GPS Location Permission Dialog */}
+      <GpsPermissionModal
+        isOpen={isGpsModalOpen}
+        onClose={() => setIsGpsModalOpen(false)}
+        language={language}
+        currentLocation={config.userLocation}
+        onLocationResolved={handleGpsLocationResolved}
+      />
+
       {/* Main Workspace Container */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
         {activeTab === 'TODAY' && (
@@ -116,6 +171,7 @@ export default function App() {
             onOpenDayDetail={setSelectedDayModal}
             onNavigateTab={setActiveTab}
             language={language}
+            onOpenGpsModal={() => setIsGpsModalOpen(true)}
           />
         )}
 
@@ -189,6 +245,7 @@ export default function App() {
             config={config}
             onUpdateConfig={handleUpdateConfig}
             language={language}
+            onOpenGpsModal={() => setIsGpsModalOpen(true)}
           />
         )}
 
@@ -205,30 +262,31 @@ export default function App() {
         onClose={() => setSelectedDayModal(null)}
         config={config}
         language={language}
+        onOpenGpsModal={() => setIsGpsModalOpen(true)}
       />
 
       {/* Editorial Colophon Footer */}
-      <footer className="mt-auto border-t border-slate-800 bg-[#0c0e14] py-6 text-xs font-serif text-slate-400">
+      <footer className="mt-auto border-t border-slate-800 bg-[#0b0e14] py-6 text-sm font-serif text-slate-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="space-y-1 text-center sm:text-left">
-            <div className="text-slate-200 font-semibold text-sm font-serif">
+            <div className="text-slate-100 font-semibold text-base font-serif">
               <a
                 href="https://dimenuvel.github.io/Evangelho-das-Dimenuveis-site/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-amber-400 underline decoration-amber-500/40 underline-offset-4 transition-colors"
+                className="hover:text-amber-400 underline decoration-amber-500/60 underline-offset-4 transition-colors"
               >
                 {t.appTitle}
               </a>{' '}
               — {t.appSubtitle}
             </div>
-            <div className="text-xs italic text-slate-400">
+            <div className="text-xs sm:text-sm italic text-slate-300">
               {language === 'pt'
                 ? 'Dia Zero + 13 Meses × 28 Dias = 364 Dias · Sábado Contínuo · A Grande Semana de 7.000 Anos'
                 : 'Day Zero + 13 Months × 28 Days = 364 Days · Continuous Sabbath · The 7,000-Year Great Week'}
             </div>
           </div>
-          <div className="text-xs font-serif text-slate-400 tabular-nums shrink-0">
+          <div className="text-sm font-serif font-semibold text-amber-300 tabular-nums shrink-0">
             {language === 'pt' ? 'Versão 1.0' : 'Version 1.0'}
           </div>
         </div>

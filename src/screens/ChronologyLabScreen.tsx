@@ -53,9 +53,9 @@ export const ChronologyLabScreen: React.FC<ChronologyLabScreenProps> = ({
     <div className="space-y-6">
       {/* Header & Parameter Control Matrix */}
       <div className="border border-slate-800 bg-slate-950 divide-y divide-slate-800">
-        <div className="flex flex-wrap items-center justify-between gap-4 p-5 bg-slate-900/60">
+        <div className="flex flex-wrap items-center justify-between gap-3 p-4 sm:p-5 bg-slate-900/60">
           <div>
-            <h2 className="text-2xl font-serif font-bold text-slate-100">
+            <h2 className="text-lg sm:text-2xl font-serif font-bold text-slate-100 whitespace-nowrap">
               {t.chronologyLab.heroTitle}
             </h2>
             <p className="text-xs text-slate-300 font-serif italic mt-0.5">
@@ -68,8 +68,8 @@ export const ChronologyLabScreen: React.FC<ChronologyLabScreenProps> = ({
         {/* 3-Column Parameter Control Strip */}
         <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-slate-800 text-xs font-serif">
           {/* Active Chronology Model Selector */}
-          <div className="p-5 space-y-2">
-            <label className="text-xs text-slate-300 uppercase tracking-wider font-semibold block">
+          <div className="p-4 sm:p-5 space-y-2">
+            <label className="text-xs text-slate-300 uppercase tracking-wider font-semibold block whitespace-nowrap">
               {t.chronologyLab.activeModelLabel}
             </label>
             <select
@@ -86,8 +86,8 @@ export const ChronologyLabScreen: React.FC<ChronologyLabScreenProps> = ({
           </div>
 
           {/* Joshua 10 Long Day Adjustment Toggle */}
-          <div className="p-5 space-y-2">
-            <label className="text-xs text-slate-300 uppercase tracking-wider font-semibold block">
+          <div className="p-4 sm:p-5 space-y-2">
+            <label className="text-xs text-slate-300 uppercase tracking-wider font-semibold block whitespace-nowrap">
               {t.chronologyLab.joshuaCorrectionLabel}
             </label>
             <div className="grid grid-cols-3 border border-slate-700 divide-x divide-slate-700 bg-slate-900">
@@ -95,7 +95,7 @@ export const ChronologyLabScreen: React.FC<ChronologyLabScreenProps> = ({
                 <button
                   key={status}
                   onClick={() => onUpdateConfig({ joshuaAdjustmentStatus: status })}
-                  className={`py-2 text-xs font-serif font-semibold transition-colors cursor-pointer ${
+                  className={`py-2 px-1 text-[11px] sm:text-xs font-serif font-semibold transition-colors cursor-pointer whitespace-nowrap ${
                     config.joshuaAdjustmentStatus === status
                       ? status === 'ACCEPTED'
                         ? 'bg-emerald-500 text-slate-950'
@@ -105,15 +105,15 @@ export const ChronologyLabScreen: React.FC<ChronologyLabScreenProps> = ({
                 >
                   {status === 'OFF' && (isPt ? 'Desligado' : 'Off')}
                   {status === 'PROPOSED' && (isPt ? 'Proposto' : 'Proposed')}
-                  {status === 'ACCEPTED' && (isPt ? '+1 Dia Aceito' : '+1d Accepted')}
+                  {status === 'ACCEPTED' && (isPt ? 'Aceito (+1d)' : 'Accepted (+1d)')}
                 </button>
               ))}
             </div>
           </div>
 
           {/* Lunar Anchor Mode Selector */}
-          <div className="p-5 space-y-2">
-            <label className="text-xs text-slate-300 uppercase tracking-wider font-semibold block">
+          <div className="p-4 sm:p-5 space-y-2">
+            <label className="text-xs text-slate-300 uppercase tracking-wider font-semibold block whitespace-nowrap">
               {t.chronologyLab.anchorModeLabel}
             </label>
             <select
@@ -131,11 +131,11 @@ export const ChronologyLabScreen: React.FC<ChronologyLabScreenProps> = ({
 
       {/* Side-by-Side Model Comparison Table */}
       <div className="border border-slate-800 bg-slate-950 overflow-x-auto">
-        <div className="px-5 py-3 bg-slate-900/50 border-b border-slate-800 text-xs font-serif font-bold uppercase tracking-wider text-amber-400">
+        <div className="px-4 sm:px-5 py-3 bg-slate-900/50 border-b border-slate-800 text-xs font-serif font-bold uppercase tracking-wider text-amber-400 whitespace-nowrap">
           {t.chronologyLab.matrixTitle} ({t.chronologyLab.targetYear} {currentGregorianYear} {isPt ? 'd.C.' : 'CE'})
         </div>
 
-        <table className="w-full text-left border-collapse text-xs font-serif tabular-nums">
+        <table className="w-full text-left border-collapse text-xs font-serif tabular-nums whitespace-nowrap">
           <thead>
             <tr className="border-b border-slate-800 bg-slate-900/30 text-slate-300 italic text-xs">
               <th className="p-3.5">{t.chronologyLab.modelNameTh}</th>
@@ -177,8 +177,8 @@ export const ChronologyLabScreen: React.FC<ChronologyLabScreenProps> = ({
 
       {/* Calendar Drift & Precision Mathematics */}
       <div className="border border-slate-800 bg-slate-950 divide-y divide-slate-800">
-        <div className="p-5 space-y-1.5">
-          <h3 className="text-sm font-serif font-bold uppercase tracking-wider text-amber-400">
+        <div className="p-4 sm:p-5 space-y-1.5">
+          <h3 className="text-xs sm:text-sm font-serif font-bold uppercase tracking-wider text-amber-400 whitespace-nowrap">
             {t.chronologyLab.driftTitle}
           </h3>
           <p className="text-xs text-slate-200 leading-relaxed">
@@ -187,15 +187,15 @@ export const ChronologyLabScreen: React.FC<ChronologyLabScreenProps> = ({
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-slate-800 font-serif text-xs tabular-nums">
-          <div className="p-5 space-y-1">
+          <div className="p-4 sm:p-5 space-y-1 whitespace-nowrap">
             <span className="text-slate-400 block text-xs italic">{t.chronologyLab.annualDrift}</span>
             <strong className="text-amber-300 text-lg font-serif">{driftAnalysis.sacredToSolarAnnualDriftDays} {t.chronologyLab.daysYear}</strong>
           </div>
-          <div className="p-5 space-y-1">
+          <div className="p-4 sm:p-5 space-y-1 whitespace-nowrap">
             <span className="text-slate-400 block text-xs italic">{t.chronologyLab.drift100}</span>
             <strong className="text-amber-300 text-lg font-serif">{driftAnalysis.driftIn100YearsDays} {isPt ? 'Dias' : 'Days'}</strong>
           </div>
-          <div className="p-5 space-y-1">
+          <div className="p-4 sm:p-5 space-y-1 whitespace-nowrap">
             <span className="text-slate-400 block text-xs italic">{t.chronologyLab.drift1000}</span>
             <strong className="text-amber-300 text-lg font-serif">{driftAnalysis.driftIn1000YearsDays} {isPt ? 'Dias' : 'Days'}</strong>
           </div>

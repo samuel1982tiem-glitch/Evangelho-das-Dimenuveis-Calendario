@@ -45,6 +45,6 @@ export function getSabbathBadgeLabel(sabbathType: SabbathType, language: Languag
       return { text: b.weeklySabbath, bgClass: 'bg-yellow-500/20 border-yellow-500/50', textClass: 'text-yellow-300' };
     case 'NONE':
     default:
-      return { text: b.workDay, bgClass: 'bg-slate-800/40 border-slate-700/50', textClass: 'text-slate-400' };
+      return { text: b.workDay, bgClass: 'bg-slate-800/40 border-slate-700/50', textClass: 'text-slate-200' };
   }
 }

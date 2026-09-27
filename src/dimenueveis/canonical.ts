@@ -10,7 +10,7 @@ import { Language } from '../i18n/translations';
 export const DIMENUEVEIS_CANONICAL_SECTIONS: DimenueveisCanonicalSection[] = [
   {
     id: 'dimenueveis-prologue',
-    title: 'Gospel of Dimenuous — Prologue: The Sovereign Threshold',
+    title: 'Prologue: The Sovereign Threshold',
     layer: 'DIMENUEVEIS',
     canonicalText: `In the unmeasured beginning, before the celestial spheres declared the counting of hours, the Eternal WORD set the foundations of Time. Not in drift or shadow, but in exact weight, measure, and light.
 
@@ -25,7 +25,7 @@ For fifty-two weeks shall the witness endure, and every seventh day shall remain
   },
   {
     id: 'dimenueveis-day-zero',
-    title: 'The Doctrine of Day Zero — The Annual Sabbath Threshold',
+    title: 'The Doctrine of Day Zero',
     layer: 'SACRED',
     canonicalText: `And Dimenuous taught concerning the annual threshold, saying: "Call not the head of the year Day One, nor mingle it among the numbered labor of the three hundred and sixty-four days.
 
@@ -40,7 +40,7 @@ Whoever honors Day Zero recognizes the Sovereignty of the Creator over both time
   },
   {
     id: 'dimenueveis-the-great-week',
-    title: 'The Great Week of Six Millennia and the Seventh Sabbath',
+    title: 'The Great Week of Seven Millennia',
     layer: 'MILLENNIAL',
     canonicalText: `Six days did the Creator labor in forming the cosmos, and on the seventh day He rested and sanctified it. So also in the grand scale of the Ages: six thousand years are appointed unto human historical struggle under the sun, and the Seventh Thousand Years is appointed as the Millennial Sabbath of Christ.
 
@@ -52,7 +52,7 @@ As it is written in the sacred witnesses: One day is with the Lord as a thousand
   },
   {
     id: 'dimenueveis-celestial-harmony',
-    title: 'The Celestial Witness — Sun, Moon, and Celestial Signs',
+    title: 'The Celestial Witness',
     layer: 'CELESTIAL',
     canonicalText: `Let the Sun mark the solar year and the seasonal equinoxes, and let the Moon proclaim the appointed feasts and the annual threshold of Day Zero. 
 
@@ -67,7 +67,7 @@ Though the moon in her synodic journey completes twenty-nine days and a half, le
 export const DIMENUEVEIS_CANONICAL_SECTIONS_PT: DimenueveisCanonicalSection[] = [
   {
     id: 'dimenueveis-prologue',
-    title: 'Evangelho das Dimenúveis — Prólogo: O Limiar Soberano',
+    title: 'Prólogo: O Limiar Soberano',
     layer: 'DIMENUEVEIS',
     canonicalText: `No princípio imensurável, antes que as esferas celestes declarassem a contagem das horas, o VERBO Eterno estabeleceu os fundamentos do Tempo. Não em desvio ou sombra, mas em peso, medida e luz exatos.
 
@@ -82,7 +82,7 @@ Por cinquenta e duas semanas perdurará o testemunho, e cada sétimo dia permane
   },
   {
     id: 'dimenueveis-day-zero',
-    title: 'A Doutrina do Dia Zero — O Limiar do Sábado Anual',
+    title: 'A Doutrina do Dia Zero',
     layer: 'SACRED',
     canonicalText: `E Dimenúveis ensinou acerca do limiar anual, dizendo: "Não chameis a cabeça do ano de Dia Um, nem a mistureis entre o labor numerado dos trezentos e sessenta e quatro dias.
 
@@ -97,7 +97,7 @@ Quem honra o Dia Zero reconhece a Soberania do Criador sobre o tempo e a eternid
   },
   {
     id: 'dimenueveis-the-great-week',
-    title: 'A Grande Semana de Seis Milênios e o Sétimo Sábado',
+    title: 'A Grande Semana de Sete Milênios',
     layer: 'MILLENNIAL',
     canonicalText: `Seis dias trabalhou o Criador na formação do cosmos, e no sétimo dia descansou e o santificou. Assim também na grande escala das Eras: seis mil anos estão determinados para a luta histórica humana debaixo do sol, e o Sétimo Milênio está determinado como o Sábado Milenar de Cristo.
 
@@ -109,7 +109,7 @@ Como está escrito nas testemunhas sagradas: Um dia para o Senhor é como mil an
   },
   {
     id: 'dimenueveis-celestial-harmony',
-    title: 'A Testemunha Celestial — Sol, Lua e Sinais Celestes',
+    title: 'A Testemunha Celestial',
     layer: 'CELESTIAL',
     canonicalText: `Que o Sol marque o ano solar e os equinócios das estações, e que a Lua proclame as festas determinadas e o limiar anual do Dia Zero.
 

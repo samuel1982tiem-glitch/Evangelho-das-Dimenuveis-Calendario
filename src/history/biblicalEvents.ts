@@ -77,7 +77,7 @@ export const BIBLICAL_HISTORY_EVENTS: BiblicalHistoryEvent[] = [
   },
   {
     id: 'joshua-gibeon-long-day',
-    title: 'Joshua’s Long Day — Celestial Alignment over Gibeon',
+    title: 'Joshua’s Long Day over Gibeon',
     biblicalRef: 'Joshua 10:12-14',
     sacredMonth: 4,
     sacredDay: 18,
@@ -99,7 +99,7 @@ export const BIBLICAL_HISTORY_EVENTS: BiblicalHistoryEvent[] = [
   },
   {
     id: 'ezra-departure',
-    title: 'Ezra’s Journey from Babylon to Jerusalem',
+    title: 'Ezra’s Journey to Jerusalem',
     biblicalRef: 'Ezra 7:9',
     sacredMonth: 1,
     sacredDay: 1,
@@ -113,7 +113,7 @@ export const BIBLICAL_HISTORY_EVENTS: BiblicalHistoryEvent[] = [
 export const BIBLICAL_HISTORY_EVENTS_PT: BiblicalHistoryEvent[] = [
   {
     id: 'creation-week',
-    title: 'Semana da Criação e Primeiro Descanso Sabático',
+    title: 'Semana da Criação e 1º Sábado',
     biblicalRef: 'Gênesis 1:1 - 2:3',
     sacredMonth: 1,
     sacredDay: 1,
@@ -124,7 +124,7 @@ export const BIBLICAL_HISTORY_EVENTS_PT: BiblicalHistoryEvent[] = [
   },
   {
     id: 'noah-ark-resting',
-    title: 'A Arca de Noé Repousa sobre o Monte Ararate',
+    title: 'A Arca de Noé no Monte Ararate',
     biblicalRef: 'Gênesis 8:4',
     sacredMonth: 7,
     sacredDay: 17,
@@ -146,7 +146,7 @@ export const BIBLICAL_HISTORY_EVENTS_PT: BiblicalHistoryEvent[] = [
   },
   {
     id: 'covenant-at-sinai',
-    title: 'Outorga dos Dez Mandamentos no Sinai',
+    title: 'Os Dez Mandamentos no Sinai',
     biblicalRef: 'Êxodo 19:1-16',
     sacredMonth: 3,
     sacredDay: 15,
@@ -157,7 +157,7 @@ export const BIBLICAL_HISTORY_EVENTS_PT: BiblicalHistoryEvent[] = [
   },
   {
     id: 'joshua-crossing-jordan',
-    title: 'Travessia do Rio Jordão para Canaã',
+    title: 'Travessia do Rio Jordão',
     biblicalRef: 'Josué 4:19',
     sacredMonth: 1,
     sacredDay: 10,
@@ -168,7 +168,7 @@ export const BIBLICAL_HISTORY_EVENTS_PT: BiblicalHistoryEvent[] = [
   },
   {
     id: 'joshua-gibeon-long-day',
-    title: 'O Dia Longo de Josué — Alinhamento Celestial sobre Gibeão',
+    title: 'O Dia Longo de Josué em Gibeão',
     biblicalRef: 'Josué 10:12-14',
     sacredMonth: 4,
     sacredDay: 18,
@@ -190,7 +190,7 @@ export const BIBLICAL_HISTORY_EVENTS_PT: BiblicalHistoryEvent[] = [
   },
   {
     id: 'ezra-departure',
-    title: 'Jornada de Esdras da Babilônia a Jerusalém',
+    title: 'Jornada de Esdras a Jerusalém',
     biblicalRef: 'Esdras 7:9',
     sacredMonth: 1,
     sacredDay: 1,

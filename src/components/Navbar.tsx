@@ -61,31 +61,31 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <header className="sticky top-0 z-40 bg-[#0c0e14] border-b border-slate-800 transition-colors">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
         {/* Top Row: 2-Line Book Title & Top-Right Language + Theme Controls */}
-        <div className="flex items-center justify-between gap-3 py-2 min-h-[3.75rem] border-b border-slate-800/80">
-          <div className="flex flex-col items-start justify-center min-w-0">
+        <div className="flex items-center justify-between gap-2 py-2 min-h-[3.75rem] border-b border-slate-800/80">
+          <div className="flex flex-col items-start justify-center min-w-0 flex-1">
             <a
               href="https://dimenuvel.github.io/Evangelho-das-Dimenuveis-site/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-lg sm:text-xl font-serif font-bold leading-tight tracking-normal text-slate-100 hover:text-amber-400 transition-colors truncate max-w-full"
+              className="text-[15.5px] sm:text-xl md:text-2xl font-serif font-bold leading-tight tracking-normal text-slate-100 hover:text-amber-400 transition-colors whitespace-nowrap"
             >
               {t.appTitle}
             </a>
             <button
               type="button"
               onClick={() => setActiveTab('TODAY')}
-              className="text-xs sm:text-sm font-serif italic leading-tight text-slate-400 hover:text-slate-200 transition-colors truncate max-w-full text-left cursor-pointer focus:outline-none"
+              className="text-[11.5px] sm:text-sm font-serif italic leading-tight text-slate-200 hover:text-amber-300 transition-colors whitespace-nowrap text-left cursor-pointer focus:outline-none mt-0.5"
             >
               {t.appSubtitle}
             </button>
           </div>
 
-          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
-            <div className="hidden md:flex items-center gap-2 text-xs font-serif text-slate-300 tabular-nums mr-1">
-              <span className="text-amber-400">§</span>
-              <span>{t.solarTime}: {systemDate.toISOString().split('T')[0]}</span>
+          <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
+            <div className="hidden md:flex items-center gap-2 text-xs sm:text-sm font-serif text-slate-200 tabular-nums mr-1 whitespace-nowrap">
+              <span className="text-amber-400 font-bold">§</span>
+              <span>{t.solarTime}: <strong className="text-slate-100">{systemDate.toISOString().split('T')[0]}</strong></span>
             </div>
 
             <LanguageSelector
@@ -96,7 +96,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               type="button"
               onClick={onToggleTheme}
-              className="inline-flex items-center justify-center w-9 h-9 bg-slate-900 border border-slate-700 hover:border-amber-500/60 text-slate-200 transition-colors cursor-pointer shrink-0"
+              className="inline-flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 bg-slate-900 border border-slate-700 hover:border-amber-500/60 text-slate-200 transition-colors cursor-pointer shrink-0"
               title={
                 theme === 'day'
                   ? isPt
@@ -127,7 +127,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               <button
                 type="button"
                 onClick={onOpenTour}
-                className="inline-flex items-center justify-center w-9 h-9 bg-slate-900 border border-slate-700 hover:border-amber-500/60 text-amber-400 transition-colors cursor-pointer shrink-0"
+                className="inline-flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 bg-slate-900 border border-slate-700 hover:border-amber-500/60 text-amber-400 transition-colors cursor-pointer shrink-0"
                 title={isPt ? 'Abrir Guia de Instruções e Recursos' : 'Open Features & Instructions Tour Guide'}
                 aria-label={isPt ? 'Abrir Guia de Instruções' : 'Open Tour Guide'}
               >

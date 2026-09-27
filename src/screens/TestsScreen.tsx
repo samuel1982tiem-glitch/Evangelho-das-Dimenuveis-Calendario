@@ -43,14 +43,14 @@ export const TestsScreen: React.FC<TestsScreenProps> = ({ language }) => {
     <div className="space-y-6">
       {/* Header & Execution Bar */}
       <div className="border border-slate-800 bg-slate-950 divide-y divide-slate-800">
-        <div className="flex flex-wrap items-center justify-between gap-4 p-5 bg-slate-900/60">
+        <div className="flex flex-wrap items-center justify-between gap-3.5 p-4 sm:p-5 bg-slate-900/60">
           <div>
-            <div className="text-xs font-serif text-emerald-400 uppercase tracking-wider font-semibold">
+            <div className="text-xs font-serif text-emerald-400 uppercase tracking-wider font-semibold whitespace-nowrap">
               {isPt
-                ? 'Verificação de Invariantes · Calendário e Solenidades'
-                : 'Invariant Verification · Calendar & Solemnities'}
+                ? 'Verificação de Invariantes'
+                : 'Invariant Verification'}
             </div>
-            <h2 className="text-2xl font-serif font-bold text-slate-100">
+            <h2 className="text-lg sm:text-2xl font-serif font-bold text-slate-100 whitespace-nowrap">
               {t.tests.heroTitle}
             </h2>
             <p className="text-xs text-slate-300 font-serif italic mt-0.5">
@@ -60,17 +60,17 @@ export const TestsScreen: React.FC<TestsScreenProps> = ({ language }) => {
 
           <button
             onClick={handleReRun}
-            className="inline-flex items-center gap-1.5 px-4 py-2 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-serif font-semibold text-xs uppercase tracking-wider transition-colors cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-serif font-semibold text-xs uppercase tracking-wider transition-colors cursor-pointer whitespace-nowrap"
           >
             <Play className="w-3.5 h-3.5 fill-current" /> {t.tests.runButton}
           </button>
         </div>
 
         {/* Summary Readout */}
-        <div className="px-5 py-3 bg-slate-900/30 flex items-center justify-between font-serif text-xs tabular-nums">
+        <div className="px-4 sm:px-5 py-3 bg-slate-900/30 flex items-center justify-between gap-2 font-serif text-xs tabular-nums whitespace-nowrap">
           <span className="text-slate-300 italic">{t.tests.summaryTitle}</span>
           <span className={`font-semibold ${allPassed ? 'text-emerald-400' : 'text-rose-400'}`}>
-            {totalPassed} / {totalTests} {isPt ? 'Verificações Aprovadas' : 'Checks Passed'} · {allPassed ? t.tests.allPassed : t.tests.failures}
+            {totalPassed}/{totalTests} · {allPassed ? t.tests.allPassed : t.tests.failures}
           </span>
         </div>
       </div>

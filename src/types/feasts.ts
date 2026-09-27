@@ -43,8 +43,6 @@ export interface BiblicalFeastDefinition {
 
   beginsAt: FeastBeginsAt;
   endsAt: FeastEndsAt;
-
-  dimenueveisReference?: string; // Canonical Dimenúveis reference if explicitly present in canon
 }
 
 export interface CalculatedFeastOccurrence {

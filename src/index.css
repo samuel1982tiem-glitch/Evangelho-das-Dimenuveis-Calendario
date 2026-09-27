@@ -1,21 +1,60 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,500;0,600;0,700;1,400;1,600&family=EB+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap');
 
 @theme {
-  --font-sans: "Lora", "EB Garamond", Georgia, Cambria, "Times New Roman", Times, serif;
-  --font-serif: "Cormorant Garamond", "EB Garamond", "Lora", Georgia, serif;
-  --font-mono: "EB Garamond", "Lora", Georgia, serif;
+  --font-sans: "Lora", Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-serif: "Lora", Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-display: "Crimson Pro", "EB Garamond", "Lora", Georgia, serif;
+  --font-mono: "Lora", Georgia, Cambria, "Times New Roman", serif;
+
+  /* Refined traditional book type scale — calibrated for 1-line mobile labels (360px+) */
+  --text-xs: 0.78rem;
+  --text-xs--line-height: 1.45;
+  --text-sm: 0.89rem;
+  --text-sm--line-height: 1.58;
+  --text-base: 1rem;
+  --text-base--line-height: 1.68;
+  --text-lg: 1.12rem;
+  --text-lg--line-height: 1.4;
+  --text-xl: 1.24rem;
+  --text-xl--line-height: 1.32;
+  --text-2xl: 1.42rem;
+  --text-2xl--line-height: 1.25;
+  --text-3xl: 1.72rem;
+  --text-3xl--line-height: 1.2;
+  --text-4xl: 2.05rem;
+  --text-4xl--line-height: 1.16;
 }
 
 @layer base {
-  body {
-    font-family: var(--font-sans);
-    background-color: #0c0e14;
-    color: #f5f2eb;
-    line-height: 1.65;
+  html {
+    font-size: 15.25px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
 
-  h1, h2, h3, h4, h5, h6,
+  @media (min-width: 640px) {
+    html {
+      font-size: 16.5px;
+    }
+  }
+
+  body {
+    font-family: var(--font-serif);
+    background-color: #0b0e14;
+    color: #fbf8f1;
+    line-height: 1.68;
+    letter-spacing: 0.008em;
+  }
+
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    letter-spacing: 0.01em;
+    line-height: 1.25;
+  }
+
+  h4, h5, h6,
   .font-serif,
   .font-serif-sacred,
   .font-decorative,
@@ -23,7 +62,7 @@
   .font-canonical,
   .font-scripture {
     font-family: var(--font-serif);
-    letter-spacing: 0.01em;
+    letter-spacing: 0.008em;
   }
 
   .font-mono-code, .font-mono {
@@ -39,54 +78,78 @@
 
 /* Custom scrollbar - book-like refined style */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 7px;
+  height: 7px;
 }
 ::-webkit-scrollbar-track {
-  background: #0c0e14;
+  background: #0b0e14;
 }
 ::-webkit-scrollbar-thumb {
-  background: #2e364f;
+  background: #36415e;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #475569;
+  background: #52628a;
 }
 
 [data-theme="day"] ::-webkit-scrollbar-track {
-  background: #f5f0e6;
+  background: #f3ede0;
 }
 [data-theme="day"] ::-webkit-scrollbar-thumb {
-  background: #c5baa5;
+  background: #b8ab93;
 }
 [data-theme="day"] ::-webkit-scrollbar-thumb:hover {
-  background: #a3967e;
+  background: #94866d;
 }
 
 /* ========================================================================== */
 /* NIGHT MODE OPTICAL CONTRAST ENHANCEMENTS ([data-theme="night"])            */
-/* Ensures muted labels, borders, and body prose have high WCAG contrast      */
+/* High-contrast warm ivory & gold leaf typography on deep obsidian           */
 /* ========================================================================== */
 
 [data-theme="night"] .text-slate-100,
 [data-theme="night"] .text-white {
-  color: #f7f4eb !important;
+  color: #fbf8f1 !important;
 }
 
 [data-theme="night"] .text-slate-200 {
-  color: #ece7d9 !important;
+  color: #f4efe2 !important;
 }
 
 [data-theme="night"] .text-slate-300 {
-  color: #dcd5c4 !important;
+  color: #e8e0ce !important;
 }
 
 [data-theme="night"] .text-slate-400 {
-  color: #c2ba9f !important;
+  color: #d5cbb4 !important;
 }
 
 [data-theme="night"] .text-slate-500,
 [data-theme="night"] .text-slate-600 {
-  color: #a39b82 !important;
+  color: #bfb399 !important;
+}
+
+[data-theme="night"] .text-amber-300,
+[data-theme="night"] .text-amber-400,
+[data-theme="night"] .text-yellow-300 {
+  color: #fcd34d !important;
+}
+
+[data-theme="night"] .text-blue-200,
+[data-theme="night"] .text-blue-300,
+[data-theme="night"] .text-blue-400 {
+  color: #93c5fd !important;
+}
+
+[data-theme="night"] .text-purple-200,
+[data-theme="night"] .text-purple-300,
+[data-theme="night"] .text-purple-400 {
+  color: #d8b4fe !important;
+}
+
+[data-theme="night"] .text-emerald-200,
+[data-theme="night"] .text-emerald-300,
+[data-theme="night"] .text-emerald-400 {
+  color: #6ee7b7 !important;
 }
 
 [data-theme="night"] .border-slate-800,
@@ -94,32 +157,38 @@
 [data-theme="night"] .border-slate-800\/70,
 [data-theme="night"] .border-slate-800\/60,
 [data-theme="night"] .divide-slate-800 > :not([hidden]) ~ :not([hidden]) {
-  border-color: #2b3248 !important;
+  border-color: #2e3852 !important;
+}
+
+[data-theme="night"] .border-slate-700,
+[data-theme="night"] .border-slate-700\/50 {
+  border-color: #3f4d6e !important;
 }
 
 /* ========================================================================== */
 /* DAYTIME ARCHIVAL BOOK MODE OVERRIDES ([data-theme="day"])                  */
-/* High-contrast warm parchment surfaces & deep book ink typography           */
+/* High-contrast warm parchment surfaces & deep India ink typography          */
 /* ========================================================================== */
 
 [data-theme="day"] body,
 [data-theme="day"] .bg-\[\#090b10\],
+[data-theme="day"] .bg-\[\#0b0e14\],
 [data-theme="day"] .bg-\[\#0c0e14\],
 [data-theme="day"] .bg-\[\#0b0d14\],
 [data-theme="day"] .bg-\[\#0d101b\],
 [data-theme="day"] .bg-\[\#080910\],
 [data-theme="day"] .bg-\[\#090b12\],
 [data-theme="day"] .bg-\[\#0f1422\] {
-  background-color: #f4efe4 !important;
-  color: #1c1813 !important;
+  background-color: #f3ede0 !important;
+  color: #14110d !important;
 }
 
 /* Primary Page & Card Surfaces */
 [data-theme="day"] .bg-slate-950,
 [data-theme="day"] .bg-slate-950\/80,
 [data-theme="day"] .bg-slate-950\/90 {
-  background-color: #fdfbf7 !important;
-  color: #1c1813 !important;
+  background-color: #fcfaf5 !important;
+  color: #14110d !important;
 }
 
 /* Secondary Header & Sub-Panel Surfaces */
@@ -134,8 +203,8 @@
 [data-theme="day"] .bg-slate-900\/90,
 [data-theme="day"] .bg-slate-800,
 [data-theme="day"] .bg-slate-800\/40 {
-  background-color: #ede6d6 !important;
-  color: #1c1813 !important;
+  background-color: #eae1cf !important;
+  color: #14110d !important;
 }
 
 /* Hover States on Neutral Surfaces in Day Mode */
@@ -145,7 +214,7 @@
 [data-theme="day"] .hover\:bg-slate-900\/60:hover,
 [data-theme="day"] .hover\:bg-slate-900\/80:hover,
 [data-theme="day"] .hover\:bg-slate-800:hover {
-  background-color: #e2d8c3 !important;
+  background-color: #dfd3bc !important;
 }
 
 /* Tinted Amber / Feast / Sabbath Surfaces in Day Mode */
@@ -157,14 +226,14 @@
 [data-theme="day"] .bg-amber-950\/40,
 [data-theme="day"] .bg-amber-950\/80,
 [data-theme="day"] .bg-yellow-500\/20 {
-  background-color: #faecc4 !important;
+  background-color: #f8e7b8 !important;
 }
 
 [data-theme="day"] .hover\:bg-amber-950\/25:hover,
 [data-theme="day"] .hover\:bg-amber-950\/30:hover,
 [data-theme="day"] .hover\:bg-amber-950\/40:hover,
 [data-theme="day"] .hover\:bg-amber-950\/60:hover {
-  background-color: #f3de9e !important;
+  background-color: #f1d791 !important;
 }
 
 /* Tinted Purple / Day Zero / Millennial Surfaces in Day Mode */
@@ -174,38 +243,41 @@
 [data-theme="day"] .bg-purple-950\/35,
 [data-theme="day"] .bg-purple-950\/80,
 [data-theme="day"] .bg-purple-500\/20 {
-  background-color: #efe5fd !important;
+  background-color: #ede2fc !important;
 }
 
 [data-theme="day"] .hover\:bg-purple-950\/25:hover,
 [data-theme="day"] .hover\:bg-purple-950\/40:hover {
-  background-color: #e2d0fb !important;
+  background-color: #dfc9f9 !important;
 }
 
 /* Tinted Blue / Lunar Surfaces in Day Mode */
 [data-theme="day"] .bg-blue-950\/15,
+[data-theme="day"] .bg-blue-950\/20,
 [data-theme="day"] .bg-blue-950\/25,
 [data-theme="day"] .bg-blue-950\/30,
+[data-theme="day"] .bg-blue-950\/35,
 [data-theme="day"] .bg-blue-950\/40,
 [data-theme="day"] .bg-blue-950\/80,
 [data-theme="day"] .bg-blue-500\/20 {
-  background-color: #e0effe !important;
+  background-color: #ddecfc !important;
 }
 
-[data-theme="day"] .hover\:bg-blue-950\/30:hover {
-  background-color: #cbe3fd !important;
+[data-theme="day"] .hover\:bg-blue-950\/30:hover,
+[data-theme="day"] .hover\:bg-blue-950\/35:hover {
+  background-color: #c7dffb !important;
 }
 
 /* Tinted Emerald / Scriptural Surfaces in Day Mode */
 [data-theme="day"] .bg-emerald-950\/30,
 [data-theme="day"] .bg-emerald-950\/40 {
-  background-color: #d8f5e3 !important;
+  background-color: #d3f2df !important;
 }
 
 /* Tinted Rose / Alert Surfaces in Day Mode */
 [data-theme="day"] .bg-rose-950\/20,
 [data-theme="day"] .bg-rose-950\/30 {
-  background-color: #ffe2e6 !important;
+  background-color: #ffe0e5 !important;
 }
 
 /* Borders & Dividers in Day Mode */
@@ -216,48 +288,48 @@
 [data-theme="day"] .border-slate-700,
 [data-theme="day"] .border-slate-700\/50,
 [data-theme="day"] .divide-slate-800 > :not([hidden]) ~ :not([hidden]) {
-  border-color: #c7bca6 !important;
+  border-color: #b8ab93 !important;
 }
 
 [data-theme="day"] .border-amber-500\/50,
 [data-theme="day"] .border-amber-500\/40 {
-  border-color: #b45309 !important;
+  border-color: #9a3412 !important;
 }
 
 [data-theme="day"] .border-purple-500\/50,
 [data-theme="day"] .border-purple-500\/40 {
-  border-color: #6d28d9 !important;
+  border-color: #5b21b6 !important;
 }
 
 [data-theme="day"] .border-blue-500\/40 {
-  border-color: #1d4ed8 !important;
+  border-color: #1e40af !important;
 }
 
 [data-theme="day"] .border-emerald-500\/50,
 [data-theme="day"] .border-emerald-500\/40,
 [data-theme="day"] .border-emerald-500\/30 {
-  border-color: #047857 !important;
+  border-color: #065f46 !important;
 }
 
 /* Primary & Secondary Ink Colors in Day Mode */
 [data-theme="day"] .text-white,
 [data-theme="day"] .text-slate-100,
 [data-theme="day"] .text-slate-200 {
-  color: #181410 !important;
+  color: #14110d !important;
 }
 
 [data-theme="day"] .text-slate-300 {
-  color: #2b251e !important;
+  color: #221d16 !important;
 }
 
 [data-theme="day"] .text-slate-400 {
-  color: #463d32 !important;
+  color: #362e23 !important;
 }
 
 [data-theme="day"] .text-slate-500,
 [data-theme="day"] .text-slate-600,
 [data-theme="day"] .text-slate-700 {
-  color: #5f5344 !important;
+  color: #4a3f31 !important;
 }
 
 /* High-Contrast Semantic Accent Inks in Day Mode */
@@ -268,7 +340,7 @@
 [data-theme="day"] .text-amber-400,
 [data-theme="day"] .text-amber-500,
 [data-theme="day"] .text-yellow-300 {
-  color: #853a06 !important;
+  color: #7c2d12 !important;
 }
 
 [data-theme="day"] .text-blue-200,
@@ -280,31 +352,33 @@
 [data-theme="day"] .text-purple-200,
 [data-theme="day"] .text-purple-300,
 [data-theme="day"] .text-purple-400 {
-  color: #581c87 !important;
+  color: #4c1d95 !important;
 }
 
 [data-theme="day"] .text-emerald-200,
 [data-theme="day"] .text-emerald-300,
 [data-theme="day"] .text-emerald-400 {
-  color: #065f46 !important;
+  color: #064e3b !important;
 }
 
 [data-theme="day"] .text-rose-400 {
-  color: #9f1239 !important;
+  color: #881337 !important;
 }
 
 /* Solid CTA Buttons in Day Mode */
-[data-theme="day"] .bg-amber-500 {
-  background-color: #92400e !important;
-  color: #fdfbf7 !important;
+[data-theme="day"] .bg-amber-500,
+[data-theme="day"] .bg-amber-500.text-slate-950 {
+  background-color: #853a06 !important;
+  color: #fcfaf5 !important;
 }
 [data-theme="day"] .bg-amber-500:hover {
-  background-color: #78350f !important;
+  background-color: #6c2e04 !important;
 }
 
-[data-theme="day"] .bg-emerald-500 {
+[data-theme="day"] .bg-emerald-500,
+[data-theme="day"] .bg-emerald-500.text-slate-950 {
   background-color: #065f46 !important;
-  color: #fdfbf7 !important;
+  color: #fcfaf5 !important;
 }
 [data-theme="day"] .bg-emerald-500:hover {
   background-color: #064e3b !important;
@@ -314,12 +388,12 @@
 [data-theme="day"] select,
 [data-theme="day"] input[type="text"],
 [data-theme="day"] input[type="number"] {
-  background-color: #fdfbf7 !important;
-  color: #181410 !important;
-  border-color: #b5a890 !important;
+  background-color: #fcfaf5 !important;
+  color: #14110d !important;
+  border-color: #a8997e !important;
 }
 
 [data-theme="day"] select option {
-  background-color: #fdfbf7 !important;
-  color: #181410 !important;
+  background-color: #fcfaf5 !important;
+  color: #14110d !important;
 }

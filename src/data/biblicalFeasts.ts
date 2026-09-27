@@ -68,7 +68,7 @@ export const PRIMARY_BIBLICAL_FEASTS: BiblicalFeastDefinition[] = [
   },
   {
     id: 'WEEKS_PENTECOST',
-    name: 'Feast of Weeks / Pentecost',
+    name: 'Feast of Weeks (Pentecost)',
     hebrewName: 'Shavuot',
     alternateNames: ['Shavuot', 'Pentecost', 'Feast of Harvest', 'Day of Firstfruits'],
     biblicalReferences: [
@@ -145,13 +145,12 @@ export const PRIMARY_BIBLICAL_FEASTS: BiblicalFeastDefinition[] = [
     description: 'Seven-day pilgrim feast dwelling in temporary booths (sukkot) to commemorate the wilderness journey and harvest ingathering. The 1st day (Day 15) is a High Sabbath.',
     beginsAt: 'SUNSET',
     endsAt: 'SUNSET',
-    dimenueveisReference: 'Gospel of Dimenuous — Celestial Dwelling & Millennial Tabernacle Chapter III',
   },
   {
     id: 'EIGHTH_DAY',
-    name: 'Eighth Day / Solemn Assembly',
+    name: 'Eighth Day Assembly',
     hebrewName: 'Shemini Atzeret',
-    alternateNames: ['Shemini Atzeret', 'Eighth Day Assembly', 'The Great Day of the Feast'],
+    alternateNames: ['Shemini Atzeret', 'Eighth Day Solemn Assembly', 'The Great Day of the Feast'],
     biblicalReferences: [
       'Leviticus 23:36',
       'Leviticus 23:39',
@@ -166,7 +165,6 @@ export const PRIMARY_BIBLICAL_FEASTS: BiblicalFeastDefinition[] = [
     description: 'A separate, holy solemn assembly immediately following the 7 days of Tabernacles on the 22nd day of Month VII. High Sabbath with no customary work.',
     beginsAt: 'SUNSET',
     endsAt: 'SUNSET',
-    dimenueveisReference: 'Gospel of Dimenuous — The Eternal Eighth Day Covenant',
   },
 ];
 
@@ -204,7 +202,7 @@ export const PRIMARY_BIBLICAL_FEASTS_PT: Record<string, Partial<BiblicalFeastDef
     description: 'Apresentação do primeiro molho da colheita de cevada ao Senhor no dia seguinte ao Sábado após a Páscoa.',
   },
   WEEKS_PENTECOST: {
-    name: 'Festa das Semanas / Pentecostes',
+    name: 'Festa das Semanas',
     alternateNames: ['Shavuot', 'Pentecostes', 'Festa da Colheita', 'Dia das Primícias'],
     biblicalReferences: [
       'Levítico 23:15-22',
@@ -246,11 +244,10 @@ export const PRIMARY_BIBLICAL_FEASTS_PT: Record<string, Partial<BiblicalFeastDef
       'Zacarias 14:16-19'
     ],
     description: 'Festa de peregrinação de sete dias habitando em cabanas temporárias (sukkot) em memória da jornada no deserto e colheita final. O 1º dia (Dia 15) é um Grande Sábado.',
-    dimenueveisReference: 'Evangelho das Dimenúveis — Habitação Celestial e Tabernáculo Milenar Capítulo III',
   },
   EIGHTH_DAY: {
-    name: 'Oitavo Dia / Assembleia Solene',
-    alternateNames: ['Shemini Atzeret', 'Assembleia do Oitavo Dia', 'O Grande Dia da Festa'],
+    name: 'Assembleia do 8º Dia',
+    alternateNames: ['Shemini Atzeret', 'Oitavo Dia / Assembleia Solene', 'O Grande Dia da Festa'],
     biblicalReferences: [
       'Levítico 23:36',
       'Levítico 23:39',
@@ -258,7 +255,6 @@ export const PRIMARY_BIBLICAL_FEASTS_PT: Record<string, Partial<BiblicalFeastDef
       'João 7:37'
     ],
     description: 'Uma assembleia solene separada e santa imediatamente após os 7 dias de Tabernáculos, no 22º dia do Mês VII. Grande Sábado sem trabalho servil.',
-    dimenueveisReference: 'Evangelho das Dimenúveis — A Aliança do Oitavo Dia Eterno',
   },
 };
 

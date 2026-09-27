@@ -50,13 +50,13 @@ export const TourGuideModal: React.FC<TourGuideModalProps> = ({
     {
       roman: 'I',
       icon: Sparkles,
-      badge: isPt ? 'Prefácio & Preferências' : 'Preface & Preferences',
+      badge: isPt ? 'Prefácio' : 'Preface',
       title: isPt
-        ? 'Bem-vindo ao Evangelho das Dimenúveis'
-        : 'Welcome to the Gospel of Dimenuous',
+        ? 'Evangelho das Dimenúveis'
+        : 'Gospel of Dimenuous',
       subtitle: isPt
-        ? 'Almanaque Bíblico Lunar, Sagrado e Milenar — Guia de Primeiros Passos'
-        : 'Biblical Lunar, Sacred & Millennial Almanac — First Launch Guide',
+        ? 'Almanaque Bíblico Lunar, Sagrado e Milenar'
+        : 'Biblical Lunar, Sacred & Millennial Almanac',
       content: (
         <div className="space-y-5">
           <p className="text-sm font-serif text-slate-200 leading-relaxed">
@@ -69,12 +69,12 @@ export const TourGuideModal: React.FC<TourGuideModalProps> = ({
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
             {/* Language Selection Box */}
             <div className="border border-slate-700 bg-slate-900/50 p-4 space-y-3">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-serif uppercase tracking-wider text-amber-400 font-semibold">
-                  {isPt ? '1. Escolha seu Idioma' : '1. Choose Your Language'}
+              <div className="flex items-center justify-between gap-2">
+                <span className="text-xs font-serif uppercase tracking-wider text-amber-400 font-semibold whitespace-nowrap">
+                  {isPt ? '1. Idioma' : '1. Language'}
                 </span>
-                <span className="text-xs font-serif italic text-slate-400">
-                  {isPt ? 'Bilingue Instantâneo' : 'Instant Bilingual'}
+                <span className="text-xs font-serif italic text-slate-300 whitespace-nowrap">
+                  {isPt ? 'Bilingue' : 'Bilingual'}
                 </span>
               </div>
               <p className="text-xs font-serif text-slate-300 leading-relaxed">
@@ -86,7 +86,7 @@ export const TourGuideModal: React.FC<TourGuideModalProps> = ({
                 <button
                   type="button"
                   onClick={() => onSelectLanguage('pt')}
-                  className={`flex items-center justify-center gap-2 px-3 py-2 border text-xs font-serif transition-colors cursor-pointer ${
+                  className={`flex items-center justify-center gap-2 px-3 py-2 border text-xs font-serif transition-colors cursor-pointer whitespace-nowrap ${
                     language === 'pt'
                       ? 'bg-amber-500 text-slate-950 border-amber-500 font-bold'
                       : 'bg-slate-950 text-slate-200 border-slate-700 hover:bg-slate-900'
@@ -102,7 +102,7 @@ export const TourGuideModal: React.FC<TourGuideModalProps> = ({
                 <button
                   type="button"
                   onClick={() => onSelectLanguage('en')}
-                  className={`flex items-center justify-center gap-2 px-3 py-2 border text-xs font-serif transition-colors cursor-pointer ${
+                  className={`flex items-center justify-center gap-2 px-3 py-2 border text-xs font-serif transition-colors cursor-pointer whitespace-nowrap ${
                     language === 'en'
                       ? 'bg-amber-500 text-slate-950 border-amber-500 font-bold'
                       : 'bg-slate-950 text-slate-200 border-slate-700 hover:bg-slate-900'
@@ -120,18 +120,18 @@ export const TourGuideModal: React.FC<TourGuideModalProps> = ({
 
             {/* Day / Night Reading Mode Box */}
             <div className="border border-slate-700 bg-slate-900/50 p-4 space-y-3">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-serif uppercase tracking-wider text-amber-400 font-semibold">
-                  {isPt ? '2. Modo de Leitura (Dia / Noite)' : '2. Reading Mode (Day / Night)'}
+              <div className="flex items-center justify-between gap-2">
+                <span className="text-xs font-serif uppercase tracking-wider text-amber-400 font-semibold whitespace-nowrap">
+                  {isPt ? '2. Modo Dia / Noite' : '2. Day / Night Mode'}
                 </span>
-                <span className="text-xs font-serif italic text-slate-400">
+                <span className="text-xs font-serif italic text-slate-300 whitespace-nowrap">
                   {theme === 'day'
                     ? isPt
-                      ? 'Pergaminho Diurno'
-                      : 'Day Parchment'
+                      ? 'Pergaminho'
+                      : 'Parchment'
                     : isPt
-                      ? 'Obsidiana Noturna'
-                      : 'Night Obsidian'}
+                      ? 'Obsidiana'
+                      : 'Obsidian'}
                 </span>
               </div>
               <p className="text-xs font-serif text-slate-300 leading-relaxed">
@@ -145,7 +145,7 @@ export const TourGuideModal: React.FC<TourGuideModalProps> = ({
                   onClick={() => {
                     if (theme !== 'night') onToggleTheme();
                   }}
-                  className={`flex items-center justify-center gap-2 px-3 py-2 border text-xs font-serif transition-colors cursor-pointer ${
+                  className={`flex items-center justify-center gap-2 px-3 py-2 border text-xs font-serif transition-colors cursor-pointer whitespace-nowrap ${
                     theme === 'night'
                       ? 'bg-amber-500 text-slate-950 border-amber-500 font-bold'
                       : 'bg-slate-950 text-slate-200 border-slate-700 hover:bg-slate-900'
@@ -159,7 +159,7 @@ export const TourGuideModal: React.FC<TourGuideModalProps> = ({
                   onClick={() => {
                     if (theme !== 'day') onToggleTheme();
                   }}
-                  className={`flex items-center justify-center gap-2 px-3 py-2 border text-xs font-serif transition-colors cursor-pointer ${
+                  className={`flex items-center justify-center gap-2 px-3 py-2 border text-xs font-serif transition-colors cursor-pointer whitespace-nowrap ${
                     theme === 'day'
                       ? 'bg-amber-500 text-slate-950 border-amber-500 font-bold'
                       : 'bg-slate-950 text-slate-200 border-slate-700 hover:bg-slate-900'
@@ -177,21 +177,21 @@ export const TourGuideModal: React.FC<TourGuideModalProps> = ({
     {
       roman: 'II',
       icon: Calendar,
-      badge: isPt ? 'Estrutura Sagrada' : 'Sacred Structure',
+      badge: isPt ? 'Estrutura' : 'Structure',
       title: isPt
-        ? 'O Calendário Sagrado: Dia Zero + 13 × 28 Dias'
-        : 'The Sacred Calendar: Day Zero + 13 × 28 Days',
+        ? 'Dia Zero + 13 × 28 Dias'
+        : 'Day Zero + 13 × 28 Days',
       subtitle: isPt
-        ? 'Simetria perpétua de 364 dias numerados e 52 semanas exatas'
-        : 'Perpetual symmetry of 364 numbered days and 52 exact weeks',
+        ? 'Simetria perpétua de 364 dias e 52 semanas'
+        : 'Perpetual symmetry of 364 days and 52 weeks',
       content: (
         <div className="space-y-4 font-serif">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-px bg-slate-700 border border-slate-700">
             <div className="bg-slate-950 p-4 space-y-1">
-              <span className="text-xs italic text-purple-300 block">
+              <span className="text-xs italic text-purple-300 block whitespace-nowrap">
                 {isPt ? 'Limiar Anual' : 'Annual Threshold'}
               </span>
-              <strong className="text-base text-slate-100 block">
+              <strong className="text-base text-slate-100 block whitespace-nowrap">
                 {isPt ? 'Dia Zero (Dia 0)' : 'Day Zero (Day 0)'}
               </strong>
               <p className="text-xs text-slate-300 leading-relaxed">
@@ -201,10 +201,10 @@ export const TourGuideModal: React.FC<TourGuideModalProps> = ({
               </p>
             </div>
             <div className="bg-slate-950 p-4 space-y-1">
-              <span className="text-xs italic text-amber-400 block">
+              <span className="text-xs italic text-amber-400 block whitespace-nowrap">
                 {isPt ? '13 Meses Iguais' : '13 Equal Months'}
               </span>
-              <strong className="text-base text-slate-100 block">
+              <strong className="text-base text-slate-100 block whitespace-nowrap">
                 {isPt ? '28 Dias por Mês' : '28 Days per Month'}
               </strong>
               <p className="text-xs text-slate-300 leading-relaxed">
@@ -214,10 +214,10 @@ export const TourGuideModal: React.FC<TourGuideModalProps> = ({
               </p>
             </div>
             <div className="bg-slate-950 p-4 space-y-1">
-              <span className="text-xs italic text-emerald-300 block">
+              <span className="text-xs italic text-emerald-300 block whitespace-nowrap">
                 {isPt ? 'Ciclo Perpétuo' : 'Perpetual Cycle'}
               </span>
-              <strong className="text-base text-slate-100 block">
+              <strong className="text-base text-slate-100 block whitespace-nowrap">
                 {isPt ? '52 Sábados Semanais' : '52 Weekly Sabbaths'}
               </strong>
               <p className="text-xs text-slate-300 leading-relaxed">
@@ -242,18 +242,18 @@ export const TourGuideModal: React.FC<TourGuideModalProps> = ({
     {
       roman: 'III',
       icon: Compass,
-      badge: isPt ? 'Astronomia & Festas' : 'Astronomy & Feasts',
+      badge: isPt ? 'Lua & Festas' : 'Moon & Feasts',
       title: isPt
-        ? 'Camada Lunar Real & Festas de Levítico 23'
-        : 'Real Lunar Overlay & Leviticus 23 Feasts',
+        ? 'Camada Lunar & Levítico 23'
+        : 'Lunar Overlay & Leviticus 23',
       subtitle: isPt
-        ? '8 fases astronômicas definidas e 8 tempos nomeados bíblicos'
-        : '8 defined astronomical phases and 8 Biblical appointed times',
+        ? '8 fases astronômicas e 8 tempos nomeados'
+        : '8 astronomical phases and 8 appointed times',
       content: (
         <div className="space-y-4 font-serif">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="border border-slate-800 bg-slate-900/40 p-4 space-y-2">
-              <h4 className="text-sm font-bold text-blue-300">
+              <h4 className="text-sm font-bold text-blue-300 whitespace-nowrap">
                 {isPt ? 'Camada Lunar (Cap. IV — Lua)' : 'Lunar Overlay (Ch. IV — Moon)'}
               </h4>
               <p className="text-xs text-slate-300 leading-relaxed">
@@ -264,7 +264,7 @@ export const TourGuideModal: React.FC<TourGuideModalProps> = ({
             </div>
 
             <div className="border border-slate-800 bg-slate-900/40 p-4 space-y-2">
-              <h4 className="text-sm font-bold text-amber-300">
+              <h4 className="text-sm font-bold text-amber-300 whitespace-nowrap">
                 {isPt ? 'Festas Bíblicas (Cap. III — Festas)' : 'Biblical Feasts (Ch. III — Feasts)'}
               </h4>
               <p className="text-xs text-slate-300 leading-relaxed">
@@ -280,18 +280,18 @@ export const TourGuideModal: React.FC<TourGuideModalProps> = ({
     {
       roman: 'IV',
       icon: Clock,
-      badge: isPt ? 'Cronologia & Profecia' : 'Chronology & Prophecy',
+      badge: isPt ? 'Cronologia' : 'Chronology',
       title: isPt
-        ? 'A Grande Semana (7.000 Anos) & Laboratório de Cronologia'
-        : 'The Great Week (7,000 Years) & Chronology Lab',
+        ? 'Grande Semana & Cronologia'
+        : 'Great Week & Chronology Lab',
       subtitle: isPt
-        ? '6.000 anos de história humana rumo ao Sábado do 7º Milênio'
-        : '6,000 years of human history toward the 7th Millennium Sabbath',
+        ? '6.000 anos rumo ao Sábado do 7º Milênio'
+        : '6,000 years toward the 7th Millennium Sabbath',
       content: (
         <div className="space-y-4 font-serif">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="border border-slate-800 bg-slate-900/40 p-4 space-y-2">
-              <h4 className="text-sm font-bold text-amber-300">
+              <h4 className="text-sm font-bold text-amber-300 whitespace-nowrap">
                 {isPt ? '4 Modelos Cronológicos (Cap. VI & VII)' : '4 Chronology Models (Ch. VI & VII)'}
               </h4>
               <p className="text-xs text-slate-300 leading-relaxed">
@@ -302,7 +302,7 @@ export const TourGuideModal: React.FC<TourGuideModalProps> = ({
             </div>
 
             <div className="border border-slate-800 bg-slate-900/40 p-4 space-y-2">
-              <h4 className="text-sm font-bold text-purple-300">
+              <h4 className="text-sm font-bold text-purple-300 whitespace-nowrap">
                 {isPt ? 'Josué 10 & Eclipses (Cap. VIII)' : 'Joshua 10 & Eclipses (Ch. VIII)'}
               </h4>
               <p className="text-xs text-slate-300 leading-relaxed">
@@ -318,13 +318,13 @@ export const TourGuideModal: React.FC<TourGuideModalProps> = ({
     {
       roman: 'V',
       icon: BookOpen,
-      badge: isPt ? 'Mapa de Capítulos' : 'Chapter Directory',
+      badge: isPt ? 'Capítulos' : 'Chapters',
       title: isPt
-        ? 'Como Navegar pelos 11 Capítulos do Almanaque'
-        : 'How to Navigate the 11 Almanac Chapters',
+        ? 'Navegar pelos 11 Capítulos'
+        : 'Navigate the 11 Chapters',
       subtitle: isPt
-        ? 'Clique em qualquer capítulo abaixo para ir diretamente a ele ou concluir o guia'
-        : 'Click any chapter below to jump directly to it or finish the tour',
+        ? 'Clique em qualquer capítulo abaixo para abrir'
+        : 'Click any chapter below to jump directly',
       content: (
         <div className="space-y-3 font-serif">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 text-xs">
@@ -394,13 +394,13 @@ export const TourGuideModal: React.FC<TourGuideModalProps> = ({
                 className="text-left p-3 border border-slate-800 bg-slate-900/40 hover:bg-slate-900 hover:border-amber-500/50 transition-colors cursor-pointer group"
               >
                 <div className="flex items-center justify-between">
-                  <span className="font-bold text-slate-100 group-hover:text-amber-300">
+                  <span className="font-bold text-slate-100 group-hover:text-amber-300 text-sm">
                     <span className="text-amber-400 italic mr-1.5">{item.roman}.</span>
                     {item.title}
                   </span>
-                  <ChevronRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-amber-400" />
+                  <ChevronRight className="w-4 h-4 text-slate-300 group-hover:text-amber-400" />
                 </div>
-                <p className="text-[11px] text-slate-400 mt-1 line-clamp-1">{item.desc}</p>
+                <p className="text-xs text-slate-300 mt-1 line-clamp-2">{item.desc}</p>
               </button>
             ))}
           </div>
@@ -421,11 +421,11 @@ export const TourGuideModal: React.FC<TourGuideModalProps> = ({
     >
       <div className="relative w-full max-w-3xl border border-slate-700 bg-slate-950 text-slate-100 shadow-2xl overflow-hidden flex flex-col max-h-[92vh]">
         {/* Top Utility Header Bar with Persistent Language & Day/Night Switchers */}
-        <div className="flex flex-wrap items-center justify-between gap-3 px-5 py-3.5 bg-slate-900 border-b border-slate-800">
-          <div className="flex items-center gap-2.5">
+        <div className="flex items-center justify-between gap-2 px-4 sm:px-5 py-3 bg-slate-900 border-b border-slate-800">
+          <div className="flex items-center gap-2 min-w-0">
             <BookOpen className="w-4 h-4 text-amber-400 shrink-0" />
-            <span className="text-xs font-serif uppercase tracking-widest text-amber-400 font-semibold">
-              {isPt ? 'Guia Interativo de Boas-Vindas' : 'Interactive First-Launch Guide'}
+            <span className="text-xs font-serif uppercase tracking-wider text-amber-400 font-semibold whitespace-nowrap">
+              {isPt ? 'Guia Interativo' : 'Interactive Guide'}
             </span>
           </div>
 
@@ -510,7 +510,7 @@ export const TourGuideModal: React.FC<TourGuideModalProps> = ({
                 key={s.roman}
                 type="button"
                 onClick={() => setStepIndex(idx)}
-                className={`py-2 px-2 text-center transition-colors cursor-pointer truncate ${
+                className={`py-2 px-2 text-center transition-colors cursor-pointer leading-snug ${
                   isCurrent
                     ? 'bg-amber-500 text-slate-950 font-bold'
                     : isCompleted

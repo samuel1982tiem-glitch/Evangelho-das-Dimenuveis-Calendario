@@ -24,37 +24,37 @@ export const DataSourceBadge: React.FC<DataSourceBadgeProps> = ({
     switch (source) {
       case 'ASTRONOMICAL_CALCULATION':
         return {
-          label: isPt ? 'Fonte: Cálculo Astronômico' : 'Source: Astronomical Calculation',
+          label: isPt ? 'Astronômico' : 'Astronomical',
           style: 'border-blue-500/40 text-blue-300 bg-blue-950/30',
         };
       case 'BIBLICAL_TEXT':
         return {
-          label: isPt ? 'Fonte: Texto Bíblico' : 'Source: Biblical Text',
+          label: isPt ? 'Texto Bíblico' : 'Biblical Text',
           style: 'border-amber-500/40 text-amber-300 bg-amber-950/30',
         };
       case 'HISTORICAL_RECORD':
         return {
-          label: isPt ? 'Fonte: Registro Histórico' : 'Source: Historical Record',
+          label: isPt ? 'Histórico' : 'Historical',
           style: 'border-emerald-500/40 text-emerald-300 bg-emerald-950/30',
         };
       case 'TRADITIONAL_CHRONOLOGY':
         return {
-          label: isPt ? 'Fonte: Cronologia Tradicional' : 'Source: Traditional Chronology',
+          label: isPt ? 'Cronologia' : 'Chronology',
           style: 'border-purple-500/40 text-purple-300 bg-purple-950/30',
         };
       case 'INTERPRETIVE_MODEL':
         return {
-          label: isPt ? 'Fonte: Modelo Interpretativo' : 'Source: Interpretive Model',
+          label: isPt ? 'Interpretativo' : 'Interpretive',
           style: 'border-amber-500/40 text-amber-300 bg-amber-950/30',
         };
       case 'HYPOTHETICAL_MODEL':
         return {
-          label: isPt ? 'Fonte: Modelo Hipotético' : 'Source: Hypothetical Model',
+          label: isPt ? 'Hipotético' : 'Hypothetical',
           style: 'border-slate-700 text-slate-300 bg-slate-900',
         };
       default:
         return {
-          label: isPt ? 'Fonte: Não Especificada' : 'Source: Unspecified',
+          label: isPt ? 'Geral' : 'General',
           style: 'border-slate-800 text-slate-400 bg-slate-950',
         };
     }
@@ -65,7 +65,7 @@ export const DataSourceBadge: React.FC<DataSourceBadgeProps> = ({
 
   return (
     <span
-      className={`inline-flex items-center gap-1.5 font-serif italic border ${config.style} ${sizing}`}
+      className={`inline-flex items-center gap-1 font-serif italic border whitespace-nowrap shrink-0 ${config.style} ${sizing}`}
     >
       <span>§</span>
       <span>{config.label}</span>

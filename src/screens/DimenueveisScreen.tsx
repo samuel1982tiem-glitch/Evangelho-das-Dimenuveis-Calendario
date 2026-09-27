@@ -49,13 +49,13 @@ export const DimenueveisScreen: React.FC<DimenueveisScreenProps> = ({ language }
     <div className="space-y-6">
       {/* Book Header & Sub-Navigation Strip */}
       <div className="border border-slate-800 bg-slate-950 divide-y divide-slate-800">
-        <div className="p-5 bg-slate-900/60 space-y-1.5">
-          <div className="text-xs font-serif text-amber-400 uppercase tracking-wider font-semibold">
+        <div className="p-4 sm:p-5 bg-slate-900/60 space-y-1.5">
+          <div className="text-xs font-serif text-amber-400 uppercase tracking-wider font-semibold whitespace-nowrap">
             {isPt
-              ? 'Repositório Canônico · Preservação Integral do Texto'
-              : 'Canonical Source Repository · Unaltered Text Preservation'}
+              ? 'Repositório Canônico · Texto Integral'
+              : 'Canonical Repository · Unaltered Text'}
           </div>
-          <h2 className="text-2xl font-serif font-bold text-slate-100">
+          <h2 className="text-lg sm:text-2xl font-serif font-bold text-slate-100 whitespace-nowrap">
             {t.dimenueveis.heroTitle}
           </h2>
           <p className="text-xs text-slate-300 font-serif italic">
@@ -63,12 +63,12 @@ export const DimenueveisScreen: React.FC<DimenueveisScreenProps> = ({ language }
           </p>
         </div>
 
-        <div className="px-5 py-3 bg-amber-950/15 text-xs font-serif italic text-amber-300">
+        <div className="px-4 sm:px-5 py-3 bg-amber-950/15 text-xs font-serif italic text-amber-300">
           {t.dimenueveis.integrityProtocol}
         </div>
 
         {/* Book Chapter Sub-Tab Bar */}
-        <div className="flex border-t border-slate-800 divide-x divide-slate-800 bg-slate-950 text-xs font-serif">
+        <div className="grid grid-cols-3 border-t border-slate-800 divide-x divide-slate-800 bg-slate-950 text-xs font-serif">
           {[
             { id: 'TREE', roman: 'I', label: t.dimenueveis.treeTab },
             { id: 'CANONICAL_TEXT', roman: 'II', label: t.dimenueveis.viewerTab },
@@ -77,7 +77,7 @@ export const DimenueveisScreen: React.FC<DimenueveisScreenProps> = ({ language }
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id as any)}
-              className={`px-5 py-3 font-semibold transition-colors cursor-pointer ${
+              className={`px-2 sm:px-5 py-3 text-[11px] sm:text-xs font-semibold text-center transition-colors cursor-pointer whitespace-nowrap ${
                 activeTab === tab.id
                   ? 'bg-amber-500 text-slate-950'
                   : 'text-slate-300 hover:text-slate-100 hover:bg-slate-900'
@@ -92,7 +92,7 @@ export const DimenueveisScreen: React.FC<DimenueveisScreenProps> = ({ language }
       {/* TAB I: 6-LAYER TIME TREE */}
       {activeTab === 'TREE' && (
         <div className="border border-slate-800 bg-slate-950">
-          <div className="px-5 py-3 bg-slate-900/50 border-b border-slate-800 text-xs font-serif font-bold uppercase tracking-wider text-amber-400">
+          <div className="px-4 sm:px-5 py-3 bg-slate-900/50 border-b border-slate-800 text-xs font-serif font-bold uppercase tracking-wider text-amber-400 whitespace-nowrap">
             {t.dimenueveis.timeTreeTitle}
           </div>
 
@@ -100,13 +100,13 @@ export const DimenueveisScreen: React.FC<DimenueveisScreenProps> = ({ language }
             {timeTree.map((layer) => (
               <div
                 key={layer.id}
-                className="p-5 border-b border-slate-800 space-y-3.5 bg-slate-950"
+                className="p-4 sm:p-5 border-b border-slate-800 space-y-3.5 bg-slate-950"
               >
                 <div className="flex items-center justify-between pb-2 border-b border-slate-800">
-                  <h4 className="text-base font-serif font-bold text-slate-100">
+                  <h4 className="text-base font-serif font-bold text-slate-100 whitespace-nowrap">
                     {layer.name}
                   </h4>
-                  <span className="w-2.5 h-2.5" style={{ backgroundColor: layer.color }} />
+                  <span className="w-2.5 h-2.5 shrink-0" style={{ backgroundColor: layer.color }} />
                 </div>
 
                 <p className="text-xs text-slate-300 leading-relaxed">{layer.description}</p>
@@ -114,7 +114,7 @@ export const DimenueveisScreen: React.FC<DimenueveisScreenProps> = ({ language }
                 <div className="divide-y divide-slate-800 border border-slate-800 bg-slate-900/30">
                   {layer.children.map((child, idx) => (
                     <div key={idx} className="p-3 text-xs space-y-1">
-                      <strong className="text-slate-100 font-serif text-xs block">{child.name}</strong>
+                      <strong className="text-slate-100 font-serif text-xs block whitespace-nowrap">{child.name}</strong>
                       <p className="text-xs text-slate-300 leading-relaxed">{child.description}</p>
                     </div>
                   ))}
@@ -130,7 +130,7 @@ export const DimenueveisScreen: React.FC<DimenueveisScreenProps> = ({ language }
         <div className="grid grid-cols-1 lg:grid-cols-12 border border-slate-800 bg-slate-950 divide-y lg:divide-y-0 lg:divide-x divide-slate-800">
           {/* Section Selector Sidebar */}
           <div className="lg:col-span-4 divide-y divide-slate-800">
-            <div className="px-5 py-3 bg-slate-900/50 text-xs font-serif text-slate-300 uppercase tracking-wider font-semibold">
+            <div className="px-4 sm:px-5 py-3 bg-slate-900/50 text-xs font-serif text-slate-300 uppercase tracking-wider font-semibold whitespace-nowrap">
               {t.dimenueveis.indexTitle}
             </div>
 
@@ -138,35 +138,35 @@ export const DimenueveisScreen: React.FC<DimenueveisScreenProps> = ({ language }
               <button
                 key={sec.id}
                 onClick={() => setSelectedSectionId(sec.id)}
-                className={`w-full px-5 py-3.5 text-left transition-colors flex items-center justify-between text-xs font-serif cursor-pointer ${
+                className={`w-full px-4 sm:px-5 py-3.5 text-left transition-colors flex items-center justify-between text-xs font-serif cursor-pointer ${
                   selectedSection.id === sec.id
                     ? 'bg-amber-950/30 text-amber-300 font-semibold'
                     : 'text-slate-300 hover:text-slate-100 hover:bg-slate-900/50'
                 }`}
               >
-                <span className="truncate">{ROMAN_NUMERALS[idx] || idx + 1}. {sec.title}</span>
-                <span>→</span>
+                <span className="whitespace-nowrap pr-2">{ROMAN_NUMERALS[idx] || idx + 1}. {sec.title}</span>
+                <span className="shrink-0">→</span>
               </button>
             ))}
           </div>
 
           {/* Book Reading Pane */}
           <div className="lg:col-span-8 divide-y divide-slate-800">
-            <div className="p-5 bg-slate-900/40 space-y-1">
-              <span className="text-xs font-serif italic text-amber-400 font-semibold">
+            <div className="p-4 sm:p-5 bg-slate-900/40 space-y-1">
+              <span className="text-xs font-serif italic text-amber-400 font-semibold whitespace-nowrap block">
                 {t.dimenueveis.timeLayer}: {translateLayerTag(selectedSection.layer)}
               </span>
-              <h3 className="text-xl font-serif font-bold text-slate-100">
+              <h3 className="text-lg sm:text-xl font-serif font-bold text-slate-100 whitespace-nowrap">
                 {selectedSection.title}
               </h3>
             </div>
 
-            <div className="p-6 bg-slate-950 text-base text-slate-100 leading-relaxed whitespace-pre-line font-serif max-w-prose">
+            <div className="p-5 sm:p-6 bg-slate-950 text-base text-slate-100 leading-relaxed whitespace-pre-line font-serif max-w-prose">
               {selectedSection.canonicalText}
             </div>
 
-            <div className="p-5 bg-slate-900/20 space-y-2">
-              <h4 className="text-xs font-serif text-amber-400 uppercase tracking-wider font-semibold">
+            <div className="p-4 sm:p-5 bg-slate-900/20 space-y-2">
+              <h4 className="text-xs font-serif text-amber-400 uppercase tracking-wider font-semibold whitespace-nowrap">
                 {t.dimenueveis.annotationsTitle}
               </h4>
               <ul className="list-disc list-inside space-y-1.5 text-xs text-slate-200 font-serif italic">
@@ -182,21 +182,21 @@ export const DimenueveisScreen: React.FC<DimenueveisScreenProps> = ({ language }
       {/* TAB III: CANONICAL LEXICON */}
       {activeTab === 'LEXICON' && (
         <div className="border border-slate-800 bg-slate-950">
-          <div className="px-5 py-3 bg-slate-900/50 border-b border-slate-800 text-xs font-serif font-bold uppercase tracking-wider text-amber-400">
+          <div className="px-4 sm:px-5 py-3 bg-slate-900/50 border-b border-slate-800 text-xs font-serif font-bold uppercase tracking-wider text-amber-400 whitespace-nowrap">
             {t.dimenueveis.lexiconTitle}
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-slate-800">
             {lexicon.map((item, idx) => (
-              <div key={idx} className="p-5 border-b border-slate-800 space-y-2">
-                <div className="flex items-center justify-between">
+              <div key={idx} className="p-4 sm:p-5 border-b border-slate-800 space-y-2">
+                <div className="flex items-center justify-between gap-2 whitespace-nowrap">
                   <h4 className="text-base font-serif font-bold text-amber-300">{item.term}</h4>
                   <span className="text-xs font-serif italic text-slate-300">
                     ({item.category})
                   </span>
                 </div>
                 <p className="text-xs text-slate-200 leading-relaxed">{item.definition}</p>
-                <p className="text-xs font-serif italic text-slate-400 pt-1.5 border-t border-slate-800/80">
+                <p className="text-xs font-serif italic text-slate-400 pt-1.5 border-t border-slate-800/80 whitespace-nowrap">
                   {t.dimenueveis.sourceLabel} {item.dimenueveisReference}
                 </p>
               </div>

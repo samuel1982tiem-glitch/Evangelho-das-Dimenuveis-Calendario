@@ -9,7 +9,7 @@ import { Language } from '../i18n/translations';
 export const HISTORICAL_ECLIPSE_EVENTS: HistoricalAstronomicalEvent[] = [
   {
     id: 'joshua-10-long-day',
-    name: 'Joshua 10 — Sun Standing Still over Gibeon',
+    name: 'Joshua 10 — Sun Over Gibeon',
     biblicalReferences: ['Joshua 10:12-14'],
     date: '30 October 1207 BCE',
     astronomicalYearBCE: 1207,
@@ -26,7 +26,7 @@ export const HISTORICAL_ECLIPSE_EVENTS: HistoricalAstronomicalEvent[] = [
   },
   {
     id: 'hezekiah-sundial',
-    name: "Hezekiah's Sign — Shadow Returning Ten Degrees",
+    name: "Hezekiah's Sign — Ahaz Sundial",
     biblicalReferences: ['2 Kings 20:8-11', 'Isaiah 38:7-8'],
     date: 'c. 701 BCE',
     astronomicalYearBCE: 701,
@@ -42,7 +42,7 @@ export const HISTORICAL_ECLIPSE_EVENTS: HistoricalAstronomicalEvent[] = [
   },
   {
     id: 'crucifixion-darkness',
-    name: 'Passover Crucifixion Darkness & Lunar Blood Alignment',
+    name: 'Passover Crucifixion Darkness',
     biblicalReferences: ['Luke 23:44-45', 'Joel 2:31', 'Acts 2:20'],
     date: '3 April 33 CE (or 7 April 30 CE)',
     astronomicalYearBCE: undefined,
@@ -61,7 +61,7 @@ export const HISTORICAL_ECLIPSE_EVENTS: HistoricalAstronomicalEvent[] = [
 export const HISTORICAL_ECLIPSE_EVENTS_PT: HistoricalAstronomicalEvent[] = [
   {
     id: 'joshua-10-long-day',
-    name: 'Josué 10 — O Sol Parou Sobre Gibeão',
+    name: 'Josué 10 — Sol Sobre Gibeão',
     biblicalReferences: ['Josué 10:12-14'],
     date: '30 de Outubro de 1207 a.C.',
     astronomicalYearBCE: 1207,
@@ -78,7 +78,7 @@ export const HISTORICAL_ECLIPSE_EVENTS_PT: HistoricalAstronomicalEvent[] = [
   },
   {
     id: 'hezekiah-sundial',
-    name: 'Sinal de Ezequias — A Sombra Retrocedendo Dez Graus',
+    name: 'Sinal de Ezequias — Relógio Solar',
     biblicalReferences: ['2 Reis 20:8-11', 'Isaías 38:7-8'],
     date: 'c. 701 a.C.',
     astronomicalYearBCE: 701,
@@ -94,7 +94,7 @@ export const HISTORICAL_ECLIPSE_EVENTS_PT: HistoricalAstronomicalEvent[] = [
   },
   {
     id: 'crucifixion-darkness',
-    name: 'Trevas da Crucificação na Páscoa e Alinhamento Lunar de Sangue',
+    name: 'Trevas da Crucificação na Páscoa',
     biblicalReferences: ['Lucas 23:44-45', 'Joel 2:31', 'Atos 2:20'],
     date: '3 de Abril de 33 d.C. (ou 7 de Abril de 30 d.C.)',
     astronomicalYearBCE: undefined,

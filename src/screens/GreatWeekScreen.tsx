@@ -40,20 +40,20 @@ export const GreatWeekScreen: React.FC<GreatWeekScreenProps> = ({ systemDate, co
     <div className="space-y-6">
       {/* Top Header & Interpretive Notice */}
       <div className="border border-slate-800 bg-slate-950 divide-y divide-slate-800">
-        <div className="flex flex-wrap items-center justify-between gap-4 p-5 bg-slate-900/60">
+        <div className="flex flex-wrap items-center justify-between gap-3 p-4 sm:p-5 bg-slate-900/60">
           <div>
-            <div className="text-xs font-serif text-purple-300 uppercase tracking-wider font-semibold">
-              {isPt ? 'Macro-Cronologia · A Grande Semana de 7.000 Anos' : 'Macro-Chronology · The 7,000-Year Great Week'}
+            <div className="text-xs font-serif text-purple-300 uppercase tracking-wider font-semibold whitespace-nowrap">
+              {isPt ? 'Macro-Cronologia · 7.000 Anos' : 'Macro-Chronology · 7,000 Years'}
             </div>
-            <h2 className="text-2xl font-serif font-bold text-slate-100">
+            <h2 className="text-lg sm:text-2xl font-serif font-bold text-slate-100 whitespace-nowrap">
               {t.greatWeek.heroTitle}
             </h2>
           </div>
           <DataSourceBadge source="INTERPRETIVE_MODEL" size="sm" language={language} />
         </div>
 
-        <div className="p-5 bg-amber-950/15 space-y-1">
-          <div className="text-xs font-serif font-bold text-amber-400 uppercase tracking-wider">
+        <div className="p-4 sm:p-5 bg-amber-950/15 space-y-1">
+          <div className="text-xs font-serif font-bold text-amber-400 uppercase tracking-wider whitespace-nowrap">
             {t.greatWeek.noticeTitle}
           </div>
           <p className="text-xs text-slate-200 leading-relaxed">
@@ -63,40 +63,42 @@ export const GreatWeekScreen: React.FC<GreatWeekScreenProps> = ({ systemDate, co
 
         {/* 4-Column Almanac Readout */}
         <div className="grid grid-cols-2 lg:grid-cols-4 divide-y lg:divide-y-0 divide-x divide-slate-800 font-serif tabular-nums">
-          <div className="p-5 space-y-1">
-            <span className="text-xs italic text-slate-400 block">{t.greatWeek.elapsedYears}</span>
-            <strong className="text-2xl font-serif font-bold text-amber-400 block">
-              {millennialPos.elapsedSolarYears} {isPt ? 'Anos' : 'Years'}
+          <div className="p-3.5 sm:p-5 space-y-1">
+            <span className="text-[11px] sm:text-xs italic text-slate-400 block whitespace-nowrap">{t.greatWeek.elapsedYears}</span>
+            <strong className="text-lg sm:text-2xl font-serif font-bold text-amber-400 block whitespace-nowrap">
+              {millennialPos.elapsedSolarYears} {isPt ? 'Anos' : 'Yrs'}
             </strong>
-            <span className="text-xs text-slate-300 block">
+            <span className="text-[11px] sm:text-xs text-slate-300 block whitespace-nowrap">
               {t.greatWeek.sinceCreation} ({millennialPos.creationEpochBCE} {isPt ? 'a.C.' : 'BCE'})
             </span>
           </div>
 
-          <div className="p-5 space-y-1">
-            <span className="text-xs italic text-slate-400 block">{t.greatWeek.activeMillennium}</span>
-            <strong className="text-lg font-serif font-bold text-purple-300 block truncate">{millennialPos.millenniumName}</strong>
-            <span className="text-xs text-amber-400 font-semibold block">
-              {isPt ? 'Ano' : 'Year'} {millennialPos.yearOfMillennium} {isPt ? 'de' : 'of'} 1000
+          <div className="p-3.5 sm:p-5 space-y-1">
+            <span className="text-[11px] sm:text-xs italic text-slate-400 block whitespace-nowrap">{t.greatWeek.activeMillennium}</span>
+            <strong className="text-lg sm:text-2xl font-serif font-bold text-purple-300 block whitespace-nowrap">
+              {millennialPos.millenniumName}
+            </strong>
+            <span className="text-[11px] sm:text-xs text-amber-400 font-semibold block whitespace-nowrap">
+              {isPt ? 'Ano' : 'Year'} {millennialPos.yearOfMillennium} / 1000
             </span>
           </div>
 
-          <div className="p-5 space-y-1">
-            <span className="text-xs italic text-slate-400 block">{t.greatWeek.boundary6000}</span>
-            <strong className="text-2xl font-serif font-bold text-blue-300 block">
+          <div className="p-3.5 sm:p-5 space-y-1">
+            <span className="text-[11px] sm:text-xs italic text-slate-400 block whitespace-nowrap">{t.greatWeek.boundary6000}</span>
+            <strong className="text-lg sm:text-2xl font-serif font-bold text-blue-300 block whitespace-nowrap">
               {millennialPos.boundary6000CEYear} {isPt ? 'd.C.' : 'CE'}
             </strong>
-            <span className="text-xs text-slate-300 block">
+            <span className="text-[11px] sm:text-xs text-slate-300 block whitespace-nowrap">
               {isPt ? `Em ${millennialPos.yearsUntil6000Boundary} anos` : `In ${millennialPos.yearsUntil6000Boundary} years`}
             </span>
           </div>
 
-          <div className="p-5 space-y-1">
-            <span className="text-xs italic text-slate-400 block">{t.greatWeek.boundary7000}</span>
-            <strong className="text-2xl font-serif font-bold text-emerald-300 block">
+          <div className="p-3.5 sm:p-5 space-y-1">
+            <span className="text-[11px] sm:text-xs italic text-slate-400 block whitespace-nowrap">{t.greatWeek.boundary7000}</span>
+            <strong className="text-lg sm:text-2xl font-serif font-bold text-emerald-300 block whitespace-nowrap">
               {millennialPos.boundary7000CEYear} {isPt ? 'd.C.' : 'CE'}
             </strong>
-            <span className="text-xs text-slate-300 block">
+            <span className="text-[11px] sm:text-xs text-slate-300 block whitespace-nowrap">
               {isPt ? `Em ${millennialPos.yearsUntil7000Boundary} anos` : `In ${millennialPos.yearsUntil7000Boundary} years`}
             </span>
           </div>
@@ -105,28 +107,28 @@ export const GreatWeekScreen: React.FC<GreatWeekScreenProps> = ({ systemDate, co
 
       {/* SACRED TIME HIERARCHY CHAIN */}
       <div className="border border-slate-800 bg-slate-950 divide-y divide-slate-800">
-        <div className="px-5 py-3 bg-slate-900/50 flex items-center justify-between text-xs font-serif">
-          <span className="text-amber-400 font-bold uppercase tracking-wider">
-            {isPt ? 'Hierarquia de Tempo Sagrado Dimenúveis' : 'Dimenúveis Sacred Time Hierarchy'}
+        <div className="px-4 sm:px-5 py-3 bg-slate-900/50 flex items-center justify-between gap-2 text-xs font-serif">
+          <span className="text-amber-400 font-bold uppercase tracking-wider whitespace-nowrap">
+            {isPt ? 'Hierarquia de Tempo Sagrado' : 'Sacred Time Hierarchy'}
           </span>
-          <span className="text-slate-300 italic">
-            {isPt ? 'Arquitetura Aninhada em 6 Níveis' : '6-Tier Nested Architecture'}
+          <span className="text-slate-300 italic whitespace-nowrap">
+            {isPt ? '6 Níveis' : '6 Tiers'}
           </span>
         </div>
 
-        <div className="p-5 space-y-3">
+        <div className="p-4 sm:p-5 space-y-3">
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 border border-slate-800 divide-y sm:divide-y-0 sm:divide-x divide-slate-800 bg-slate-900/30 font-serif text-xs text-center">
             {[
               { roman: 'I', label: isPt ? 'Ano (364 Dias)' : 'Year (364 Days)' },
-              { roman: 'II', label: isPt ? 'Mês (13 × 28 Dias)' : 'Month (13 × 28 Days)' },
-              { roman: 'III', label: isPt ? 'Semana (52 × 7 Dias)' : 'Week (52 × 7 Days)' },
-              { roman: 'IV', label: isPt ? 'Sábado (7º Dia + Dia Zero)' : 'Sabbath (7th Day + Day Zero)' },
+              { roman: 'II', label: isPt ? 'Mês (13 × 28d)' : 'Month (13 × 28d)' },
+              { roman: 'III', label: isPt ? 'Semana (52 × 7d)' : 'Week (52 × 7d)' },
+              { roman: 'IV', label: isPt ? 'Sábado (7º Dia)' : 'Sabbath (7th Day)' },
               { roman: 'V', label: isPt ? 'Festas (Moedim)' : 'Feasts (Moedim)' },
-              { roman: 'VI', label: isPt ? 'Milênio (7.000 Anos)' : 'Millennium (7,000 Years)' },
+              { roman: 'VI', label: isPt ? 'Milênio (7.000a)' : 'Millennium (7,000y)' },
             ].map((tier, i) => (
-              <div key={tier.roman} className={`p-3 ${i === 5 ? 'bg-purple-950/30 text-purple-300 font-semibold' : 'text-slate-200'}`}>
+              <div key={tier.roman} className={`p-3 whitespace-nowrap ${i === 5 ? 'bg-purple-950/30 text-purple-300 font-semibold' : 'text-slate-200'}`}>
                 <span className="text-xs italic text-slate-400 block">{tier.roman}.</span>
-                <span>{tier.label}</span>
+                <span className="text-[11px] sm:text-xs">{tier.label}</span>
               </div>
             ))}
           </div>
@@ -141,19 +143,19 @@ export const GreatWeekScreen: React.FC<GreatWeekScreenProps> = ({ systemDate, co
 
       {/* Annual Feast Cycle Embedded Matrix */}
       <div className="border border-slate-800 bg-slate-950">
-        <div className="px-5 py-3 bg-slate-900/50 border-b border-slate-800 text-xs font-serif font-bold uppercase tracking-wider text-amber-400">
-          {isPt ? 'Ciclo Anual de Festas no Ano Sagrado' : 'Annual Biblical Feast Cycle (Appointed Times)'} · {sacredYear}
+        <div className="px-4 sm:px-5 py-3 bg-slate-900/50 border-b border-slate-800 text-xs font-serif font-bold uppercase tracking-wider text-amber-400 whitespace-nowrap">
+          {isPt ? 'Ciclo Anual de Festas' : 'Annual Feast Cycle'} · {sacredYear}
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 divide-y sm:divide-y-0 sm:divide-x divide-slate-800 font-serif text-xs tabular-nums">
           {feastOccurrences.map((occ) => (
-            <div key={occ.feast.id} className="p-3.5 space-y-1">
-              <span className="text-xs text-amber-400 font-semibold block">
+            <div key={occ.feast.id} className="p-3 sm:p-3.5 space-y-1 min-w-0">
+              <span className="text-[11px] sm:text-xs text-amber-400 font-semibold block whitespace-nowrap">
                 {isPt ? 'Mês' : 'Month'} {occ.feast.sacredMonth}, {isPt ? 'Dia' : 'Day'} {occ.feast.sacredDay}
               </span>
-              <strong className="text-xs text-slate-100 block truncate font-serif" title={occ.feast.name}>
+              <strong className="text-[11px] sm:text-xs text-slate-100 block whitespace-nowrap font-serif">
                 {occ.feast.name}
               </strong>
-              <span className="text-[11px] italic text-slate-400 block">
+              <span className="text-[11px] sm:text-xs italic text-slate-300 block whitespace-nowrap">
                 {occ.feast.durationDays}d · {occ.gregorianStartDate.toISOString().slice(5, 10)}
               </span>
             </div>
@@ -163,26 +165,26 @@ export const GreatWeekScreen: React.FC<GreatWeekScreenProps> = ({ systemDate, co
 
       {/* 7 Millennia Matrix */}
       <div className="border border-slate-800 bg-slate-950">
-        <div className="px-5 py-3 bg-slate-900/50 border-b border-slate-800 text-xs font-serif font-bold uppercase tracking-wider text-slate-100">
+        <div className="px-4 sm:px-5 py-3 bg-slate-900/50 border-b border-slate-800 text-xs font-serif font-bold uppercase tracking-wider text-slate-100 whitespace-nowrap">
           {t.greatWeek.sevenMillenniaTitle}
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-slate-800">
           {[
-            { num: 1, name: isPt ? 'I. 1º Milênio — Época Adâmica' : 'I. 1st Millennium — Adamic Epoch', span: '0001 – 1000 AM' },
-            { num: 2, name: isPt ? 'II. 2º Milênio — Era Patriarcal' : 'II. 2nd Millennium — Patriarchal Era', span: '1001 – 2000 AM' },
-            { num: 3, name: isPt ? 'III. 3º Milênio — Êxodo e Tabernáculo' : 'III. 3rd Millennium — Exodus & Tabernacle', span: '2001 – 3000 AM' },
-            { num: 4, name: isPt ? 'IV. 4º Milênio — Reino e Profetas' : 'IV. 4th Millennium — Kingdom & Prophets', span: '3001 – 4000 AM' },
-            { num: 5, name: isPt ? 'V. 5º Milênio — Era Messias e Apostólica' : 'V. 5th Millennium — Messiah & Apostolic Age', span: '4001 – 5000 AM' },
-            { num: 6, name: isPt ? 'VI. 6º Milênio — Era das Nações e Clímax' : 'VI. 6th Millennium — Nations & Climax Age', span: '5001 – 6000 AM' },
-            { num: 7, name: isPt ? 'VII. 7º Milênio — O Sábado Milenar' : 'VII. 7th Millennium — The Millennial Sabbath', span: '6001 – 7000 AM', isSabbath: true },
+            { num: 1, name: isPt ? 'I. 1º Milênio — Época Adâmica' : 'I. 1st Millennium — Adamic Age', span: '0001 – 1000 AM' },
+            { num: 2, name: isPt ? 'II. 2º Milênio — Era Patriarcal' : 'II. 2nd Millennium — Patriarchal Age', span: '1001 – 2000 AM' },
+            { num: 3, name: isPt ? 'III. 3º Milênio — Era do Êxodo' : 'III. 3rd Millennium — Exodus Age', span: '2001 – 3000 AM' },
+            { num: 4, name: isPt ? 'IV. 4º Milênio — Reis e Profetas' : 'IV. 4th Millennium — Kingdom Age', span: '3001 – 4000 AM' },
+            { num: 5, name: isPt ? 'V. 5º Milênio — Era Apostólica' : 'V. 5th Millennium — Apostolic Age', span: '4001 – 5000 AM' },
+            { num: 6, name: isPt ? 'VI. 6º Milênio — Era das Nações' : 'VI. 6th Millennium — Nations Age', span: '5001 – 6000 AM' },
+            { num: 7, name: isPt ? 'VII. 7º Milênio — Sábado Milenar' : 'VII. 7th Millennium — Sabbath Rest', span: '6001 – 7000 AM', isSabbath: true },
           ].map((m) => {
             const isCurrent = millennialPos.millenniumNumber === m.num;
 
             return (
               <div
                 key={m.num}
-                className={`p-5 border-b border-slate-800 space-y-1.5 ${
+                className={`p-4 sm:p-5 border-b border-slate-800 space-y-1.5 ${
                   isCurrent
                     ? 'bg-purple-950/35'
                     : m.isSabbath
@@ -190,7 +192,7 @@ export const GreatWeekScreen: React.FC<GreatWeekScreenProps> = ({ systemDate, co
                     : 'bg-slate-950'
                 }`}
               >
-                <div className="flex items-center justify-between text-xs font-serif italic tabular-nums">
+                <div className="flex items-center justify-between text-xs font-serif italic tabular-nums whitespace-nowrap">
                   <span className="text-slate-300">{m.span}</span>
                   {isCurrent && (
                     <span className="text-purple-300 font-semibold not-italic">
@@ -198,7 +200,7 @@ export const GreatWeekScreen: React.FC<GreatWeekScreenProps> = ({ systemDate, co
                     </span>
                   )}
                 </div>
-                <h4 className={`text-base font-serif font-bold ${m.isSabbath ? 'text-amber-300' : 'text-slate-100'}`}>
+                <h4 className={`text-sm sm:text-base font-serif font-bold whitespace-nowrap ${m.isSabbath ? 'text-amber-300' : 'text-slate-100'}`}>
                   {m.name}
                 </h4>
               </div>
