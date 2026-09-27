@@ -17,7 +17,7 @@ interface DimenueveisScreenProps {
 export const DimenueveisScreen: React.FC<DimenueveisScreenProps> = ({ language }) => {
   const t = TRANSLATIONS[language];
   const isPt = language === 'pt';
-  const [activeSubTab, setActiveSubTab] = useState<'TREE' | 'VIEWER' | 'LEXICON'>('VIEWER');
+  const [activeSubTab, setActiveSubTab] = useState<'TREE' | 'VIEWER' | 'LEXICON'>('TREE');
 
   const timeTree = getLocalizedTimeTree(language);
   const canonicalSections = getLocalizedCanonicalSections(language);

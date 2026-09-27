@@ -107,18 +107,18 @@ export const AppointedTimesScreen: React.FC<AppointedTimesScreenProps> = ({
           <DataSourceBadge source="ASTRONOMICAL_CALCULATION" size="sm" language={language} />
         </div>
 
-        <div className="flex flex-wrap items-center justify-between gap-3 px-4 sm:px-5 py-3 bg-slate-900/40 text-xs font-serif">
-          <div className="flex items-center gap-2.5 text-slate-300 whitespace-nowrap">
+        <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-center justify-between gap-3 px-4 sm:px-5 py-3.5 bg-slate-900/40 text-xs font-serif overflow-hidden">
+          <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1 text-slate-300 min-w-0 leading-snug">
             <span>{isPt ? 'Modelo:' : 'Model:'} <strong className="text-amber-400">{translateModel(config.feastCalendarModel)}</strong></span>
             <span className="text-slate-500">·</span>
             <span>{isPt ? 'Âncora:' : 'Anchor:'} <strong className="text-blue-300">{translateAnchor(config.lunarAnchorMode)}</strong></span>
           </div>
 
-          <div className="flex flex-wrap items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2.5 min-w-0">
             <button
               type="button"
               onClick={() => setCalendarSyncOccurrences(feastOccurrences)}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-serif font-bold transition-colors cursor-pointer whitespace-nowrap"
+              className="inline-flex items-center justify-center gap-1.5 px-3 py-1.5 bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-serif font-bold transition-colors cursor-pointer shrink-0"
             >
               <Calendar className="w-3.5 h-3.5 shrink-0" />
               <span>{isPt ? 'Incluir no Google Agenda' : 'Add to Google Calendar'}</span>

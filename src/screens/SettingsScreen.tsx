@@ -400,25 +400,25 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
             )}
 
             {/* Google Calendar Mobile Sync Box */}
-            <div className="p-3.5 border border-slate-800 bg-slate-900/40 space-y-2.5">
-              <div className="flex items-center justify-between gap-2">
-                <span className="text-xs font-serif font-bold uppercase tracking-wider text-amber-400 whitespace-nowrap">
+            <div className="p-4 border border-slate-800 bg-slate-900/40 space-y-3 overflow-hidden">
+              <div className="flex flex-wrap items-center justify-between gap-2 min-w-0">
+                <span className="text-xs font-serif font-bold uppercase tracking-wider text-amber-400 break-words leading-snug">
                   {isPt ? 'Google Agenda Móvel' : 'Google Mobile Calendar'}
                 </span>
-                <span className="text-xs font-serif italic text-slate-300 whitespace-nowrap">
+                <span className="text-xs font-serif italic text-slate-300 shrink-0">
                   {isPt ? `Ano Sagrado ${currentSacredYear}` : `Sacred Year ${currentSacredYear}`}
                 </span>
               </div>
-              <p className="text-xs text-slate-300 font-serif leading-relaxed">
+              <p className="text-xs text-slate-300 font-serif leading-relaxed break-words">
                 {isPt
                   ? 'Inclua as 8 Festas Bíblicas descritas (Páscoa, Asmos, Primícias, Semanas, Trombetas, Expiação, Tabernáculos e 8º Dia) diretamente no Google Agenda da sua conta Google com lembretes no celular.'
                   : 'Add all 8 described Biblical Feasts (Passover, Unleavened Bread, Firstfruits, Weeks, Trumpets, Atonement, Tabernacles, and 8th Day) directly to your Google account mobile calendar with reminders.'}
               </p>
-              <div className="flex flex-wrap items-center gap-2 pt-0.5 font-serif text-xs">
+              <div className="flex flex-wrap items-center gap-2.5 pt-1 font-serif text-xs">
                 <button
                   type="button"
                   onClick={() => setIsGoogleCalendarModalOpen(true)}
-                  className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold transition-colors cursor-pointer whitespace-nowrap"
+                  className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold transition-colors cursor-pointer"
                 >
                   <Calendar className="w-3.5 h-3.5 shrink-0" />
                   <span>{isPt ? 'Incluir no Google Agenda' : 'Add to Google Calendar'}</span>
@@ -427,7 +427,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
                 <button
                   type="button"
                   onClick={() => exportFeastsToIcs(currentYearFeasts, currentSacredYear, language)}
-                  className="inline-flex items-center gap-1.5 px-3 py-2 bg-slate-950 hover:bg-slate-800 border border-slate-700 hover:border-amber-500/60 text-amber-300 transition-colors cursor-pointer whitespace-nowrap"
+                  className="inline-flex items-center justify-center gap-1.5 px-3 py-2 bg-slate-950 hover:bg-slate-800 border border-slate-700 hover:border-amber-500/60 text-amber-300 transition-colors cursor-pointer"
                 >
                   <Download className="w-3.5 h-3.5 shrink-0" />
                   <span>{isPt ? 'Baixar .ICS' : 'Download .ICS'}</span>

@@ -86,21 +86,24 @@ jobs:
           KEY_ALIAS: dimenueveis
           KEY_PASSWORD: dimenueveis123
         run: |
+          FOOTER_VER=$(grep -oE "Version [0-9]+(\.[0-9]+)*" ../src/App.tsx | head -n 1 | awk '{print $2}')
+          APP_VERSION="${FOOTER_VER:-1.1}"
+          echo "APP_VERSION=$APP_VERSION" >> $GITHUB_ENV
           gradle assembleDebug assembleRelease --no-daemon --stacktrace
           mkdir -p ../apk-output
-          cp app/build/outputs/apk/debug/app-debug.apk ../apk-output/Calendario-Dimenuvel-v1.0.0-debug.apk
-          cp app/build/outputs/apk/release/app-release.apk ../apk-output/Calendario-Dimenuvel-v1.0.0-release.apk
+          cp app/build/outputs/apk/debug/app-debug.apk "../apk-output/Calendario-Dimenuvel-v${APP_VERSION}-debug.apk"
+          cp app/build/outputs/apk/release/app-release.apk "../apk-output/Calendario-Dimenuvel-v${APP_VERSION}-release.apk"
 
       - name: Upload Signed Release APK Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: Calendario-Dimenuvel-v1.0.0-release-apk
-          path: apk-output/Calendario-Dimenuvel-v1.0.0-release.apk
+          name: Calendario-Dimenuvel-v${{ env.APP_VERSION }}-release-apk
+          path: apk-output/Calendario-Dimenuvel-v${{ env.APP_VERSION }}-release.apk
           if-no-files-found: error
 
       - name: Upload Debug APK Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: Calendario-Dimenuvel-v1.0.0-debug-apk
-          path: apk-output/Calendario-Dimenuvel-v1.0.0-debug.apk
+          name: Calendario-Dimenuvel-v${{ env.APP_VERSION }}-debug-apk
+          path: apk-output/Calendario-Dimenuvel-v${{ env.APP_VERSION }}-debug.apk
           if-no-files-found: error

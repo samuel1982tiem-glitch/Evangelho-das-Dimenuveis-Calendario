@@ -195,11 +195,22 @@ export function exportFeastsToIcs(
 
   lines.push('END:VCALENDAR');
 
-  const blob = new Blob([lines.join('\r\n')], { type: 'text/calendar;charset=utf-8' });
+  const icsContent = lines.join('\r\n');
+  const fileName =
+    language === 'pt'
+      ? `Festas-Biblicas-Ano-Sagrado-${sacredYear}.ics`
+      : `Biblical-Feasts-Sacred-Year-${sacredYear}.ics`;
+
+  if (typeof window !== 'undefined' && window.AndroidBridge?.saveIcsFile) {
+    window.AndroidBridge.saveIcsFile(fileName, icsContent);
+    return;
+  }
+
+  const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
   const url = URL.createObjectURL(blob);
   const link = document.createElement('a');
   link.href = url;
-  link.download = `Festas-Biblicas-Ano-Sagrado-${sacredYear}.ics`;
+  link.download = fileName;
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);

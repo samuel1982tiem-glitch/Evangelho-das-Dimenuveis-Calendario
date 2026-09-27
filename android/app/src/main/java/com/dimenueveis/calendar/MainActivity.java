@@ -27,6 +27,7 @@ import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -36,6 +37,8 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 import androidx.webkit.WebViewAssetLoader;
 
+import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
@@ -47,8 +50,10 @@ public class MainActivity extends AppCompatActivity {
     private WebView webView;
     private String pendingGeolocationOrigin;
     private GeolocationPermissions.Callback pendingGeolocationCallback;
+    private String pendingIcsContent;
     private ActivityResultLauncher<String[]> locationPermissionLauncher;
     private ActivityResultLauncher<String> notificationPermissionLauncher;
+    private ActivityResultLauncher<Intent> saveIcsDocumentLauncher;
 
     private boolean isLocationPermissionGranted() {
         return ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
@@ -109,6 +114,33 @@ public class MainActivity extends AppCompatActivity {
                 granted -> {
                     if (webView != null) {
                         final String js = "window.dispatchEvent(new CustomEvent('androidNotificationPermissionResult', { detail: { granted: " + granted + " } }));";
+                        webView.post(() -> webView.evaluateJavascript(js, null));
+                    }
+                }
+        );
+
+        saveIcsDocumentLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    boolean saved = false;
+                    if (result.getResultCode() == RESULT_OK && result.getData() != null && result.getData().getData() != null && pendingIcsContent != null) {
+                        Uri uri = result.getData().getData();
+                        try (OutputStream os = getContentResolver().openOutputStream(uri)) {
+                            if (os != null) {
+                                os.write(pendingIcsContent.getBytes(StandardCharsets.UTF_8));
+                                os.flush();
+                                saved = true;
+                            }
+                        } catch (Exception ignored) {
+                        }
+                    }
+                    pendingIcsContent = null;
+                    if (saved) {
+                        Toast.makeText(MainActivity.this, "Arquivo .ICS salvo com sucesso!", Toast.LENGTH_LONG).show();
+                    }
+                    if (webView != null) {
+                        final boolean finalSaved = saved;
+                        final String js = "window.dispatchEvent(new CustomEvent('androidIcsSaveResult', { detail: { saved: " + finalSaved + " } }));";
                         webView.post(() -> webView.evaluateJavascript(js, null));
                     }
                 }
@@ -286,6 +318,24 @@ public class MainActivity extends AppCompatActivity {
                                 .setColorMode(PrintAttributes.COLOR_MODE_COLOR);
                         printManager.print(jobName, printAdapter, builder.build());
                     }
+                } catch (Exception ignored) {
+                }
+            });
+        }
+
+        @JavascriptInterface
+        public void saveIcsFile(String fileName, String icsContent) {
+            runOnUiThread(() -> {
+                try {
+                    pendingIcsContent = icsContent;
+                    String safeName = (fileName != null && !fileName.isEmpty())
+                            ? fileName
+                            : "Festas-Biblicas.ics";
+                    Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
+                    intent.addCategory(Intent.CATEGORY_OPENABLE);
+                    intent.setType("text/calendar");
+                    intent.putExtra(Intent.EXTRA_TITLE, safeName);
+                    saveIcsDocumentLauncher.launch(intent);
                 } catch (Exception ignored) {
                 }
             });
