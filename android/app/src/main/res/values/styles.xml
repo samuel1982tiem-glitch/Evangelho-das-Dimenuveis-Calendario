@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.DimenueveisCalendar" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/amber_gold</item>
+        <item name="colorPrimaryDark">@color/obsidian_bg</item>
+        <item name="colorAccent">@color/amber_gold</item>
+        <item name="android:windowBackground">@color/obsidian_bg</item>
+        <item name="android:statusBarColor">@color/obsidian_bg</item>
+        <item name="android:navigationBarColor">@color/obsidian_bg</item>
+    </style>
+</resources>

@@ -1,0 +1,325 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+
+@theme {
+  --font-sans: "Lora", "EB Garamond", Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-serif: "Cormorant Garamond", "EB Garamond", "Lora", Georgia, serif;
+  --font-mono: "EB Garamond", "Lora", Georgia, serif;
+}
+
+@layer base {
+  body {
+    font-family: var(--font-sans);
+    background-color: #0c0e14;
+    color: #f5f2eb;
+    line-height: 1.65;
+  }
+
+  h1, h2, h3, h4, h5, h6,
+  .font-serif,
+  .font-serif-sacred,
+  .font-decorative,
+  .font-marcellus,
+  .font-canonical,
+  .font-scripture {
+    font-family: var(--font-serif);
+    letter-spacing: 0.01em;
+  }
+
+  .font-mono-code, .font-mono {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums lining-nums;
+    letter-spacing: 0.015em;
+  }
+
+  .tabular-nums {
+    font-variant-numeric: tabular-nums lining-nums;
+  }
+}
+
+/* Custom scrollbar - book-like refined style */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0c0e14;
+}
+::-webkit-scrollbar-thumb {
+  background: #2e364f;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
+[data-theme="day"] ::-webkit-scrollbar-track {
+  background: #f5f0e6;
+}
+[data-theme="day"] ::-webkit-scrollbar-thumb {
+  background: #c5baa5;
+}
+[data-theme="day"] ::-webkit-scrollbar-thumb:hover {
+  background: #a3967e;
+}
+
+/* ========================================================================== */
+/* NIGHT MODE OPTICAL CONTRAST ENHANCEMENTS ([data-theme="night"])            */
+/* Ensures muted labels, borders, and body prose have high WCAG contrast      */
+/* ========================================================================== */
+
+[data-theme="night"] .text-slate-100,
+[data-theme="night"] .text-white {
+  color: #f7f4eb !important;
+}
+
+[data-theme="night"] .text-slate-200 {
+  color: #ece7d9 !important;
+}
+
+[data-theme="night"] .text-slate-300 {
+  color: #dcd5c4 !important;
+}
+
+[data-theme="night"] .text-slate-400 {
+  color: #c2ba9f !important;
+}
+
+[data-theme="night"] .text-slate-500,
+[data-theme="night"] .text-slate-600 {
+  color: #a39b82 !important;
+}
+
+[data-theme="night"] .border-slate-800,
+[data-theme="night"] .border-slate-800\/80,
+[data-theme="night"] .border-slate-800\/70,
+[data-theme="night"] .border-slate-800\/60,
+[data-theme="night"] .divide-slate-800 > :not([hidden]) ~ :not([hidden]) {
+  border-color: #2b3248 !important;
+}
+
+/* ========================================================================== */
+/* DAYTIME ARCHIVAL BOOK MODE OVERRIDES ([data-theme="day"])                  */
+/* High-contrast warm parchment surfaces & deep book ink typography           */
+/* ========================================================================== */
+
+[data-theme="day"] body,
+[data-theme="day"] .bg-\[\#090b10\],
+[data-theme="day"] .bg-\[\#0c0e14\],
+[data-theme="day"] .bg-\[\#0b0d14\],
+[data-theme="day"] .bg-\[\#0d101b\],
+[data-theme="day"] .bg-\[\#080910\],
+[data-theme="day"] .bg-\[\#090b12\],
+[data-theme="day"] .bg-\[\#0f1422\] {
+  background-color: #f4efe4 !important;
+  color: #1c1813 !important;
+}
+
+/* Primary Page & Card Surfaces */
+[data-theme="day"] .bg-slate-950,
+[data-theme="day"] .bg-slate-950\/80,
+[data-theme="day"] .bg-slate-950\/90 {
+  background-color: #fdfbf7 !important;
+  color: #1c1813 !important;
+}
+
+/* Secondary Header & Sub-Panel Surfaces */
+[data-theme="day"] .bg-slate-900,
+[data-theme="day"] .bg-slate-900\/20,
+[data-theme="day"] .bg-slate-900\/30,
+[data-theme="day"] .bg-slate-900\/40,
+[data-theme="day"] .bg-slate-900\/50,
+[data-theme="day"] .bg-slate-900\/60,
+[data-theme="day"] .bg-slate-900\/70,
+[data-theme="day"] .bg-slate-900\/80,
+[data-theme="day"] .bg-slate-900\/90,
+[data-theme="day"] .bg-slate-800,
+[data-theme="day"] .bg-slate-800\/40 {
+  background-color: #ede6d6 !important;
+  color: #1c1813 !important;
+}
+
+/* Hover States on Neutral Surfaces in Day Mode */
+[data-theme="day"] .hover\:bg-slate-900:hover,
+[data-theme="day"] .hover\:bg-slate-900\/40:hover,
+[data-theme="day"] .hover\:bg-slate-900\/50:hover,
+[data-theme="day"] .hover\:bg-slate-900\/60:hover,
+[data-theme="day"] .hover\:bg-slate-900\/80:hover,
+[data-theme="day"] .hover\:bg-slate-800:hover {
+  background-color: #e2d8c3 !important;
+}
+
+/* Tinted Amber / Feast / Sabbath Surfaces in Day Mode */
+[data-theme="day"] .bg-amber-950\/10,
+[data-theme="day"] .bg-amber-950\/15,
+[data-theme="day"] .bg-amber-950\/20,
+[data-theme="day"] .bg-amber-950\/25,
+[data-theme="day"] .bg-amber-950\/30,
+[data-theme="day"] .bg-amber-950\/40,
+[data-theme="day"] .bg-amber-950\/80,
+[data-theme="day"] .bg-yellow-500\/20 {
+  background-color: #faecc4 !important;
+}
+
+[data-theme="day"] .hover\:bg-amber-950\/25:hover,
+[data-theme="day"] .hover\:bg-amber-950\/30:hover,
+[data-theme="day"] .hover\:bg-amber-950\/40:hover,
+[data-theme="day"] .hover\:bg-amber-950\/60:hover {
+  background-color: #f3de9e !important;
+}
+
+/* Tinted Purple / Day Zero / Millennial Surfaces in Day Mode */
+[data-theme="day"] .bg-purple-950\/15,
+[data-theme="day"] .bg-purple-950\/20,
+[data-theme="day"] .bg-purple-950\/30,
+[data-theme="day"] .bg-purple-950\/35,
+[data-theme="day"] .bg-purple-950\/80,
+[data-theme="day"] .bg-purple-500\/20 {
+  background-color: #efe5fd !important;
+}
+
+[data-theme="day"] .hover\:bg-purple-950\/25:hover,
+[data-theme="day"] .hover\:bg-purple-950\/40:hover {
+  background-color: #e2d0fb !important;
+}
+
+/* Tinted Blue / Lunar Surfaces in Day Mode */
+[data-theme="day"] .bg-blue-950\/15,
+[data-theme="day"] .bg-blue-950\/25,
+[data-theme="day"] .bg-blue-950\/30,
+[data-theme="day"] .bg-blue-950\/40,
+[data-theme="day"] .bg-blue-950\/80,
+[data-theme="day"] .bg-blue-500\/20 {
+  background-color: #e0effe !important;
+}
+
+[data-theme="day"] .hover\:bg-blue-950\/30:hover {
+  background-color: #cbe3fd !important;
+}
+
+/* Tinted Emerald / Scriptural Surfaces in Day Mode */
+[data-theme="day"] .bg-emerald-950\/30,
+[data-theme="day"] .bg-emerald-950\/40 {
+  background-color: #d8f5e3 !important;
+}
+
+/* Tinted Rose / Alert Surfaces in Day Mode */
+[data-theme="day"] .bg-rose-950\/20,
+[data-theme="day"] .bg-rose-950\/30 {
+  background-color: #ffe2e6 !important;
+}
+
+/* Borders & Dividers in Day Mode */
+[data-theme="day"] .border-slate-800,
+[data-theme="day"] .border-slate-800\/80,
+[data-theme="day"] .border-slate-800\/70,
+[data-theme="day"] .border-slate-800\/60,
+[data-theme="day"] .border-slate-700,
+[data-theme="day"] .border-slate-700\/50,
+[data-theme="day"] .divide-slate-800 > :not([hidden]) ~ :not([hidden]) {
+  border-color: #c7bca6 !important;
+}
+
+[data-theme="day"] .border-amber-500\/50,
+[data-theme="day"] .border-amber-500\/40 {
+  border-color: #b45309 !important;
+}
+
+[data-theme="day"] .border-purple-500\/50,
+[data-theme="day"] .border-purple-500\/40 {
+  border-color: #6d28d9 !important;
+}
+
+[data-theme="day"] .border-blue-500\/40 {
+  border-color: #1d4ed8 !important;
+}
+
+[data-theme="day"] .border-emerald-500\/50,
+[data-theme="day"] .border-emerald-500\/40,
+[data-theme="day"] .border-emerald-500\/30 {
+  border-color: #047857 !important;
+}
+
+/* Primary & Secondary Ink Colors in Day Mode */
+[data-theme="day"] .text-white,
+[data-theme="day"] .text-slate-100,
+[data-theme="day"] .text-slate-200 {
+  color: #181410 !important;
+}
+
+[data-theme="day"] .text-slate-300 {
+  color: #2b251e !important;
+}
+
+[data-theme="day"] .text-slate-400 {
+  color: #463d32 !important;
+}
+
+[data-theme="day"] .text-slate-500,
+[data-theme="day"] .text-slate-600,
+[data-theme="day"] .text-slate-700 {
+  color: #5f5344 !important;
+}
+
+/* High-Contrast Semantic Accent Inks in Day Mode */
+[data-theme="day"] .text-\[\#f3e3a2\],
+[data-theme="day"] .text-amber-100,
+[data-theme="day"] .text-amber-200,
+[data-theme="day"] .text-amber-300,
+[data-theme="day"] .text-amber-400,
+[data-theme="day"] .text-amber-500,
+[data-theme="day"] .text-yellow-300 {
+  color: #853a06 !important;
+}
+
+[data-theme="day"] .text-blue-200,
+[data-theme="day"] .text-blue-300,
+[data-theme="day"] .text-blue-400 {
+  color: #1e3a8a !important;
+}
+
+[data-theme="day"] .text-purple-200,
+[data-theme="day"] .text-purple-300,
+[data-theme="day"] .text-purple-400 {
+  color: #581c87 !important;
+}
+
+[data-theme="day"] .text-emerald-200,
+[data-theme="day"] .text-emerald-300,
+[data-theme="day"] .text-emerald-400 {
+  color: #065f46 !important;
+}
+
+[data-theme="day"] .text-rose-400 {
+  color: #9f1239 !important;
+}
+
+/* Solid CTA Buttons in Day Mode */
+[data-theme="day"] .bg-amber-500 {
+  background-color: #92400e !important;
+  color: #fdfbf7 !important;
+}
+[data-theme="day"] .bg-amber-500:hover {
+  background-color: #78350f !important;
+}
+
+[data-theme="day"] .bg-emerald-500 {
+  background-color: #065f46 !important;
+  color: #fdfbf7 !important;
+}
+[data-theme="day"] .bg-emerald-500:hover {
+  background-color: #064e3b !important;
+}
+
+/* Form Selects and Inputs in Day Mode */
+[data-theme="day"] select,
+[data-theme="day"] input[type="text"],
+[data-theme="day"] input[type="number"] {
+  background-color: #fdfbf7 !important;
+  color: #181410 !important;
+  border-color: #b5a890 !important;
+}
+
+[data-theme="day"] select option {
+  background-color: #fdfbf7 !important;
+  color: #181410 !important;
+}

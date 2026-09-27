@@ -1,0 +1,526 @@
+/**
+ * @file src/i18n/translations.ts
+ * Comprehensive bilingual dictionary for English ("en") and Portuguese ("pt").
+ */
+
+export type Language = 'en' | 'pt';
+
+export const TRANSLATIONS = {
+  en: {
+    appTitle: 'Gospel of Dimenuous',
+    appSubtitle: 'Biblical Lunar & Millennial Calendar',
+    sacredStructureTag: '364d + Day 0',
+    nightMode: 'Night Mode',
+    solarDayMode: 'Solar Day Mode',
+    solarTime: 'Solar',
+    language: 'Language',
+    selectLanguage: 'Select Language',
+    english: 'English',
+    portuguese: 'Português',
+
+    // Phase Names
+    phaseNames: {
+      'New Moon': 'New Moon',
+      'Waxing Crescent': 'Waxing Crescent',
+      'First Quarter': 'First Quarter',
+      'Waxing Gibbous': 'Waxing Gibbous',
+      'Full Moon': 'Full Moon',
+      'Waning Gibbous': 'Waning Gibbous',
+      'Last Quarter': 'Last Quarter',
+      'Waning Crescent': 'Waning Crescent',
+    },
+
+    // Navigation Tabs
+    tabs: {
+      TODAY: 'Today',
+      CALENDAR: '13-Month Calendar',
+      FEASTS: 'Appointed Times',
+      MOON: 'Moon',
+      SABBATH: 'Sabbath',
+      GREAT_WEEK: 'Great Week',
+      CHRONOLOGY_LAB: 'Chronology Lab',
+      SCRIPTURE_HISTORY: 'Scripture & History',
+      DIMENUEVEIS: 'Dimenúveis Architecture',
+      SETTINGS: 'Settings',
+      TESTS: 'Engine Tests',
+    },
+
+    // Today Screen
+    today: {
+      realtimeClock: 'REAL-TIME SACRED CLOCK',
+      sacredYear: 'SACRED YEAR',
+      dayZeroTitle: 'DAY ZERO',
+      dayZeroSubtitle: 'Annual Sacred New Year & Celestial Threshold',
+      weekOf: 'WEEK',
+      of52: 'OF 52',
+      dayOfWeek: 'DAY OF WEEK',
+      inspectDetails: 'Inspect Full Day Details',
+      astronomicalMoon: 'Astronomical Moon',
+      illuminated: 'Illuminated',
+      lunarAge: 'Lunar Age',
+      theGreatWeek: 'The Great Week',
+      elapsedSolarYears: 'Solar Yrs Elapsed',
+      explore13Month: '13-Month Sacred Calendar',
+      explore13MonthDesc: '13 equal months of 28 days (364 numbered days) + Day Zero New Year threshold. Continuous 7-day weekly Sabbath.',
+      exploreGrid: 'Explore 13-Month Grid',
+      lunarOverlay: 'Astronomical Lunar Overlay',
+      lunarOverlayDesc: 'Actual astronomical lunar phase displayed directly over sacred dates without forcing calendar days to stretch or shrink.',
+      inspectLunar: 'Inspect Lunar Cycle',
+      millennialClock: '7,000-Year Great Week',
+      millennialClockDesc: 'Millennial Sabbath model based on 2 Peter 3:8 & Revelation 20. Track position relative to 6,000-year and 7,000-year boundaries.',
+      viewMillennial: 'View Millennial Clock',
+    },
+
+    // Calendar Screen
+    calendar: {
+      yearTitle: 'Sacred Calendar Year',
+      subtitle: 'Day Zero + 13 Months × 28 Days = 364 Numbered Days (52 Unbroken Weeks)',
+      annualSabbathThreshold: 'ANNUAL SABBATH THRESHOLD',
+      dayZeroBannerTitle: 'The Annual Sacred New Year & Celestial Threshold',
+      dayZeroBannerDesc: 'Distinct from Month 1 Day 1 and outside the 364 numbered days. Celebrated as an Annual Sabbath linked to the Spring Lunar Conjunction.',
+      springAnchorPhase: 'Spring Anchor Phase',
+      allMonths: 'Show All 13 Months',
+      days28Weeks4: '28 Days | 4 Weeks',
+      daysOfWeek: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Sabbath'],
+      lunarFilter: 'Lunar Phase Overlay Filter:',
+      allPhases: 'All Moon Phases',
+      newMoon: '🌑 New Moon',
+      waxingPhases: '🌓 Waxing Phases',
+      fullMoon: '🌕 Full Moon',
+      waningPhases: '🌗 Waning Phases',
+    },
+
+    // Moon Screen
+    moon: {
+      title: 'Astronomical Lunar Layer & Phase Inspector',
+      sacredVsSynodic: 'Sacred Month vs Synodic Lunation Distinction',
+      sacredVsSynodicDesc: 'The 28-day calendar month is a Sacred Calendar Unit (4 exact 7-day weeks). The actual astronomical synodic lunar period is ~29.53 days. The astronomical moon is rendered directly on top of the sacred calendar without deforming calendar day counts.',
+      anchorModeLabel: 'Active Day Zero Lunar Anchor Mode',
+      modeA: 'MODE A — Astronomical Conjunction',
+      modeADesc: 'New Moon Conjunction',
+      modeB: 'MODE B — First Visible Crescent',
+      modeBDesc: '~1.5 Days Post-Conjunction',
+      modeC: 'MODE C — Observational Twilight',
+      modeCDesc: 'Local Horizon Visibility',
+      guideTitle: 'The 8 Defined Astronomical Lunar Phases',
+      guideDesc: 'Exact visual icons and age specifications for all 8 canonical moon phases in synodic order.',
+      all8Phases: 'All 8 Phases',
+      activeNow: 'ACTIVE NOW',
+      nextEvent: 'Next Astronomical Phase Event',
+      prevEvent: 'Previous Astronomical Phase Event',
+      upcomingHorizon: 'Upcoming Astronomical Lunation Horizon',
+      targetDate: 'Target Date:',
+      recordedDate: 'Recorded Date:',
+    },
+
+    // Sabbath Screen
+    sabbath: {
+      heroTitle: 'The Continuous Sabbath System',
+      description: 'Rule 7 of the Sacred Calendar requires an unbroken 7-day weekly Sabbath cycle. Month boundaries do NOT reset or interrupt the weekly Sabbath count. Day Zero is additionally classified as the ANNUAL SABBATH threshold.',
+      weeklySabbathLabel: 'WEEKLY SABBATH',
+      weeklySabbathDesc: 'Every 7th day (Days 7, 14, 21, 28 of each month) = 52 times/year.',
+      annualSabbathLabel: 'ANNUAL SABBATH',
+      annualSabbathDesc: 'Day Zero New Year threshold outside 364 numbered days.',
+      grandSabbathLabel: 'GRAND SABBATH (BOTH)',
+      grandSabbathDesc: 'When Day Zero coincides with the 7th weekly Sabbath day.',
+      continuityProofTitle: 'Continuous Weekly Cycle Proof',
+      proofText: 'Because 13 months × 28 days = 364 numbered days, and 364 ÷ 7 = 52 exact weeks, the weekly Sabbath recurs with mathematical perfection every 7th day throughout all 13 months without shifting or day-dropping.',
+      annualSabbathsTitle: 'Annual & Weekly Sabbath Log',
+      annualNewYearSabbath: 'Annual New Year Sabbath',
+    },
+
+    // Great Week Screen
+    greatWeek: {
+      heroTitle: 'The Great Week (7,000-Year Millennial Model)',
+      noticeTitle: 'THEOLOGICAL INTERPRETIVE MODEL NOTICE',
+      noticeText: 'This is an interpretive chronological model aligning the 7-day creation week with 7,000 years of cosmic history (2 Peter 3:8, Psalm 90:4, Revelation 20). It is presented transparently as a theological model rather than mathematically proven dogma.',
+      elapsedYears: 'Elapsed Solar Years',
+      sinceCreation: 'Since Creation Epoch',
+      activeMillennium: 'Active Millennium',
+      boundary6000: '6,000-Year Threshold',
+      boundary7000: '7,000-Year Boundary',
+      sevenMillenniaTitle: 'The Seven Millennia of Creation History',
+      scriptureFoundationsTitle: 'Scripture Foundations (2 Peter 3:8 & Revelation 20)',
+    },
+
+    // Chronology Lab
+    chronologyLab: {
+      heroTitle: 'Chronology Lab — Multi-Model Comparison Studio',
+      description: 'The Chronology Lab allows scholars and researchers to compare different Biblical chronologies (Ussher, Rabbinic Seder Olam, Septuagint, and Sacred Epoch) side-by-side, toggle historical corrections like Joshua’s Long Day (+1 Day), and observe deterministic recalculations.',
+      simulationParameters: 'Live Simulation Parameters',
+      activeModelLabel: 'Active Chronology Model',
+      joshuaCorrectionLabel: 'Joshua 10 Historical Correction',
+      anchorModeLabel: 'Day Zero Lunar Anchor Mode',
+      matrixTitle: 'Side-by-Side Chronology Matrix',
+      targetYear: 'Target Year:',
+      modelNameTh: 'Model Name',
+      creationEpochTh: 'Creation Epoch',
+      elapsedSolarTh: 'Elapsed Solar Yrs',
+      boundary6000Th: '6,000 Boundary CE',
+      currentMillenniumTh: 'Current Millennium',
+      statusTh: 'Status',
+      driftTitle: '364-Day Sacred Calendar vs Solar & Lunar Cycle Drift Analysis',
+      annualDrift: 'Annual Sacred-to-Solar Drift',
+      drift100: '100 Solar Years Drift',
+      drift1000: '1,000 Solar Years Drift',
+      daysYear: 'Days / Year',
+    },
+
+    // Scripture History
+    scriptureHistory: {
+      heroTitle: 'Scripture & Historical Astronomical Events',
+      heroDesc: 'Scripture records extraordinary celestial events where solar and lunar movements intersected with covenant history. All events are categorized transparently by source data (Biblical Text, Astronomical Calculation, or Historical Candidate).',
+      joshuaTitle: 'Joshua 10 — The Sun Standing Still over Gibeon',
+      joshuaStatus: 'STATUS: CANDIDATE (30 OCT 1207 BCE)',
+      joshuaDesc: 'Joshua 10:12-14 records: "Sun, stand thou still upon Gibeon; and thou, Moon, in the valley of Aijalon." Researchers Humphreys & Waddington (2017) proposed an annular solar eclipse over Canaan on 30 October 1207 BCE matching the Merneptah Stele timeline.',
+      joshuaSetting: 'Joshua Historical Correction (+1 Day)',
+      currentSetting: 'Current Setting:',
+      offLabel: 'OFF — Standard Solar Continuum',
+      proposedLabel: 'PROPOSED — Evaluated as Candidate (+1d)',
+      acceptedLabel: 'ACCEPTED — Enable +1d Chronological Shift',
+      catalogTitle: 'Astronomical & Celestial Event Catalog',
+      timelineTitle: 'Sacred Biblical History Timeline',
+    },
+
+    // Dimenúveis Screen
+    dimenueveis: {
+      heroTitle: 'Gospel of Dimenuous — Canonical Architecture',
+      subtitle: 'Immutable Canonical Text & 6-Layer Conceptual Time System',
+      integrityProtocol: 'CANONICAL INTEGRITY PROTOCOL (RULE 19): All Gospel of Dimenuous source texts are preserved verbatim in their immutable form without alteration or summary.',
+      treeTab: '6-Layer Time Tree',
+      viewerTab: 'Canonical Gospel Viewer',
+      lexiconTab: 'Canonical Lexicon',
+      timeTreeTitle: 'Dimenúveis 6-Layer Time Architecture Tree',
+      indexTitle: 'Canonical Gospel Index',
+      annotationsTitle: 'Canonical Annotations',
+      timeLayer: 'TIME LAYER',
+      lexiconTitle: 'Canonical Terminology Lexicon',
+      sourceLabel: 'Source:',
+    },
+
+    // Settings
+    settings: {
+      heroTitle: 'Calendar & Astronomical Configuration',
+      heroDesc: 'Configure active Day Zero lunar anchor calculations, chronology models, custom month nomenclature, and location parameters for local solar twilight calculation.',
+      engineParameters: 'Core Engine Parameters',
+      lunarAnchorMode: 'Day Zero Lunar Anchor Mode',
+      defaultChronology: 'Default Chronology Model',
+      locationLabel: 'Location for Solar Sunrise/Sunset Times',
+      latitude: 'Latitude',
+      longitude: 'Longitude',
+      customMonthTitle: '13 Month Custom Nomenclature',
+      resetDefaults: 'Reset to Defaults',
+      saveConfig: 'Save Configuration',
+      savedSuccess: 'Configuration Saved',
+      monthNumberLabel: 'Month',
+    },
+
+    // Engine Tests
+    tests: {
+      heroTitle: 'Calendar Engine Automated Test Suite',
+      heroDesc: 'Executes automated tests verifying calendar mathematics (13 x 28 = 364), Month Boundaries, Day Zero preservation, continuous weekly Sabbath cycle, BCE/CE Year Zero rule, Great Week millennial boundaries, and Joshua 10 candidate isolation.',
+      runButton: 'Run Engine Verification Tests',
+      summaryTitle: 'Test Execution Summary:',
+      allPassed: '100% SUCCESS',
+      failures: 'FAILURES DETECTED',
+      passedLabel: 'PASSED',
+      failedLabel: 'FAILED',
+    },
+
+    // Day Detail Modal
+    modal: {
+      sacredYear: 'SACRED YEAR',
+      gregorianEquiv: 'Gregorian Equivalent:',
+      positionTitle: 'Sacred Calendar Position',
+      dayOfYear: 'Day of Year:',
+      weekOfYear: 'Week of Year:',
+      dayOfWeek: 'Day of Week:',
+      dayZeroDesc: 'Annual New Year threshold outside 364 numbered days.',
+      lunarOverlay: 'Astronomical Lunar Overlay',
+      illumination: 'Illumination:',
+      moonAge: 'Moon Age:',
+      lunation: 'Lunation',
+      solarData: 'Solar Data',
+      sunrise: 'Sunrise',
+      solarNoon: 'Solar Noon',
+      sunset: 'Sunset',
+      dusk: 'Dusk Twilight',
+      biblicalEvents: 'Biblical Events Associated with Date',
+      canonicalMaterial: 'Canonical Gospel of Dimenuous Material',
+    },
+
+    // Common Badges
+    badges: {
+      weeklySabbath: 'WEEKLY SABBATH (7th Day)',
+      annualSabbath: 'ANNUAL NEW YEAR SABBATH',
+      grandSabbath: 'GRAND SABBATH (Weekly & Annual)',
+      workDay: 'Work Day',
+      sabbath: 'SABBATH',
+    },
+
+    // Months (Default)
+    monthNames: [
+      'Month I', 'Month II', 'Month III', 'Month IV', 'Month V', 'Month VI', 'Month VII',
+      'Month VIII', 'Month IX', 'Month X', 'Month XI', 'Month XII', 'Month XIII'
+    ],
+  },
+
+  pt: {
+    appTitle: 'Evangelho das Dimenúveis',
+    appSubtitle: 'Calendário Bíblico Lunar e Milenar',
+    sacredStructureTag: '364d + Dia 0',
+    nightMode: 'Modo Noturno',
+    solarDayMode: 'Modo Dia Solar',
+    solarTime: 'Solar',
+    language: 'Idioma',
+    selectLanguage: 'Selecionar Idioma',
+    english: 'English',
+    portuguese: 'Português',
+
+    // Phase Names
+    phaseNames: {
+      'New Moon': 'Lua Nova',
+      'Waxing Crescent': 'Crescente Côncava',
+      'First Quarter': 'Quarto Crescente',
+      'Waxing Gibbous': 'Crescente Convexa',
+      'Full Moon': 'Lua Cheia',
+      'Waning Gibbous': 'Minguante Convexa',
+      'Last Quarter': 'Quarto Minguante',
+      'Waning Crescent': 'Minguante Côncava',
+    },
+
+    // Navigation Tabs
+    tabs: {
+      TODAY: 'Hoje',
+      CALENDAR: 'Calendário de 13 Meses',
+      FEASTS: 'Os Tempos Nomeados',
+      MOON: 'Lua',
+      SABBATH: 'Sábado',
+      GREAT_WEEK: 'A Grande Semana',
+      CHRONOLOGY_LAB: 'Laboratório de Cronologia',
+      SCRIPTURE_HISTORY: 'Escrituras e História',
+      DIMENUEVEIS: 'Arquitetura Dimenúveis',
+      SETTINGS: 'Configurações',
+      TESTS: 'Testes do Motor',
+    },
+
+    // Today Screen
+    today: {
+      realtimeClock: 'RELÓGIO SAGRADO EM TEMPO REAL',
+      sacredYear: 'ANO SAGRADO',
+      dayZeroTitle: 'DIA ZERO',
+      dayZeroSubtitle: 'Ano Novo Sagrado Anual e Limiar Celestial',
+      weekOf: 'SEMANA',
+      of52: 'DE 52',
+      dayOfWeek: 'DIA DA SEMANA',
+      inspectDetails: 'Inspecionar Detalhes do Dia',
+      astronomicalMoon: 'Lua Astronômica',
+      illuminated: 'Iluminada',
+      lunarAge: 'Idade da Lua',
+      theGreatWeek: 'A Grande Semana',
+      elapsedSolarYears: 'Anos Solares Decorridos',
+      explore13Month: 'Calendário Sagrado de 13 Meses',
+      explore13MonthDesc: '13 meses iguais de 28 dias (364 dias numerados) + Limiar do Ano Novo Dia Zero. Sábado semanal contínuo de 7 dias.',
+      exploreGrid: 'Explorar Grade de 13 Meses',
+      lunarOverlay: 'Sobreposição Lunar Astronômica',
+      lunarOverlayDesc: 'Fase lunar astronômica real exibida diretamente sobre as datas sagradas sem forçar os dias do calendário a esticar ou encolher.',
+      inspectLunar: 'Inspecionar Ciclo Lunar',
+      millennialClock: 'A Grande Semana de 7.000 Anos',
+      millennialClockDesc: 'Modelo de Sábado Milenar baseado em 2 Pedro 3:8 e Apocalipse 20. Acompanhe a posição relativa às fronteiras de 6.000 e 7.000 anos.',
+      viewMillennial: 'Ver Relógio Milenar',
+    },
+
+    // Calendar Screen
+    calendar: {
+      yearTitle: 'Ano do Calendário Sagrado',
+      subtitle: 'Dia Zero + 13 Meses × 28 Dias = 364 Dias Numerados (52 Semanas Ininterruptas)',
+      annualSabbathThreshold: 'LIMIAR DO SÁBADO ANUAL',
+      dayZeroBannerTitle: 'O Ano Novo Sagrado Anual e Limiar Celestial',
+      dayZeroBannerDesc: 'Distinto do Mês 1 Dia 1 e fora dos 364 dias numerados. Celebrado como um Sábado Anual vinculado à Conjunção Lunar da Primavera.',
+      springAnchorPhase: 'Fase de Ancoragem da Primavera',
+      allMonths: 'Exibir Todos os 13 Meses',
+      days28Weeks4: '28 Dias | 4 Semanas',
+      daysOfWeek: ['Dia 1', 'Dia 2', 'Dia 3', 'Dia 4', 'Dia 5', 'Dia 6', 'Sábado'],
+      lunarFilter: 'Filtro de Sobreposição Lunar:',
+      allPhases: 'Todas as Fases da Lua',
+      newMoon: '🌑 Lua Nova',
+      waxingPhases: '🌓 Fases Crescentes',
+      fullMoon: '🌕 Lua Cheia',
+      waningPhases: '🌗 Fases Minguantes',
+    },
+
+    // Moon Screen
+    moon: {
+      title: 'Camada Lunar Astronômica e Inspetor de Fases',
+      sacredVsSynodic: 'Distinção entre Mês Sagrado e Lunação Sinódica',
+      sacredVsSynodicDesc: 'O mês do calendário de 28 dias é uma Unidade de Calendário Sagrado (4 semanas exatas de 7 dias). O período lunar sinódico astronômico real é de ~29,53 dias. A lua astronômica é renderizada diretamente sobre o calendário sagrado sem deformar as contagens de dias.',
+      anchorModeLabel: 'Modo de Ancoragem Lunar do Dia Zero Ativo',
+      modeA: 'MODO A — Conjunção Astronômica',
+      modeADesc: 'Conjunção da Lua Nova',
+      modeB: 'MODO B — Primeiros Crescente Visível',
+      modeBDesc: '~1,5 Dias Pós-Conjunção',
+      modeC: 'MODO C — Crepúsculo Observacional',
+      modeCDesc: 'Visibilidade do Horizonte Local',
+      guideTitle: 'As 8 Fases Lunares Astronômicas Definidas',
+      guideDesc: 'Ícones visuais exatos e especificações de idade para todas as 8 fases lunares canônicas na ordem sinódica.',
+      all8Phases: 'Todas as 8 Fases',
+      activeNow: 'ATIVO AGORA',
+      nextEvent: 'Próximo Evento de Fase Astronômica',
+      prevEvent: 'Evento de Fase Astronômica Anterior',
+      upcomingHorizon: 'Horizonte de Lunação Astronômica Futuro',
+      targetDate: 'Data Alvo:',
+      recordedDate: 'Data Registrada:',
+    },
+
+    // Sabbath Screen
+    sabbath: {
+      heroTitle: 'O Sistema de Sábado Contínuo',
+      description: 'A Regra 7 do Calendário Sagrado exige um ciclo de Sábado semanal ininterrupto de 7 dias. As fronteiras dos meses NÃO reiniciam nem interrompem a contagem semanal do Sábado. O Dia Zero é classificado adicionalmente como o limiar do SÁBADO ANUAL.',
+      weeklySabbathLabel: 'SÁBADO SEMANAL',
+      weeklySabbathDesc: 'A cada 7º dia (Dias 7, 14, 21, 28 de cada mês) = 52 vezes por ano.',
+      annualSabbathLabel: 'SÁBADO ANUAL',
+      annualSabbathDesc: 'Limiar do Ano Novo Dia Zero fora dos 364 dias numerados.',
+      grandSabbathLabel: 'GRANDE SÁBADO (AMBOS)',
+      grandSabbathDesc: 'Quando o Dia Zero coincide com o 7º dia do Sábado semanal.',
+      continuityProofTitle: 'Prova do Ciclo Semanal Contínuo',
+      proofText: 'Como 13 meses × 28 dias = 364 dias numerados, e 364 ÷ 7 = 52 semanas exatas, o Sábado semanal recorre com perfeição matemática a cada 7º dia em todos os 13 meses sem deslocamentos ou dias perdidos.',
+      annualSabbathsTitle: 'Registro de Sábados Anuais e Semanais',
+      annualNewYearSabbath: 'Sábado do Ano Novo Anual',
+    },
+
+    // Great Week Screen
+    greatWeek: {
+      heroTitle: 'A Grande Semana (Modelo Milenar de 7.000 Anos)',
+      noticeTitle: 'AVISO DE MODELO TEOLÓGICO INTERPRETATIVO',
+      noticeText: 'Este é um modelo cronológico interpretativo alinhando a semana da criação de 7 dias com 7.000 anos de história cósmica (2 Pedro 3:8, Salmo 90:4, Apocalipse 20). É apresentado de forma transparente como um modelo teológico em vez de dogma matematicamente comprovado.',
+      elapsedYears: 'Anos Solares Decorridos',
+      sinceCreation: 'Desde a Época da Criação',
+      activeMillennium: 'Milênio Ativo',
+      boundary6000: 'Limiar de 6.000 Anos',
+      boundary7000: 'Fronteira de 7.000 Anos',
+      sevenMillenniaTitle: 'Os Sete Milênios da História da Criação',
+      scriptureFoundationsTitle: 'Fundamentos das Escrituras (2 Pedro 3:8 e Apocalipse 20)',
+    },
+
+    // Chronology Lab
+    chronologyLab: {
+      heroTitle: 'Laboratório de Cronologia — Estúdio de Comparação Multi-Modelo',
+      description: 'O Laboratório de Cronologia permite que estudiosos e pesquisadores comparem diferentes cronologias bíblicas (Ussher, Seder Olam Rabínico, Septuaginta e Época Sagrada) lado a lado, alternem correções históricas como o Dia Longo de Josué (+1 Dia) e observem recalculações determinísticas.',
+      simulationParameters: 'Parâmetros de Simulação ao Vivo',
+      activeModelLabel: 'Modelo Cronológico Ativo',
+      joshuaCorrectionLabel: 'Correção Histórica de Josué 10',
+      anchorModeLabel: 'Modo de Ancoragem Lunar do Dia Zero',
+      matrixTitle: 'Matriz Cronológica Lado a Lado',
+      targetYear: 'Ano Alvo:',
+      modelNameTh: 'Nome do Modelo',
+      creationEpochTh: 'Época da Criação',
+      elapsedSolarTh: 'Anos Solares Decorridos',
+      boundary6000Th: 'Fronteira 6.000 d.C.',
+      currentMillenniumTh: 'Milênio Atual',
+      statusTh: 'Status',
+      driftTitle: 'Análise de Desvio do Calendário Sagrado de 364 Dias vs Ciclo Solar e Lunar',
+      annualDrift: 'Desvio Anual Sagrado para Solar',
+      drift100: 'Desvio em 100 Anos Solares',
+      drift1000: 'Desvio em 1.000 Anos Solares',
+      daysYear: 'Dias / Ano',
+    },
+
+    // Scripture History
+    scriptureHistory: {
+      heroTitle: 'Escrituras e Eventos Astronômicos Históricos',
+      heroDesc: 'As Escrituras registram eventos celestes extraordinários onde os movimentos solares e lunares se interconectaram com a história da aliança. Todos os eventos são categorizados transparentemente por dados de origem (Texto Bíblico, Cálculo Astronômico ou Candidato Histórico).',
+      joshuaTitle: 'Josué 10 — O Sol Parou Sobre Gibeão',
+      joshuaStatus: 'STATUS: CANDIDATO (30 OUT 1207 a.C.)',
+      joshuaDesc: 'Josué 10:12-14 registra: "Sol, detém-te em Gibeão; e tu, Lua, no vale de Aijalão." Os pesquisadores Humphreys & Waddington (2017) propuseram um eclipse solar anular sobre Canaã em 30 de outubro de 1207 a.C. correspondendo à linha do tempo da Estela de Merneptah.',
+      joshuaSetting: 'Correção Histórica de Josué (+1 Dia)',
+      currentSetting: 'Configuração Atual:',
+      offLabel: 'DESLIGADO — Continuum Solar Padrão',
+      proposedLabel: 'PROPOSTO — Avaliado como Candidato (+1d)',
+      acceptedLabel: 'ACEITO — Habilitar Deslocamento Cronológico de +1d',
+      catalogTitle: 'Catálogo de Eventos Astronômicos e Celestiais',
+      timelineTitle: 'Linha do Tempo da História Bíblica Sagrada',
+    },
+
+    // Dimenúveis Screen
+    dimenueveis: {
+      heroTitle: 'Evangelho das Dimenúveis — Arquitetura Canônica',
+      subtitle: 'Texto Canônico Imutável e Sistema de Tempo Conceitual em 6 Camadas',
+      integrityProtocol: 'PROTOCOLO DE INTEGRIDADE CANÔNICA (REGRA 19): Todos os textos-fonte do Evangelho das Dimenúveis são preservados verbatim em sua forma imutável sem alteração ou resumo.',
+      treeTab: 'Árvore do Tempo em 6 Camadas',
+      viewerTab: 'Visualizador do Evangelho Canônico',
+      lexiconTab: 'Léxico Canônico',
+      timeTreeTitle: 'Árvore de Arquitetura do Tempo Dimenúveis em 6 Camadas',
+      indexTitle: 'Índice do Evangelho Canônico',
+      annotationsTitle: 'Anotações Canônicas',
+      timeLayer: 'CAMADA DE TEMPO',
+      lexiconTitle: 'Léxico de Terminologia Canônica',
+      sourceLabel: 'Fonte:',
+    },
+
+    // Settings
+    settings: {
+      heroTitle: 'Configuração do Calendário e Astronômica',
+      heroDesc: 'Configure os cálculos de ancoragem lunar do Dia Zero ativos, modelos de cronologia, nomenclatura personalizada de meses e parâmetros de localização para cálculo do crepúsculo solar local.',
+      engineParameters: 'Parâmetros Principais do Motor',
+      lunarAnchorMode: 'Modo de Ancoragem Lunar do Dia Zero',
+      defaultChronology: 'Modelo de Cronologia Padrão',
+      locationLabel: 'Localização para Horários do Nascer/Pôr do Sol',
+      latitude: 'Latitude',
+      longitude: 'Longitude',
+      customMonthTitle: 'Nomenclatura Personalizada de 13 Meses',
+      resetDefaults: 'Restaurar Padrões',
+      saveConfig: 'Salvar Configuração',
+      savedSuccess: 'Configuração Salva',
+      monthNumberLabel: 'Mês',
+    },
+
+    // Engine Tests
+    tests: {
+      heroTitle: 'Suíte de Testes Automatizados do Motor do Calendário',
+      heroDesc: 'Executa testes automatizados verificando a matemática do calendário (13 x 28 = 364), limites de mês, preservação do Dia Zero, ciclo semanal contínuo de Sábado, regra de ano zero a.C./d.C., limites milenares da Grande Semana e isolamento do candidato de Josué 10.',
+      runButton: 'Executar Testes de Verificação do Motor',
+      summaryTitle: 'Resumo de Execução dos Testes:',
+      allPassed: '100% SUCESSO',
+      failures: 'FALHAS DETECTADAS',
+      passedLabel: 'APROVADO',
+      failedLabel: 'REPROVADO',
+    },
+
+    // Day Detail Modal
+    modal: {
+      sacredYear: 'ANO SAGRADO',
+      gregorianEquiv: 'Equivalente Gregoriano:',
+      positionTitle: 'Posição no Calendário Sagrado',
+      dayOfYear: 'Dia do Ano:',
+      weekOfYear: 'Semana do Ano:',
+      dayOfWeek: 'Dia da Semana:',
+      dayZeroDesc: 'Limiar do Ano Novo Anual fora dos 364 dias numerados.',
+      lunarOverlay: 'Sobreposição Lunar Astronômica',
+      illumination: 'Iluminação:',
+      moonAge: 'Idade da Lua:',
+      lunation: 'Lunação',
+      solarData: 'Dados Solares',
+      sunrise: 'Nascer do Sol',
+      solarNoon: 'Meio-dia Solar',
+      sunset: 'Pôr do Sol',
+      dusk: 'Crepúsculo',
+      biblicalEvents: 'Eventos Bíblicos Associados à Data',
+      canonicalMaterial: 'Material Canônico do Evangelho das Dimenúveis',
+    },
+
+    // Common Badges
+    badges: {
+      weeklySabbath: 'SÁBADO SEMANAL (7º Dia)',
+      annualSabbath: 'SÁBADO DO ANO NOVO ANUAL',
+      grandSabbath: 'GRANDE SÁBADO (Semanal e Anual)',
+      workDay: 'Dia de Trabalho',
+      sabbath: 'SÁBADO',
+    },
+
+    // Months (Default)
+    monthNames: [
+      'Mês I', 'Mês II', 'Mês III', 'Mês IV', 'Mês V', 'Mês VI', 'Mês VII',
+      'Mês VIII', 'Mês IX', 'Mês X', 'Mês XI', 'Mês XII', 'Mês XIII'
+    ],
+  },
+};

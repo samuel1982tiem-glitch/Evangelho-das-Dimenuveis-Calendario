@@ -1,0 +1,101 @@
+name: Build Android APK
+
+on:
+  push:
+    branches:
+      - main
+      - master
+    tags:
+      - 'v*'
+  pull_request:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-android-apk:
+    name: Build Debug & Signed Release APK
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Web Dependencies & Build Vite Bundle
+        run: |
+          npm install
+          npm run build
+
+      - name: Sync Web Bundle into Android Assets
+        run: |
+          mkdir -p android/app/src/main/assets/public
+          rm -rf android/app/src/main/assets/public/*
+          cp -r dist/* android/app/src/main/assets/public/
+
+      - name: Setup Java JDK 17 (Temurin)
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Setup Android SDK (API 34)
+        uses: android-actions/setup-android@v3
+
+      - name: Accept Android SDK Licenses & Install Build Tools 34
+        run: |
+          yes | sdkmanager --licenses || true
+          sdkmanager "platforms;android-34" "build-tools;34.0.0"
+
+      - name: Setup Gradle 8.7
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.7'
+
+      - name: Prepare Release Signing Keystore
+        working-directory: android
+        run: |
+          keytool -genkeypair -v \
+            -keystore release-keystore.jks \
+            -alias dimenueveis \
+            -keyalg RSA \
+            -keysize 2048 \
+            -validity 10000 \
+            -storepass dimenueveis123 \
+            -keypass dimenueveis123 \
+            -dname "CN=Evangelho das Dimenuveis, OU=Calendar, O=Dimenuveis, L=SaoPaulo, ST=SP, C=BR"
+
+      - name: Build Android Debug & Signed Release APKs
+        working-directory: android
+        env:
+          KEYSTORE_PATH: ${{ github.workspace }}/android/release-keystore.jks
+          KEYSTORE_PASSWORD: dimenueveis123
+          KEY_ALIAS: dimenueveis
+          KEY_PASSWORD: dimenueveis123
+        run: |
+          gradle assembleDebug assembleRelease --no-daemon --stacktrace
+          mkdir -p ../apk-output
+          cp app/build/outputs/apk/debug/app-debug.apk ../apk-output/Evangelho-das-Dimenuveis-v1.0.0-debug.apk
+          cp app/build/outputs/apk/release/app-release.apk ../apk-output/Evangelho-das-Dimenuveis-v1.0.0-release.apk
+
+      - name: Upload Signed Release APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Evangelho-das-Dimenuveis-v1.0.0-release-apk
+          path: apk-output/Evangelho-das-Dimenuveis-v1.0.0-release.apk
+          if-no-files-found: error
+
+      - name: Upload Debug APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Evangelho-das-Dimenuveis-v1.0.0-debug-apk
+          path: apk-output/Evangelho-das-Dimenuveis-v1.0.0-debug.apk
+          if-no-files-found: error
